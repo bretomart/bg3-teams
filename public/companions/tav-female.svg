@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="bg_female" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a1b3d" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="glow_female" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e879f9" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#e879f9" stop-opacity="0.05" />
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="28" fill="url(#bg_female)" />
+  <rect width="200" height="200" rx="28" fill="url(#glow_female)" stroke="#c026d3" stroke-width="2" stroke-opacity="0.4" />
+  
+  <!-- Female stylized adventurer silhouette with hair contour -->
+  <g fill="#cbd5e1" stroke="#e879f9" stroke-width="1.5" stroke-linejoin="round">
+    <!-- Hair outline / silhouette back -->
+    <path d="M72 65 C72 40, 128 40, 128 65 C128 85, 134 110, 134 125 C130 120, 124 100, 124 95 L124 75 C124 60, 76 60, 76 75 L76 95 C76 100, 70 120, 66 125 C66 110, 72 85, 72 65 Z" fill="#4a1d96" opacity="0.6" />
+    <!-- Head -->
+    <path d="M100 44 C89 44, 82 54, 82 66 C82 78, 89 92, 100 92 C111 92, 118 78, 118 66 C118 54, 111 44, 100 44 Z" fill="#e2e8f0" />
+    <!-- Slender Neck -->
+    <path d="M94 90 L94 108 L106 108 L106 90 Z" />
+    <!-- Shoulders & Torso -->
+    <path d="M94 108 L70 122 C60 128, 54 138, 54 150 L54 186 C54 188, 56 190, 58 190 L142 190 C144 190, 146 188, 146 186 L146 150 C146 138, 140 128, 130 122 L106 108 Z" fill="#701a75" />
+  </g>
+
+  <!-- Gem Emblem Badge -->
+  <circle cx="100" cy="148" r="14" fill="#a21caf" stroke="#f5d0fe" stroke-width="2" />
+  <path d="M100 138 L102 144 L108 144 L103 148 L105 154 L100 150 L95 154 L97 148 L92 144 L98 144 Z" fill="#fdf4ff" />
+</svg>

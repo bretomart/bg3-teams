@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="bg_male" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="glow_male" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.05" />
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="28" fill="url(#bg_male)" />
+  <rect width="200" height="200" rx="28" fill="url(#glow_male)" stroke="#0284c7" stroke-width="2" stroke-opacity="0.4" />
+  
+  <!-- Male stylized warrior torso & head silhouette -->
+  <g fill="#94a3b8" stroke="#38bdf8" stroke-width="1.5" stroke-linejoin="round">
+    <!-- Head -->
+    <path d="M100 42 C88 42, 80 52, 80 66 C80 80, 88 95, 100 95 C112 95, 120 80, 120 66 C120 52, 112 42, 100 42 Z" fill="#cbd5e1" />
+    <!-- Neck -->
+    <path d="M92 92 L92 108 L108 108 L108 92 Z" />
+    <!-- Broad Shoulders & Chest -->
+    <path d="M92 108 L62 120 C50 125, 45 138, 45 152 L45 186 C45 188, 47 190, 50 190 L150 190 C153 190, 155 188, 155 186 L155 152 C155 138, 150 125, 138 120 L108 108 Z" fill="#64748b" />
+  </g>
+
+  <!-- Crest Emblem Badge -->
+  <circle cx="100" cy="148" r="14" fill="#0369a1" stroke="#bae6fd" stroke-width="2" />
+  <path d="M100 138 L102 144 L108 144 L103 148 L105 154 L100 150 L95 154 L97 148 L92 144 L98 144 Z" fill="#f8fafc" />
+</svg>
