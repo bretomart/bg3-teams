@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useTeamStore } from './stores/teamStore';
 import TeamSlots from './components/TeamSlots.vue';
 import SynergyAnalysis from './components/SynergyAnalysis.vue';
@@ -9,6 +9,8 @@ import { RotateCcw } from 'lucide-vue-next';
 
 const store = useTeamStore();
 const activeView = ref<'builder' | 'meta'>('builder');
+const baseUrl = import.meta.env.BASE_URL || '/';
+const bg3LogoSrc = computed(() => `${baseUrl}bg3-logo.png`);
 </script>
 
 <template>
@@ -20,7 +22,7 @@ const activeView = ref<'builder' | 'meta'>('builder');
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-xl bg-slate-900 border border-amber-500/30 flex items-center justify-center p-1 shadow-lg shadow-amber-950/30 overflow-hidden group">
             <img
-              src="/bg3-logo.png"
+              :src="bg3LogoSrc"
               alt="Baldur's Gate 3"
               class="w-full h-full object-contain filter drop-shadow group-hover:scale-105 transition-transform"
             />

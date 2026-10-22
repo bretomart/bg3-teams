@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 import type { OriginType, CombatRole } from '../types/companion';
 
 const props = defineProps<{
@@ -10,6 +10,26 @@ const props = defineProps<{
   size?: 'sm' | 'md' | 'lg' | 'xl';
   highlighted?: boolean;
 }>();
+
+const imageError = ref(false);
+const baseUrl = import.meta.env.BASE_URL || '/';
+
+const resolvedAvatar = computed(() => {
+  if (!props.avatar) return '';
+  if (props.avatar.startsWith('http://') || props.avatar.startsWith('https://')) {
+    return props.avatar;
+  }
+  const cleanPath = props.avatar.startsWith('/') ? props.avatar.slice(1) : props.avatar;
+  return `${baseUrl}${cleanPath}`;
+});
+
+const initials = computed(() => {
+  const parts = props.name.replace(/[^a-zA-Z\s]/g, '').trim().split(/\s+/);
+  if (parts.length >= 2) {
+    return (parts[0][0] + parts[1][0]).toUpperCase();
+  }
+  return props.name.slice(0, 2).toUpperCase();
+});
 
 const badgeColor = computed(() => {
   switch (props.originType) {
@@ -44,18 +64,27 @@ const sizeClasses = computed(() => {
     <div
       :class="[
         sizeClasses,
-        'rounded-2xl overflow-hidden border transition-all duration-200 shadow-md bg-slate-900',
+        'rounded-2xl overflow-hidden border transition-all duration-200 shadow-md bg-slate-900 flex items-center justify-center',
         highlighted
           ? 'border-amber-400 ring-2 ring-amber-400/40 scale-105'
           : 'border-slate-700/80 hover:border-slate-500'
       ]"
     >
       <img
-        :src="avatar"
+        v-if="!imageError"
+        :src="resolvedAvatar"
         :alt="name"
         class="w-full h-full object-cover object-top"
         loading="lazy"
+        @error="imageError = true"
       />
+      <!-- Fallback initials if image cannot load -->
+      <span
+        v-else
+        class="font-serif font-black text-amber-300 text-xs tracking-wider"
+      >
+        {{ initials }}
+      </span>
     </div>
 
     <!-- Origin Category Indicator -->
