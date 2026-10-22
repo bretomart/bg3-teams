@@ -1,0 +1,604 @@
+[
+  {
+    "id": "wet-lightning-storm",
+    "name": "Tempest Cascade (Wet Nuke)",
+    "difficultyTier": "Honor Mode S-Tier",
+    "coreSynergyConcept": "Hydromancy vulnerability: targets afflicted by the Wet status suffer 2x (100% vulnerability) damage from Lightning and Cold attacks.",
+    "slots": ["shadowheart", "durge", "tav", "astarion"],
+    "slotBuilds": [
+      {
+        "companionId": "shadowheart",
+        "assignedRole": "Support",
+        "buildTitle": "Tempest Reverberation Hydromancer",
+        "classSplit": "12 Tempest Cleric (or 11 Tempest / 1 Wizard)",
+        "coreFeat": "War Caster & Alert",
+        "keyGear": "Luminous Armor, Boots of Stormy Clamour, Markoheshkir"
+      },
+      {
+        "companionId": "durge",
+        "assignedRole": "AoE Blaster",
+        "buildTitle": "Destructive Wrath Storm Sorcerer",
+        "classSplit": "11 Storm Sorcerer / 1 Tempest Cleric",
+        "coreFeat": "Dual Wielder & Alert",
+        "keyGear": "Robe of the Weave, Markoheshkir, Deathstalker Mantle"
+      },
+      {
+        "companionId": "tav",
+        "assignedRole": "Party Face",
+        "buildTitle": "Arcane Acuity Swords Controller",
+        "classSplit": "10 Swords Bard / 1 Fighter / 1 Wizard",
+        "coreFeat": "Sharpshooter & Alert",
+        "keyGear": "Helmet of Arcane Acuity, Band of the Mystic Scoundrel"
+      },
+      {
+        "companionId": "astarion",
+        "assignedRole": "Striker",
+        "buildTitle": "Tavern Brawler Open Hand Striker",
+        "classSplit": "8 Open Hand Monk / 4 Thief Rogue",
+        "coreFeat": "Tavern Brawler & Alert",
+        "keyGear": "Gloves of Soul Catching, Boots of Kushigo, Vest of Soul Revitalization"
+      }
+    ],
+    "description": "The undisputed king of single-round wipeouts in Honor Mode. Shadowheart drenches enemies using Create Water or thrown water bottles with no saving throw. Durge triggers Destructive Wrath to force maximum damage on Twin-Cast Chain Lightning, vaporizing elite bosses in round 1 while Tav locks down survivors with 100% DC Hold spells.",
+    "strengths": [
+      "Deals 200% double damage against all wet targets with zero chance to resist vulnerability",
+      "Destructive Wrath eliminates damage roll RNG by guaranteeing maximum possible damage dice",
+      "Tav Swords Bard generates +10 Spell DC in a single turn to immobilize any legendary boss",
+      "Astarion cleans up stragglers with four 50+ damage unarmed strikes per round"
+    ],
+    "weaknesses": [
+      "Lightning resistant or immune constructs in the Iron Throne / Steel Watch require bludgeoning pivot",
+      "Spell slot heavy: requires frequent Long Rests or efficient spell replenishment",
+      "Careful positioning is required to avoid electrocuting standing party members in water surfaces"
+    ],
+    "turnSequencing": [
+      "Initiative: High Alert feats ensure party acts before enemies can deploy legendary actions",
+      "Slot 1 (Shadowheart): Cast Create Water (Level 2+ upcast) covering all enemy clusters",
+      "Slot 2 (Durge): Metamagic Quickened Twin Chain Lightning + Channel Divinity Destructive Wrath",
+      "Slot 3 (Tav): Ranged Slashing Flourish to cap Arcane Acuity (+10 DC), then bonus action Command: Grovel",
+      "Slot 4 (Astarion): Flurry of Blows: Topple on any surviving target for guaranteed critical strikes"
+    ],
+    "progressionMilestones": [
+      {
+        "act": "Act 1",
+        "objective": "Acquire Spellsparkler from Waukeen's Rest and Returning Pike / Kushigo gear",
+        "impact": "Unlocks early lightning charge scaling and Tavern Brawler power spike at Level 4"
+      },
+      {
+        "act": "Act 2",
+        "objective": "Collect Helmet of Arcane Acuity from Reithwin Mason's Guild and Luminous Armor",
+        "impact": "Bard gains infinite spell save DC scaling and Cleric turns encounters into Radiant Orb blender"
+      },
+      {
+        "act": "Act 3",
+        "objective": "Obtain Markoheshkir from Ramazith's Tower and Band of the Mystic Scoundrel from Circus",
+        "impact": "Free Chain Lightning casts per short rest and bonus action 100% DC crowd control"
+      }
+    ]
+  },
+  {
+    "id": "radiant-orb-blender",
+    "name": "Radiant Orb Lawnmower",
+    "difficultyTier": "Honor Mode S-Tier",
+    "coreSynergyConcept": "Radiating Orb stacking (-1 to hit per stack, up to -10) coupled with Reverberation knockdown, rendering enemy attacks completely incapable of landing.",
+    "slots": ["shadowheart", "karlach", "laezel", "tav"],
+    "slotBuilds": [
+      {
+        "companionId": "shadowheart",
+        "assignedRole": "Support",
+        "buildTitle": "Luminous Spirit Guardians Cleric",
+        "classSplit": "12 Light Domain Cleric",
+        "coreFeat": "War Caster & Alert",
+        "keyGear": "Luminous Armor, Coruscation Ring, Callous Glow Ring, Blood of Lathander"
+      },
+      {
+        "companionId": "karlach",
+        "assignedRole": "Tank",
+        "buildTitle": "Berserker Enraged Throwzerker",
+        "classSplit": "5 Berserker Barbarian / 4 Thief Rogue / 3 Champion Fighter",
+        "coreFeat": "Tavern Brawler & Alert",
+        "keyGear": "Returning Pike / Nyrulna, Ring of Flinging, Kushigo Gloves"
+      },
+      {
+        "companionId": "laezel",
+        "assignedRole": "Striker",
+        "buildTitle": "Astral Greatsword Battle Master",
+        "classSplit": "12 Battle Master Fighter",
+        "coreFeat": "Great Weapon Master & Alert",
+        "keyGear": "Silver Sword of the Astral Plane, Armour of Persistence, Balduran's Giantslayer"
+      },
+      {
+        "companionId": "tav",
+        "assignedRole": "Party Face",
+        "buildTitle": "Aura of Protection Smite Commander",
+        "classSplit": "7 Ancients Paladin / 5 Sorcerer",
+        "coreFeat": "Savage Attacker & Alert",
+        "keyGear": "Helm of Balduran, Cloak of Protection, Bhaalist Armor"
+      }
+    ],
+    "description": "The safest defensive core in the entire game, completely trivializing Act 2 and making Honor Mode boss encounters virtually unlosable. Shadowheart casts Spirit Guardians and sprints through enemy frontlines, inflicting -10 to attack rolls and forcing Reverberation prone checks, while Karlach and Lae'zel mercilessly execute prone enemies with triple attacks.",
+    "strengths": [
+      "Inflicts a stacking -1 to -10 penalty on all enemy attack rolls, causing almost all boss swings to miss",
+      "Ancients Paladin Aura of Protection and spell damage resistance halves all incoming magical bursts",
+      "Tremendous frontline physical resilience with high HP pools and heavy armor class (AC 21+)",
+      "Zero reliance on complex elemental set-ups: works straight out of the box in every encounter"
+    ],
+    "weaknesses": [
+      "Radiant Retort enemies (such as Sharran Sanctuary in Act 3) require turning off radiant damage",
+      "Melee density: vulnerability to difficult terrain surfaces if boots of free action are not equipped"
+    ],
+    "turnSequencing": [
+      "Slot 1 (Shadowheart): Cast Spirit Guardians (Radiant) or Radiance of the Dawn, Dash through enemy ranks",
+      "Slot 2 (Tav): Activate Aura of Protection, Smite the highest priority enemy marked with Radiant Orb",
+      "Slot 3 (Karlach): Enraged Throw to knock dangerous spellcasters prone and trigger prone-lock",
+      "Slot 4 (Lae'zel): Action Surge, execute 6 melee Great Weapon Master strikes with permanent advantage"
+    ],
+    "progressionMilestones": [
+      {
+        "act": "Act 1",
+        "objective": "Loot Luminous Armor from Selûnite Outpost in Underdark and Blood of Lathander in Crèche",
+        "impact": "Cleric immediately becomes untouchable by undead and monstrosities"
+      },
+      {
+        "act": "Act 2",
+        "objective": "Collect Boots of Stormy Clamour and Callous Glow Ring in Moonrise Towers",
+        "impact": "Every radiant tick inflicts Reverberation, tripping foes automatically"
+      },
+      {
+        "act": "Act 3",
+        "objective": "Complete House of Hope for Armour of Persistence and Helm of Balduran",
+        "impact": "Permanent Blade Ward and Resistance across frontline combatants"
+      }
+    ]
+  },
+  {
+    "id": "shadow-dominion-darkness",
+    "name": "Umbral Vanguard (Darkness Comp)",
+    "difficultyTier": "Honor Mode S-Tier",
+    "coreSynergyConcept": "Magical Darkness blindness manipulation: party attacks from inside magical darkness with permanent advantage while enemies cannot target inside and suffer complete blindness.",
+    "slots": ["wyll", "minthara", "shadowheart", "astarion"],
+    "slotBuilds": [
+      {
+        "companionId": "wyll",
+        "assignedRole": "Controller",
+        "buildTitle": "Devil's Sight Hadar Warlock",
+        "classSplit": "12 Fiend Warlock (or 5 Warlock / 7 Paladin)",
+        "coreFeat": "Spell Sniper & Alert",
+        "keyGear": "Potent Robe, Infernal Rapier, Spineshudder Amulet"
+      },
+      {
+        "companionId": "minthara",
+        "assignedRole": "Striker",
+        "buildTitle": "Blindness-Immune Vengeance Smiter",
+        "classSplit": "7 Vengeance Paladin / 5 Sorcerer",
+        "coreFeat": "Great Weapon Master & Alert",
+        "keyGear": "Helldusk Helmet (Blindsight), Balduran's Giantslayer, Bhaalist Armor"
+      },
+      {
+        "companionId": "shadowheart",
+        "assignedRole": "Support",
+        "buildTitle": "Shar's Spear Shadow Cleric",
+        "classSplit": "12 Trickery or War Cleric",
+        "coreFeat": "War Caster & Alert",
+        "keyGear": "Shar's Spear of Evening (Darkness Immunity), Dark Justiciar Half-Plate"
+      },
+      {
+        "companionId": "astarion",
+        "assignedRole": "Skill Monkey",
+        "buildTitle": "Eversight Gloom Assassin",
+        "classSplit": "5 Gloom Stalker / 4 Assassin / 3 Battle Master",
+        "coreFeat": "Sharpshooter & Alert",
+        "keyGear": "Eversight Ring (Blindness Immunity), Titanstring Bow, Knife of Undermountain King"
+      }
+    ],
+    "description": "Exploits the AI pathfinding limitation in BG3: ranged enemies and spellcasters cannot cast spells or make ranged attacks into or out of Darkness. Equipping the party with blindness immunity (Devil's Sight, Eversight Ring, Helldusk Helmet, and Shar's Spear) allows them to butcher blinded enemies with permanent advantage and zero retaliation.",
+    "strengths": [
+      "Total immunity to all enemy ranged attacks and ranged spells: AI simply cannot target you",
+      "Guaranteed attack advantage on every single strike without spending bonus actions or resources",
+      "Hunger of Hadar stacks blinding darkness with difficult terrain and cold/acid damage ticks",
+      "Unmatched stealth scouting and opening round assassinations"
+    ],
+    "weaknesses": [
+      "Requires specific gear pieces for blindness immunity on non-Warlocks (Eversight Ring, Helldusk Helm)",
+      "Narrative commitment: obtaining Shar's Spear of Evening requires specific dark story paths"
+    ],
+    "turnSequencing": [
+      "Slot 1 (Wyll): Drop Hunger of Hadar or Darkness covering the enemy choke point or party bunker",
+      "Slot 2 (Shadowheart): Cast Shar's Darkness or Spirit Guardians, anchoring the cloud center",
+      "Slot 3 (Astarion): Sneak Attack Sharpshooter shots with permanent advantage from inside shadow",
+      "Slot 4 (Minthara): Step up to blinded enemies, executing auto-advantage critical Divine Smites"
+    ],
+    "progressionMilestones": [
+      {
+        "act": "Act 1",
+        "objective": "Loot Eversight Ring from House of Healing Morgue / Blighted Village cellar",
+        "impact": "First martial companion receives complete immunity to blindness"
+      },
+      {
+        "act": "Act 2",
+        "objective": "Claim Shar's Spear of Evening at the Shadowfell or equip Justiciar gear",
+        "impact": "Shadowheart gains at-will Darkness and blind immunity"
+      },
+      {
+        "act": "Act 3",
+        "objective": "Acquire Helldusk Helmet from House of Hope for the final companion",
+        "impact": "All four party members achieve 100% blind immunity within darkness clouds"
+      }
+    ]
+  },
+  {
+    "id": "tavern-brawler-alpha-strike",
+    "name": "Brawler Alpha Strike (Physical Brutality)",
+    "difficultyTier": "Honor Mode S-Tier",
+    "coreSynergyConcept": "Dual Tavern Brawler engine: double Strength modifier to attack and damage rolls ensures a 95% minimum hit rate and devastating flat physical damage scaling.",
+    "slots": ["karlach", "astarion", "laezel", "tav"],
+    "slotBuilds": [
+      {
+        "companionId": "karlach",
+        "assignedRole": "Striker",
+        "buildTitle": "Berserker Throw King",
+        "classSplit": "5 Berserker Barbarian / 4 Thief Rogue / 3 Champion Fighter",
+        "coreFeat": "Tavern Brawler & Alert",
+        "keyGear": "Returning Pike / Nyrulna, Kushigo Gloves, Ring of Flinging"
+      },
+      {
+        "companionId": "astarion",
+        "assignedRole": "Striker",
+        "buildTitle": "Tavern Brawler Open Hand Monk",
+        "classSplit": "8 Open Hand Monk / 4 Thief Rogue",
+        "coreFeat": "Tavern Brawler & Alert",
+        "keyGear": "Gloves of Soul Catching, Boots of Kushigo, Vest of Soul Revitalization"
+      },
+      {
+        "companionId": "laezel",
+        "assignedRole": "Tank",
+        "buildTitle": "Tripping Battle Master",
+        "classSplit": "12 Battle Master Fighter",
+        "coreFeat": "Great Weapon Master & Alert",
+        "keyGear": "Balduran's Giantslayer, Armour of Agility, Surgeon's Subjugation Amulet"
+      },
+      {
+        "companionId": "tav",
+        "assignedRole": "Party Face",
+        "buildTitle": "Bhaalist Piercing Bard",
+        "classSplit": "10 Swords Bard / 2 Paladin (or 10 Bard / 1 Fighter / 1 Wizard)",
+        "coreFeat": "Sharpshooter & Savage Attacker",
+        "keyGear": "Bhaalist Armor (Aura of Murder: Piercing Vulnerability), Hand Crossbows"
+      }
+    ],
+    "description": "The ultimate physical burst composition. Bhaalist Armor grants an aura of piercing vulnerability that doubles all piercing damage dealt by Karlach's thrown tridents, Tav's crossbow flourishes, and Lae'zel's piercing strikes, while Monk Astarion decimates anything resistant to piercing with bludgeoning flurry combos.",
+    "strengths": [
+      "Aura of Murder inflicts 100% piercing vulnerability with no saving throw to nearby foes",
+      "Tavern Brawler provides practically unmissable 95% accuracy even against 25+ AC bosses",
+      "Short rest recovery on almost all resources: can fight 5+ major battles per long rest",
+      "Extreme single-round single-target burst exceeding 500 cumulative DPR"
+    ],
+    "weaknesses": [
+      "Limited AoE spell coverage: clearing wide swarms of 20+ low HP enemies takes deliberate targeting",
+      "Heavy competition for Strength Elixirs if not distributing natural stats effectively"
+    ],
+    "turnSequencing": [
+      "Slot 1 (Tav): Move within 3m of boss to apply Bhaalist Armor Piercing Vulnerability",
+      "Slot 2 (Karlach): Enraged Throw Nyrulna (deals double piercing damage + thunder splash)",
+      "Slot 3 (Lae'zel): Trip Attack prone knockdown followed by 5 critical Great Weapon strikes",
+      "Slot 4 (Astarion): Flurry of Blows: Push / Topple, dealing over 180 bludgeoning damage"
+    ],
+    "progressionMilestones": [
+      {
+        "act": "Act 1",
+        "objective": "Level 4 Tavern Brawler power spike and Derryth Bonecloak Elixir farming",
+        "impact": "Karlach and Astarion gain unprecedented +10 to hit and +10 to damage"
+      },
+      {
+        "act": "Act 2",
+        "objective": "Rescue tieflings for Potent Robe / buy risky ring from Araj Oblodra",
+        "impact": "Massive boost to attack consistency and martial utility"
+      },
+      {
+        "act": "Act 3",
+        "objective": "Become Unholy Assassin to purchase Bhaalist Armor from Echo of Abazigal",
+        "impact": "Aura of Murder doubles all party piercing damage, melting bosses in 1 round"
+      }
+    ]
+  },
+  {
+    "id": "swords-bard-god-controller",
+    "name": "Arcane Acuity Dominion",
+    "difficultyTier": "Honor Mode S-Tier",
+    "coreSynergyConcept": "Arcane Acuity itemization: every weapon attack adds +2 Spell Save DC up to +10, enabling bonus action crowd control spells with a literal 100% success rate on any boss.",
+    "slots": ["tav", "gale", "shadowheart", "laezel"],
+    "slotBuilds": [
+      {
+        "companionId": "tav",
+        "assignedRole": "Party Face",
+        "buildTitle": "Acuity Scoundrel Swords Bard",
+        "classSplit": "10 Swords Bard / 1 Fighter / 1 Wizard",
+        "coreFeat": "Sharpshooter & Alert",
+        "keyGear": "Helmet of Arcane Acuity, Band of the Mystic Scoundrel, Titanstring Bow"
+      },
+      {
+        "companionId": "gale",
+        "assignedRole": "AoE Blaster",
+        "buildTitle": "Sculpt Spells Evocation Archmage",
+        "classSplit": "12 Evocation Wizard",
+        "coreFeat": "Dual Wielder & Alert",
+        "keyGear": "Markoheshkir, Robe of the Weave, Hood of the Weave"
+      },
+      {
+        "companionId": "shadowheart",
+        "assignedRole": "Support",
+        "buildTitle": "Bless & Ward Life Specialist",
+        "classSplit": "11 Life Cleric / 1 Storm Sorcerer",
+        "coreFeat": "War Caster & Alert",
+        "keyGear": "The Whispering Promise, Hellrider's Pride, Devotee's Mace"
+      },
+      {
+        "companionId": "laezel",
+        "assignedRole": "Striker",
+        "buildTitle": "Executioner Battle Master",
+        "classSplit": "12 Battle Master Fighter",
+        "coreFeat": "Great Weapon Master & Alert",
+        "keyGear": "Silver Sword of the Astral Plane, Armour of Agility, Killer's Sweetheart"
+      }
+    ],
+    "description": "The quintessential tactical lockup party. Tav opens combat by firing a Ranged Slashing Flourish, immediately gaining 8 to 10 stacks of Arcane Acuity. With Band of the Mystic Scoundrel, Tav casts Hold Person, Hold Monster, or Command: Grovel as a bonus action with a 100% success rate. Gale and Lae'zel follow up with guaranteed critical hits against helpless immobilized targets.",
+    "strengths": [
+      "Guaranteed turn denial on any boss without needing prior debuffs: 100% spell save DC",
+      "Complete party sustain: Life Cleric distributes team-wide Bless and Blade Ward upon any healing",
+      "Flexible scroll scribing: Gale and Tav can prepare any wizard utility spell in the game",
+      "Exceptional dialogue mastery with Bard expertise in Persuasion, Deception, and Sleight of Hand"
+    ],
+    "weaknesses": [
+      "Enemies with Unstoppable stacks (such as Orin) require multihit strip before crowd control takes full effect",
+      "Slightly reliant on concentration maintenance if incapacitated"
+    ],
+    "turnSequencing": [
+      "Slot 1 (Tav): Ranged Slashing Flourish on two targets (+8 Arcane Acuity), bonus action cast Hold Monster (100% DC)",
+      "Slot 2 (Lae'zel): Move to held boss, make 3 automatic melee critical hits with Great Weapon Master",
+      "Slot 3 (Gale): Drop Sculpt Spells Upcast Chain Lightning or Disintegrate into paralyzed targets",
+      "Slot 4 (Shadowheart): Cast Mass Healing Word (triggers team-wide 2-turn Bless and Blade Ward)"
+    ],
+    "progressionMilestones": [
+      {
+        "act": "Act 1",
+        "objective": "Purchase Whispering Promise from Volo and Hellrider's Pride from Zevlor",
+        "impact": "Every heal now automatically applies +1d4 to attack/saves and halves weapon damage"
+      },
+      {
+        "act": "Act 2",
+        "objective": "Acquire Helmet of Arcane Acuity in Reithwin Mason Guild secret cellar",
+        "impact": "Bard transforms into an unstoppable crowd control machine"
+      },
+      {
+        "act": "Act 3",
+        "objective": "Spin Akabi's wheel at the Circus to get Band of the Mystic Scoundrel",
+        "impact": "Enables bonus action illusion and enchantment spells in the same turn as attacking"
+      }
+    ]
+  },
+  {
+    "id": "nature-hazard-choke",
+    "name": "Verdant Hazard Lockdown",
+    "difficultyTier": "Honor Mode A-Tier",
+    "coreSynergyConcept": "Non-concentration difficult terrain stacking (Plant Growth / Spike Growth) with forced movement and slippery surfaces (Sleet Storm / Ice Storm).",
+    "slots": ["halsin", "jaheira", "wyll", "minsc"],
+    "slotBuilds": [
+      {
+        "companionId": "halsin",
+        "assignedRole": "Tank",
+        "buildTitle": "Tavern Brawler Earth Myrmidon",
+        "classSplit": "10 Moon Druid / 1 Sorcerer / 1 War Cleric",
+        "coreFeat": "Tavern Brawler & Alert",
+        "keyGear": "Armour of Moonbasking, Shapeshifter's Hat, Amulet of Greater Health"
+      },
+      {
+        "companionId": "jaheira",
+        "assignedRole": "Controller",
+        "buildTitle": "Land Druid Blizzard Architect",
+        "classSplit": "11 Land Druid / 1 Storm Sorcerer",
+        "coreFeat": "War Caster & Alert",
+        "keyGear": "Belm, Sylvan Scimitar, Armour of Landfall, Staff of Spellpower"
+      },
+      {
+        "companionId": "wyll",
+        "assignedRole": "Striker",
+        "buildTitle": "Repelling Hadar Blaster",
+        "classSplit": "12 Fiend Warlock",
+        "coreFeat": "Spell Sniper & Alert",
+        "keyGear": "Potent Robe, Infernal Rapier, Daredevil Gloves"
+      },
+      {
+        "companionId": "minsc",
+        "assignedRole": "AoE Blaster",
+        "buildTitle": "Hunter Volley Cleaver",
+        "classSplit": "11 Hunter Ranger / 1 War Cleric",
+        "coreFeat": "Sharpshooter & Alert",
+        "keyGear": "Gontr Mael, Dead Shot, Armour of Agility"
+      }
+    ],
+    "description": "Denies enemy melee AI the ability to ever reach the party. Jaheira casts Plant Growth (quarters enemy movement with no concentration requirement) and Sleet Storm. Wyll drops Hunger of Hadar inside. Any enemy attempting to dash through is continuously blasted back into the lethal killbox by Wyll's Repelling Blast and Minsc's resource-free infinite Volley attacks.",
+    "strengths": [
+      "Plant Growth quarters movement without using concentration, stacking with Hunger of Hadar",
+      "Sleet Storm continuously breaks enemy concentration and forces prone saves with no movement left to stand",
+      "Minsc's Volley attack at level 11 deals full ranged weapon damage to all enemies in a radius without spell slots",
+      "Earth Myrmidon Halsin acts as an impenetrable 180 HP wall that burrows and slams"
+    ],
+    "weaknesses": [
+      "Teleporting enemies (Githyanki Misty Step, Phase Spiders) can bypass ground hazard choke points",
+      "Requires open spatial geometry to maximize choke point efficiency"
+    ],
+    "turnSequencing": [
+      "Slot 1 (Jaheira): Cast Plant Growth at choke point (quarters movement, zero concentration)",
+      "Slot 2 (Wyll): Cast Hunger of Hadar on top of Plant Growth (blindness, acid/cold damage, half movement)",
+      "Slot 3 (Halsin): Wild Shape into Earth Myrmidon, position at exit perimeter to stun any escapees",
+      "Slot 4 (Minsc): Repeatedly fire Sharpshooter Volleys into the trapped clusters for infinite AoE"
+    ],
+    "progressionMilestones": [
+      {
+        "act": "Act 1",
+        "objective": "Pick up Titanstring Bow and Spike Growth scrolls",
+        "impact": "Enables early area denial tactics in Goblin Camp and Crèche"
+      },
+      {
+        "act": "Act 2",
+        "objective": "Acquire Sylvan Scimitar and Staff of the Woodlands",
+        "impact": "Druid spell save DC increases and scimitars scale on Wisdom"
+      },
+      {
+        "act": "Act 3",
+        "objective": "Reach level 11 on Hunter Ranger for Volley and Moon Druid level 10 for Myrmidons",
+        "impact": "Resource-free infinite ranged AoE and elite elemental tanking"
+      }
+    ]
+  },
+  {
+    "id": "crit-fishing-assassin-death",
+    "name": "Gloom Assassin Shadow Protocol",
+    "difficultyTier": "Honor Mode S-Tier",
+    "coreSynergyConcept": "Opening round surprise round mechanics: auto-critical hits against surprised enemies, extended first round attack volume, and Deathstalker Mantle invisibility loops.",
+    "slots": ["astarion", "durge", "karlach", "wyll"],
+    "slotBuilds": [
+      {
+        "companionId": "astarion",
+        "assignedRole": "Striker",
+        "buildTitle": "Gloom Stalker Assassin Terminator",
+        "classSplit": "5 Gloom Stalker / 4 Assassin / 3 Battle Master",
+        "coreFeat": "Sharpshooter & Alert",
+        "keyGear": "Titanstring Bow, Knife of Undermountain King, Bhaalist Armor"
+      },
+      {
+        "companionId": "durge",
+        "assignedRole": "Striker",
+        "buildTitle": "Deathstalker Shadow Sorcerer",
+        "classSplit": "11 Storm Sorcerer / 1 Tempest Cleric",
+        "coreFeat": "Alert & Dual Wielder",
+        "keyGear": "Deathstalker Mantle, Markoheshkir, Robe of the Weave"
+      },
+      {
+        "companionId": "karlach",
+        "assignedRole": "Tank",
+        "buildTitle": "Tavern Brawler Berserker",
+        "classSplit": "5 Berserker Barbarian / 4 Thief Rogue / 3 Champion Fighter",
+        "coreFeat": "Tavern Brawler & Alert",
+        "keyGear": "Nyrulna, Kushigo Gloves, Ring of Flinging"
+      },
+      {
+        "companionId": "wyll",
+        "assignedRole": "Party Face",
+        "buildTitle": "Eldritch Sniper",
+        "classSplit": "2 Warlock / 10 Sorcerer (or 12 Warlock)",
+        "coreFeat": "Spell Sniper & Alert",
+        "keyGear": "Potent Robe, Birthright, Daredevil Gloves"
+      }
+    ],
+    "description": "Engineered to end fights before enemies even take a single action. Initiating combat from stealth inflicts the Surprised condition. Assassin mechanics turn every hit against surprised targets into an automatic critical hit. Astarion unleashes 7 auto-crit arrows in round 1, Durge scores a critical kill and vanishes into Deathstalker invisibility, and the encounter ends in 30 seconds.",
+    "strengths": [
+      "Surprised enemies lose their entire first turn, completely removing enemy counterattacks",
+      "100% guaranteed critical strikes against all surprised foes in round 1",
+      "Deathstalker Mantle constantly breaks enemy aggro by cloaking the primary damage dealer in invisibility",
+      "High natural initiative ensures the party always wins the turn order"
+    ],
+    "weaknesses": [
+      "Honor Mode legendary bosses with the Alert perk or scripted cutscene starts cannot be surprised",
+      "Requires disciplined tactical positioning to initiate stealth surprise rounds consistently"
+    ],
+    "turnSequencing": [
+      "Slot 1 (Astarion): Initiate from stealth, trigger Surprise round, make Dread Ambusher + Action Surge auto-crit strikes",
+      "Slot 2 (Durge): Upcast Lightning Bolt or Scorching Ray, kill high priority target, activate Deathstalker invisibility",
+      "Slot 3 (Karlach): Enraged Throw to knock remaining leaders prone with guaranteed critical damage",
+      "Slot 4 (Wyll): Quickened Eldritch Blast (6 beams with Potent Robe bonus) to obliterate stragglers"
+    ],
+    "progressionMilestones": [
+      {
+        "act": "Act 1",
+        "objective": "Recruit Astarion, level Gloom Stalker to 5, and obtain Deathstalker Mantle via Dark Urge",
+        "impact": "Unlocks Dread Ambusher extra attack and invisibility on kill"
+      },
+      {
+        "act": "Act 2",
+        "objective": "Reach level 9 to complete 5 Gloom / 4 Assassin split and acquire Risky Ring",
+        "impact": "Permanent advantage on all attacks and guaranteed opening round crits"
+      },
+      {
+        "act": "Act 3",
+        "objective": "Obtain Bhaalist Armor and Dead Shot bow",
+        "impact": "Doubles piercing damage and lowers critical threshold down to 15"
+      }
+    ]
+  },
+  {
+    "id": "fire-acuity-scorcher",
+    "name": "Ignition Protocol (Fire Acuity)",
+    "difficultyTier": "Honor Mode S-Tier",
+    "coreSynergyConcept": "Hat of Fire Acuity combined with upcast Scorching Ray: each ray hit adds +2 Arcane Acuity up to +10, followed by an unavoidable Quickened Extended Command: Grovel or Hold Monster.",
+    "slots": ["durge", "laezel", "shadowheart", "astarion"],
+    "slotBuilds": [
+      {
+        "companionId": "durge",
+        "assignedRole": "AoE Blaster",
+        "buildTitle": "11/1 Fire Acuity Sorlock",
+        "classSplit": "11 Red Draconic Sorcerer / 1 Fiend Warlock",
+        "coreFeat": "Alert & Dual Wielder",
+        "keyGear": "Hat of Fire Acuity, Robe of the Weave, Markoheshkir"
+      },
+      {
+        "companionId": "laezel",
+        "assignedRole": "Striker",
+        "buildTitle": "Great Weapon Executioner",
+        "classSplit": "12 Battle Master Fighter",
+        "coreFeat": "Great Weapon Master & Savage Attacker",
+        "keyGear": "Silver Sword of the Astral Plane, Balduran's Giantslayer"
+      },
+      {
+        "companionId": "shadowheart",
+        "assignedRole": "Support",
+        "buildTitle": "Radiant Ward Cleric",
+        "classSplit": "12 Light Cleric",
+        "coreFeat": "War Caster & Alert",
+        "keyGear": "Luminous Armor, Coruscation Ring, Blood of Lathander"
+      },
+      {
+        "companionId": "astarion",
+        "assignedRole": "Skill Monkey",
+        "buildTitle": "Open Hand Thief Striker",
+        "classSplit": "8 Open Hand Monk / 4 Thief Rogue",
+        "coreFeat": "Tavern Brawler & Alert",
+        "keyGear": "Gloves of Soul Catching, Boots of Kushigo"
+      }
+    ],
+    "description": "The premier caster burst build in Baldur's Gate 3. Durge opens with an upcast Scorching Ray (firing 5 to 7 rays). With Hat of Fire Acuity, all 7 rays hit to grant +10 Spell Save DC in a single action. Durge then spends 3 sorcery points to cast Quickened Extended Command: Grovel or Hold Monster on 6 enemies simultaneously, rendering them totally prone and helpless for multiple rounds.",
+    "strengths": [
+      "Highest single-target spell burst in the game with Elemental Affinity adding Charisma to every ray",
+      "Reaches maximum +10 Spell Save DC in turn 1 faster than any other class",
+      "Command: Grovel forces entire boss arenas to skip their turns without granting them a concentration save",
+      "Overwhelming synergy between held bosses and melee automatic critical strikes"
+    ],
+    "weaknesses": [
+      "Fire immune enemies (Raphael, Hellfire Watchers) require using Arsonist's Oil or switching spell schools",
+      "Consumes sorcery points quickly during protracted dungeon crawls"
+    ],
+    "turnSequencing": [
+      "Slot 1 (Durge): Cast Level 4 Scorching Ray at boss (+10 Fire Acuity), then Quickened Command: Grovel (6 targets, 100% DC)",
+      "Slot 2 (Lae'zel): Move to prone/held targets, execute Action Surge 6-hit Great Weapon Master combo",
+      "Slot 3 (Astarion): Flurry of Blows unarmed strikes on held enemies with guaranteed critical strikes",
+      "Slot 4 (Shadowheart): Cast Radiance of the Dawn to incinerate minions and apply radiant orbs"
+    ],
+    "progressionMilestones": [
+      {
+        "act": "Act 1",
+        "objective": "Obtain Spellsparkler and Sparkstruck ring in Grymforge",
+        "impact": "Every fire ray triggers lightning charges for bonus damage ticks"
+      },
+      {
+        "act": "Act 2",
+        "objective": "Kill Strange Ox at Last Light Inn to loot Hat of Fire Acuity",
+        "impact": "Unlocks the core build engine: +2 Spell Save DC per fire ray hit"
+      },
+      {
+        "act": "Act 3",
+        "objective": "Acquire Markoheshkir and Robe of the Weave in Ramazith's Tower",
+        "impact": "Unlimited level 6 spell slots and supreme spell attack bonuses"
+      }
+    ]
+  }
+]
