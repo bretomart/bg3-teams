@@ -1,5 +1,21 @@
 export type OriginType = 'origin' | 'companion' | 'custom';
 
+export type GameDifficulty = 'Explorer' | 'Balanced' | 'Tactician' | 'Honor';
+
+export interface DifficultyRuleProfile {
+  id: GameDifficulty;
+  name: string;
+  badge: string;
+  campSuppliesPerLongRest: number;
+  enemyHpScaling: string;
+  enemyTacticsLevel: string;
+  multiclassAllowed: boolean;
+  permadeathOrSingleSave: boolean;
+  legendaryBossActions: boolean;
+  traderMarkupPercent: number;
+  summary: string;
+}
+
 export type CompanionId =
   | 'tav'
   | 'durge'
@@ -50,7 +66,41 @@ export interface WeaponOption {
   name: string;
   act: 1 | 2 | 3;
   type: string;
+  sourceCategory?: 'Main Story & Vendors' | 'Quest Locked' | 'Optional Secret / Boss' | 'Alternative Common';
+  questLockWarning?: string;
   description: string;
+}
+
+export interface BuildOption {
+  id: string;
+  name: string;
+  classSplit: string;
+  primaryRole: CombatRole;
+  secondaryRole: CombatRole;
+  shortRestRecharge: boolean;
+  damageTypes: DamageType[];
+  tags: string[];
+  description: string;
+  strengths: string[];
+  drawbacks: string[];
+  combatLoopBreakdown: {
+    action: string;
+    bonusAction: string;
+    reaction: string;
+  };
+  keyFeats: string[];
+  statGoals: Record<AbilityName, number>;
+  weapons: WeaponOption[];
+  armor: {
+    head: string;
+    chest: string;
+    gloves: string;
+    boots: string;
+    amulet: string;
+    rings: string[];
+    cloak?: string;
+  };
+  spellRecommendations?: string[];
 }
 
 export interface OptimalGear {
@@ -92,6 +142,7 @@ export interface Companion {
     description: string;
     tag: string;
   };
+  builds?: BuildOption[];
   baseAbilities: Record<AbilityName, number>;
   recommendedMulticlass: string;
   optimizationRationale?: string;

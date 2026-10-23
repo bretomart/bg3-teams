@@ -17,7 +17,14 @@
       "description": "Full freedom to pick any race, background, dialogue personality, and ability score distribution without canonical constraints.",
       "tag": "Player Avatar"
     },
-    "baseAbilities": { "str": 8, "dex": 16, "con": 14, "int": 10, "wis": 10, "cha": 16 },
+    "baseAbilities": {
+      "str": 8,
+      "dex": 16,
+      "con": 14,
+      "int": 10,
+      "wis": 10,
+      "cha": 16
+    },
     "recommendedMulticlass": "10 Swords Bard / 1 Fighter / 1 Wizard",
     "optimizationRationale": "College of Swords unlocks Slashing Flourish (Ranged), which fires two attacks per attack action. With Extra Attack at level 6, a single action unleashes 4 hits. Equipping the Helmet of Arcane Acuity stacks +2 Spell Save DC per hit up to the maximum cap of +10 DC in turn 1. The Band of the Mystic Scoundrel allows casting Enchantment and Illusion spells (such as Hold Person, Hold Monster, or Command: Grovel) as a bonus action immediately following weapon attacks, ensuring an unbreakable 100% success rate on Honor Mode bosses. Adding 1 level of Fighter grants archery fighting style, shield proficiency, and Constitution saving throw proficiency, while 1 level of Wizard unlocks scribing any scroll in the game up to 6th level.",
     "combatLoopBreakdown": {
@@ -27,9 +34,24 @@
     },
     "optimalGear": {
       "weapons": [
-        { "name": "Hand Crossbow +2", "act": 2, "type": "Hand Crossbow", "description": "Dual wield for rapid Slashing Flourish multi-hits." },
-        { "name": "Dead Shot", "act": 3, "type": "Longbow", "description": "Doubles proficiency bonus to ranged attack rolls and lowers critical threshold." },
-        { "name": "Titanstring Bow", "act": 1, "type": "Longbow", "description": "Adds Strength modifier to bow damage, synergistic with Elixirs of Hill Giant Strength." }
+        {
+          "name": "Hand Crossbow +2",
+          "act": 2,
+          "type": "Hand Crossbow",
+          "description": "Dual wield for rapid Slashing Flourish multi-hits."
+        },
+        {
+          "name": "Dead Shot",
+          "act": 3,
+          "type": "Longbow",
+          "description": "Doubles proficiency bonus to ranged attack rolls and lowers critical threshold."
+        },
+        {
+          "name": "Titanstring Bow",
+          "act": 1,
+          "type": "Longbow",
+          "description": "Adds Strength modifier to bow damage, synergistic with Elixirs of Hill Giant Strength."
+        }
       ],
       "armor": {
         "head": "Helmet of Arcane Acuity",
@@ -37,19 +59,255 @@
         "gloves": "Gloves of Dexterity",
         "boots": "Boots of Speed",
         "amulet": "Amulet of Greater Health",
-        "rings": ["Band of the Mystic Scoundrel", "Caustic Band"],
+        "rings": [
+          "Band of the Mystic Scoundrel",
+          "Caustic Band"
+        ],
         "cloak": "Cloak of Protection"
       }
     },
     "skillPriority": {
-      "order": ["Slashing Flourish (Ranged)", "Hold Person", "Command: Grovel", "Hypnotic Pattern", "Song of Rest"],
-      "keyFeats": ["Sharpshooter", "Alert", "Ability Score Improvement (+2 CHA)"],
-      "statGoals": { "str": 8, "dex": 16, "con": 16, "int": 10, "wis": 10, "cha": 20 },
-      "spellRecommendations": ["Healing Word", "Hold Person", "Hypnotic Pattern", "Counterspell", "Otto's Irresistible Dance"]
+      "order": [
+        "Slashing Flourish (Ranged)",
+        "Hold Person",
+        "Command: Grovel",
+        "Hypnotic Pattern",
+        "Song of Rest"
+      ],
+      "keyFeats": [
+        "Sharpshooter",
+        "Alert",
+        "Ability Score Improvement (+2 CHA)"
+      ],
+      "statGoals": {
+        "str": 8,
+        "dex": 16,
+        "con": 16,
+        "int": 10,
+        "wis": 10,
+        "cha": 20
+      },
+      "spellRecommendations": [
+        "Healing Word",
+        "Hold Person",
+        "Hypnotic Pattern",
+        "Counterspell",
+        "Otto's Irresistible Dance"
+      ]
     },
-    "damageTypes": ["Piercing", "Slashing", "Psychic", "Thunder"],
+    "damageTypes": [
+      "Piercing",
+      "Slashing",
+      "Psychic",
+      "Thunder"
+    ],
     "shortRestRecharge": true,
-    "tags": ["Arcane Acuity", "Face", "Dual Wielder", "Extra Short Rest"]
+    "tags": [
+      "Arcane Acuity",
+      "Face",
+      "Dual Wielder",
+      "Extra Short Rest"
+    ],
+    "builds": [
+      {
+        "id": "swords-bard-controller",
+        "name": "College of Swords (Acuity Controller)",
+        "classSplit": "10 Swords Bard / 1 Fighter / 1 Wizard",
+        "primaryRole": "Party Face",
+        "secondaryRole": "Controller",
+        "shortRestRecharge": true,
+        "damageTypes": [
+          "Piercing",
+          "Slashing",
+          "Psychic",
+          "Thunder"
+        ],
+        "tags": [
+          "Arcane Acuity",
+          "Face",
+          "Dual Wielder",
+          "Extra Short Rest"
+        ],
+        "description": "Fires Slashing Flourishes to max out Arcane Acuity (+10 Spell DC in round 1), then casts 100% DC Hold Monster or Command as a bonus action via Band of the Mystic Scoundrel.",
+        "strengths": [
+          "Guaranteed turn denial against any boss with 100% spell save DC",
+          "Exceptional dialogue mastery with Bard expertise in Persuasion and Deception",
+          "Song of Rest provides a third Short Rest each day"
+        ],
+        "drawbacks": [
+          "Vulnerable if disarmed or silenced before building Arcane Acuity stacks",
+          "Mystic Scoundrel ring is in Act 3 Circus: requires early-game patience",
+          "Consumes Bardic Inspiration charges rapidly in multi-wave battles"
+        ],
+        "combatLoopBreakdown": {
+          "action": "Ranged Slashing Flourish x2 (4 hits for +8 to +10 Arcane Acuity DC)",
+          "bonusAction": "Band of the Mystic Scoundrel bonus action: cast 100% DC Hold Monster, Hold Person, or Command",
+          "reaction": "Shield spell (+5 AC) or Counterspell to shut down enemy casters"
+        },
+        "keyFeats": [
+          "Sharpshooter",
+          "Alert",
+          "Ability Score Improvement (+2 CHA)"
+        ],
+        "statGoals": {
+          "str": 8,
+          "dex": 16,
+          "con": 14,
+          "int": 10,
+          "wis": 10,
+          "cha": 20
+        },
+        "weapons": [
+          {
+            "name": "Titanstring Bow",
+            "act": 1,
+            "type": "Longbow",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Adds STR modifier to damage. Extremely consistent with Elixirs of Hill Giant Strength."
+          },
+          {
+            "name": "Hand Crossbow +2",
+            "act": 2,
+            "type": "Hand Crossbow",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Dual wield for reliable bonus action attacks during leveling."
+          },
+          {
+            "name": "Dead Shot",
+            "act": 3,
+            "type": "Longbow",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Doubles proficiency bonus to ranged attacks and lowers critical roll requirement by 1."
+          },
+          {
+            "name": "Gontr Mael",
+            "act": 3,
+            "type": "Longbow",
+            "sourceCategory": "Optional Secret / Boss",
+            "questLockWarning": "Locked behind defeating the Steel Watch Titan in the Foundry.",
+            "description": "Inflicts Guiding Bolt and grants Celestial Haste with zero lethargy penalty."
+          }
+        ],
+        "armor": {
+          "head": "Helmet of Arcane Acuity",
+          "chest": "Bhaalist Armor",
+          "gloves": "Gloves of Dexterity",
+          "boots": "Boots of Speed",
+          "amulet": "Amulet of Greater Health",
+          "rings": [
+            "Band of the Mystic Scoundrel",
+            "Caustic Band"
+          ],
+          "cloak": "Cloak of Protection"
+        },
+        "spellRecommendations": [
+          "Healing Word",
+          "Hold Person",
+          "Hypnotic Pattern",
+          "Counterspell",
+          "Otto's Irresistible Dance"
+        ]
+      },
+      {
+        "id": "oath-ancients-paladin",
+        "name": "Oath of the Ancients (Aura Sentinel)",
+        "classSplit": "7 Ancients Paladin / 5 Sorcerer",
+        "primaryRole": "Tank",
+        "secondaryRole": "Support",
+        "shortRestRecharge": false,
+        "damageTypes": [
+          "Radiant",
+          "Slashing",
+          "Thunder",
+          "Fire"
+        ],
+        "tags": [
+          "Aura of Protection",
+          "Smite Nova",
+          "Healing Radiance",
+          "Warding Aura"
+        ],
+        "description": "Anchors the party with +5 to all saving throws (Aura of Protection) and halves all incoming spell damage (Aura of Warding), while converting Sorcerer slots into Divine Smites.",
+        "strengths": [
+          "Immense team protection: +5 to all ally saving throws prevents disastrous crowd control wipes",
+          "Aura of Warding permanently halves incoming spell damage for adjacent party members",
+          "Devastating burst damage on high-priority targets using upcast Divine Smites"
+        ],
+        "drawbacks": [
+          "Strict Oath conditions: breaking your oath locks key auras until paying 1,000+ gold to the Oathbreaker Knight",
+          "Melee-locked: enemies on distant ledges require Misty Step or ranged party assistance",
+          "Spell slot hungry: Divine Smites burn through spell resources quickly in long dungeons"
+        ],
+        "combatLoopBreakdown": {
+          "action": "Extra Attack: 2 Great Weapon strikes combined with Level 3/4 Divine Smites",
+          "bonusAction": "Quickened Metamagic spell (Misty Step or Hold Person) or Healing Radiance pulse",
+          "reaction": "Divine Smite on critical hit confirmation, or Hellish Rebuke retaliation"
+        },
+        "keyFeats": [
+          "Great Weapon Master",
+          "Savage Attacker",
+          "Alert"
+        ],
+        "statGoals": {
+          "str": 20,
+          "dex": 10,
+          "con": 16,
+          "int": 8,
+          "wis": 10,
+          "cha": 18
+        },
+        "weapons": [
+          {
+            "name": "Sword of Justice",
+            "act": 1,
+            "type": "Greatsword",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Grants Tyr's Protection (+2 AC concentration shield), excellent for Act 1 frontlining."
+          },
+          {
+            "name": "Halberd of Vigilance",
+            "act": 2,
+            "type": "Halberd",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Bought from Lann Tarv at Moonrise. Adds +1 to Initiative and advantage on Perception."
+          },
+          {
+            "name": "Balduran's Giantslayer",
+            "act": 3,
+            "type": "Greatsword",
+            "sourceCategory": "Optional Secret / Boss",
+            "questLockWarning": "Locked behind the Ansur Wyrmway Trials under the city.",
+            "description": "Doubles Strength modifier on damage rolls and grants Giant Form enrage."
+          },
+          {
+            "name": "Foebreaker",
+            "act": 3,
+            "type": "Warhammer",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Bypasses bludgeoning resistance and ignores sturdy wall properties, reliable vendor purchase."
+          }
+        ],
+        "armor": {
+          "head": "Helm of Balduran",
+          "chest": "Armour of Persistence",
+          "gloves": "Legacy of the Masters",
+          "boots": "Boots of Striding",
+          "amulet": "Broodmother's Revenge",
+          "rings": [
+            "Ring of Protection",
+            "Callous Glow Ring"
+          ],
+          "cloak": "Cloak of Protection"
+        },
+        "spellRecommendations": [
+          "Divine Smite",
+          "Misty Step",
+          "Shield of Faith",
+          "Healing Radiance",
+          "Counterspell"
+        ]
+      }
+    ]
   },
   {
     "id": "durge",
@@ -69,13 +327,35 @@
       "description": "Killing an enemy grants invisibility for 2 rounds once per turn, resetting enemy targeting and giving guaranteed advantage.",
       "tag": "Invisibility on Kill"
     },
-    "baseAbilities": { "str": 8, "dex": 16, "con": 14, "int": 10, "wis": 12, "cha": 16 },
+    "baseAbilities": {
+      "str": 8,
+      "dex": 16,
+      "con": 14,
+      "int": 10,
+      "wis": 12,
+      "cha": 16
+    },
     "recommendedMulticlass": "11 Storm Sorcerer / 1 Tempest Cleric",
     "optimalGear": {
       "weapons": [
-        { "name": "Markoheshkir", "act": 3, "type": "Quarterstaff", "description": "Free Kereska's Favour (Bolts of Doom) granting Chain Lightning and lightning resistance." },
-        { "name": "Spellsparkler", "act": 1, "type": "Quarterstaff", "description": "Generates 2 Lightning Charges per hit, boosting spell damage and save DC." },
-        { "name": "Staff of Spellpower", "act": 3, "type": "Quarterstaff", "description": "Provides an extra free level 6 spell cast without expending a spell slot." }
+        {
+          "name": "Markoheshkir",
+          "act": 3,
+          "type": "Quarterstaff",
+          "description": "Free Kereska's Favour (Bolts of Doom) granting Chain Lightning and lightning resistance."
+        },
+        {
+          "name": "Spellsparkler",
+          "act": 1,
+          "type": "Quarterstaff",
+          "description": "Generates 2 Lightning Charges per hit, boosting spell damage and save DC."
+        },
+        {
+          "name": "Staff of Spellpower",
+          "act": 3,
+          "type": "Quarterstaff",
+          "description": "Provides an extra free level 6 spell cast without expending a spell slot."
+        }
       ],
       "armor": {
         "head": "Hood of the Weave",
@@ -83,19 +363,147 @@
         "gloves": "Quickspell Gloves",
         "boots": "Disintegrating Night Walkers",
         "amulet": "Spellcrux Amulet",
-        "rings": ["Ring of Free Action", "Coruscation Ring"],
+        "rings": [
+          "Ring of Free Action",
+          "Coruscation Ring"
+        ],
         "cloak": "Deathstalker Mantle"
       }
     },
     "skillPriority": {
-      "order": ["Create Water (Allies)", "Quickened Twin Chain Lightning", "Destructive Wrath", "Sleet Storm", "Shield"],
-      "keyFeats": ["Alert", "Dual Wielder", "War Caster"],
-      "statGoals": { "str": 8, "dex": 16, "con": 16, "int": 8, "wis": 12, "cha": 20 },
-      "spellRecommendations": ["Chain Lightning", "Lightning Bolt", "Create Water", "Haste", "Counterspell"]
+      "order": [
+        "Create Water (Allies)",
+        "Quickened Twin Chain Lightning",
+        "Destructive Wrath",
+        "Sleet Storm",
+        "Shield"
+      ],
+      "keyFeats": [
+        "Alert",
+        "Dual Wielder",
+        "War Caster"
+      ],
+      "statGoals": {
+        "str": 8,
+        "dex": 16,
+        "con": 16,
+        "int": 8,
+        "wis": 12,
+        "cha": 20
+      },
+      "spellRecommendations": [
+        "Chain Lightning",
+        "Lightning Bolt",
+        "Create Water",
+        "Haste",
+        "Counterspell"
+      ]
     },
-    "damageTypes": ["Lightning", "Cold", "Thunder", "Force"],
+    "damageTypes": [
+      "Lightning",
+      "Cold",
+      "Thunder",
+      "Force"
+    ],
     "shortRestRecharge": false,
-    "tags": ["Wet Synergy", "Twin Cast", "Deathstalker Mantle", "Tempest Wrath"]
+    "tags": [
+      "Wet Synergy",
+      "Twin Cast",
+      "Deathstalker Mantle",
+      "Tempest Wrath"
+    ],
+    "builds": [
+      {
+        "id": "durge-canonical",
+        "name": "Sorcerer (Storm Sorcery)",
+        "classSplit": "11 Storm Sorcerer / 1 Tempest Cleric",
+        "primaryRole": "AoE Blaster",
+        "secondaryRole": "Striker",
+        "shortRestRecharge": false,
+        "damageTypes": [
+          "Lightning",
+          "Cold",
+          "Thunder",
+          "Force"
+        ],
+        "tags": [
+          "Wet Synergy",
+          "Twin Cast",
+          "Deathstalker Mantle",
+          "Tempest Wrath"
+        ],
+        "description": "The Dark Urge's primary optimized build template.",
+        "strengths": [
+          "High performance synergy with core party compositions",
+          "Reliable resource recovery",
+          "Strong thematic narrative fit"
+        ],
+        "drawbacks": [
+          "Requires standard itemization milestones",
+          "Specific situational resistances apply"
+        ],
+        "combatLoopBreakdown": {
+          "action": "Standard class actions and primary attack sequences",
+          "bonusAction": "Class bonus utility and spells",
+          "reaction": "Defensive reaction spells and counter-attacks"
+        },
+        "keyFeats": [
+          "Alert",
+          "Dual Wielder",
+          "War Caster"
+        ],
+        "statGoals": {
+          "str": 8,
+          "dex": 16,
+          "con": 16,
+          "int": 8,
+          "wis": 12,
+          "cha": 20
+        },
+        "weapons": [
+          {
+            "name": "Markoheshkir",
+            "act": 3,
+            "type": "Quarterstaff",
+            "description": "Free Kereska's Favour (Bolts of Doom) granting Chain Lightning and lightning resistance.",
+            "sourceCategory": "Optional Secret / Boss"
+          },
+          {
+            "name": "Spellsparkler",
+            "act": 1,
+            "type": "Quarterstaff",
+            "description": "Generates 2 Lightning Charges per hit, boosting spell damage and save DC.",
+            "sourceCategory": "Main Story & Vendors"
+          },
+          {
+            "name": "Staff of Spellpower",
+            "act": 3,
+            "type": "Quarterstaff",
+            "description": "Provides an extra free level 6 spell cast without expending a spell slot.",
+            "sourceCategory": "Main Story & Vendors"
+          }
+        ],
+        "armor": {
+          "head": "Hood of the Weave",
+          "chest": "Robe of the Weave",
+          "gloves": "Quickspell Gloves",
+          "boots": "Disintegrating Night Walkers",
+          "amulet": "Spellcrux Amulet",
+          "rings": [
+            "Ring of Free Action",
+            "Coruscation Ring"
+          ],
+          "cloak": "Deathstalker Mantle"
+        },
+        "spellRecommendations": [
+          "Chain Lightning",
+          "Lightning Bolt",
+          "Create Water",
+          "Haste",
+          "Counterspell"
+        ]
+      }
+    ]
   },
   {
     "id": "astarion",
@@ -115,7 +523,14 @@
       "description": "Bonus action bite granting the Happy status (+1 to all attack rolls, saving throws, and skill checks until long rest). Act 3 Ascension adds +1d10 necrotic damage to all attacks.",
       "tag": "+1 All Checks & Ascended Necrotic"
     },
-    "baseAbilities": { "str": 8, "dex": 17, "con": 14, "int": 13, "wis": 13, "cha": 10 },
+    "baseAbilities": {
+      "str": 8,
+      "dex": 17,
+      "con": 14,
+      "int": 13,
+      "wis": 13,
+      "cha": 10
+    },
     "recommendedMulticlass": "8 Open Hand Monk / 4 Thief Rogue (or 5 Gloom Stalker / 4 Assassin / 3 Battle Master)",
     "optimizationRationale": "Astarion's unique Vampire Bite inflicts the Bloodless condition and grants the Happy buff (+1 to all attack rolls, saving throws, and skill checks until long rest). Act 3 Ascension injects a flat +1d10 necrotic damage to all unarmed and weapon strikes. Combining Tavern Brawler with Open Hand Monk adds double Strength modifier (+10 to hit and damage) to unarmed strikes. 4 levels of Thief Rogue provide Fast Hands (2 bonus actions every turn). Each bonus action executes Flurry of Blows (two strikes), resulting in 6 unarmed strikes per turn dealing well over 220 damage, toppling bosses with no resource expenditure.",
     "combatLoopBreakdown": {
@@ -125,9 +540,24 @@
     },
     "optimalGear": {
       "weapons": [
-        { "name": "Gontr Mael", "act": 3, "type": "Longbow", "description": "Guiding Light on hit and Celestial Haste with zero lethargy penalty." },
-        { "name": "Titanstring Bow", "act": 1, "type": "Longbow", "description": "Adds Strength modifier to damage, perfect for Tavern Brawler or Elixir users." },
-        { "name": "Knife of the Undermountain King", "act": 1, "type": "Shortsword", "description": "Lowers critical roll requirement by 1 and rerolls damage dice on 1 or 2." }
+        {
+          "name": "Gontr Mael",
+          "act": 3,
+          "type": "Longbow",
+          "description": "Guiding Light on hit and Celestial Haste with zero lethargy penalty."
+        },
+        {
+          "name": "Titanstring Bow",
+          "act": 1,
+          "type": "Longbow",
+          "description": "Adds Strength modifier to damage, perfect for Tavern Brawler or Elixir users."
+        },
+        {
+          "name": "Knife of the Undermountain King",
+          "act": 1,
+          "type": "Shortsword",
+          "description": "Lowers critical roll requirement by 1 and rerolls damage dice on 1 or 2."
+        }
       ],
       "armor": {
         "head": "Mask of Soul Perception",
@@ -135,19 +565,251 @@
         "gloves": "Gloves of Soul Catching",
         "boots": "Boots of Uninhibited Kushigo",
         "amulet": "Sentient Amulet",
-        "rings": ["Ring of Regeneration", "Caustic Band"],
+        "rings": [
+          "Ring of Regeneration",
+          "Caustic Band"
+        ],
         "cloak": "Shade-Slayer Cloak"
       }
     },
     "skillPriority": {
-      "order": ["Vampire Bite", "Flurry of Blows: Stagger", "Sneak Attack (Ranged)", "Dash/Disengage", "Wholeness of Body"],
-      "keyFeats": ["Tavern Brawler (+1 CON/STR)", "Alert", "Mobile"],
-      "statGoals": { "str": 8, "dex": 16, "con": 16, "int": 8, "wis": 16, "cha": 8 },
-      "spellRecommendations": ["Hunter's Mark", "Misty Step", "Longstrider", "Pass Without Trace"]
+      "order": [
+        "Vampire Bite",
+        "Flurry of Blows: Stagger",
+        "Sneak Attack (Ranged)",
+        "Dash/Disengage",
+        "Wholeness of Body"
+      ],
+      "keyFeats": [
+        "Tavern Brawler (+1 CON/STR)",
+        "Alert",
+        "Mobile"
+      ],
+      "statGoals": {
+        "str": 8,
+        "dex": 16,
+        "con": 16,
+        "int": 8,
+        "wis": 16,
+        "cha": 8
+      },
+      "spellRecommendations": [
+        "Hunter's Mark",
+        "Misty Step",
+        "Longstrider",
+        "Pass Without Trace"
+      ]
     },
-    "damageTypes": ["Bludgeoning", "Piercing", "Necrotic", "Force"],
+    "damageTypes": [
+      "Bludgeoning",
+      "Piercing",
+      "Necrotic",
+      "Force"
+    ],
     "shortRestRecharge": true,
-    "tags": ["Fast Hands", "Tavern Brawler", "Lockpicker", "Ascended Burst"]
+    "tags": [
+      "Fast Hands",
+      "Tavern Brawler",
+      "Lockpicker",
+      "Ascended Burst"
+    ],
+    "builds": [
+      {
+        "id": "open-hand-monk-thief",
+        "name": "Way of the Open Hand (Tavern Brawler Pugilist)",
+        "classSplit": "8 Open Hand Monk / 4 Thief Rogue",
+        "primaryRole": "Striker",
+        "secondaryRole": "Skill Monkey",
+        "shortRestRecharge": true,
+        "damageTypes": [
+          "Bludgeoning",
+          "Necrotic",
+          "Force",
+          "Radiant"
+        ],
+        "tags": [
+          "Tavern Brawler",
+          "Fast Hands",
+          "Happy Buff",
+          "Stunning Strike"
+        ],
+        "description": "The highest single-target melee damage build in BG3. Combines Tavern Brawler with high Strength and Open Hand Manifestations. Thief Rogue grants two bonus actions, delivering 6 attacks per round dealing over 200 DPR.",
+        "strengths": [
+          "Highest single-target DPR in the game, easily toppling high-HP Honor Mode bosses",
+          "Stunning Strike incapacitates targets, forcing them to skip entire combat rounds",
+          "Happy buff (+1 to all checks) and Ascended Bite (+1d10 necrotic) maximize hit and damage consistency"
+        ],
+        "drawbacks": [
+          "Requires Strength investment or daily consumption of Elixirs of Hill/Cloud Giant Strength",
+          "High Ki point consumption during lengthy multi-round boss encounters",
+          "Melee range requirement exposes Astarion to close-range area hazards"
+        ],
+        "combatLoopBreakdown": {
+          "action": "Unarmed Strike x2 (or Stunning Strike to lock down the priority boss)",
+          "bonusAction": "Fast Hands provides 2 bonus actions: Flurry of Blows (Topple) followed by Flurry of Blows (Stagger)",
+          "reaction": "Deflect Missiles to reduce incoming ranged projectile damage to 0"
+        },
+        "keyFeats": [
+          "Tavern Brawler (+1 CON)",
+          "Alert",
+          "Mobile"
+        ],
+        "statGoals": {
+          "str": 8,
+          "dex": 16,
+          "con": 16,
+          "int": 8,
+          "wis": 16,
+          "cha": 8
+        },
+        "weapons": [
+          {
+            "name": "Corellon's Grace",
+            "act": 1,
+            "type": "Quarterstaff",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Bought from Auntie Ethel in the Grove. Grants +1 to unarmed attack rolls and saves."
+          },
+          {
+            "name": "Club of Hill Giant Strength",
+            "act": 1,
+            "type": "Club",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Found in the Arcane Tower. Sets Strength to 19 when held in the off-hand."
+          },
+          {
+            "name": "Knife of the Undermountain King",
+            "act": 1,
+            "type": "Shortsword",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Lowers critical roll requirement by 1 when stat-sticking in weapon slots."
+          },
+          {
+            "name": "Bloodthirst",
+            "act": 3,
+            "type": "Dagger",
+            "sourceCategory": "Quest Locked",
+            "questLockWarning": "Looted from Orin the Red in the Temple of Bhaal.",
+            "description": "Lowers crit threshold and inflicts piercing vulnerability on main-hand strike."
+          }
+        ],
+        "armor": {
+          "head": "Mask of Soul Perception",
+          "chest": "Vest of Soul Revitalization",
+          "gloves": "Gloves of Soul Catching",
+          "boots": "Boots of Uninhibited Kushigo",
+          "amulet": "Sentient Amulet",
+          "rings": [
+            "Ring of Regeneration",
+            "Caustic Band"
+          ],
+          "cloak": "Shade-Slayer Cloak"
+        },
+        "spellRecommendations": [
+          "Vampire Bite",
+          "Flurry of Blows: Topple",
+          "Stunning Strike",
+          "Wholeness of Body"
+        ]
+      },
+      {
+        "id": "gloom-stalker-assassin",
+        "name": "Gloom Stalker Assassin (Turn-1 Terminator)",
+        "classSplit": "5 Gloom Stalker / 4 Assassin / 3 Battle Master",
+        "primaryRole": "Striker",
+        "secondaryRole": "Skill Monkey",
+        "shortRestRecharge": true,
+        "damageTypes": [
+          "Piercing",
+          "Slashing",
+          "Poison"
+        ],
+        "tags": [
+          "Dread Ambusher",
+          "Auto-Crit on Surprise",
+          "Sharpshooter",
+          "Alpha Strike"
+        ],
+        "description": "The master of surprise rounds. Fires up to 7 attacks in round 1 with Action Surge and Dread Ambusher. Automatically scores critical hits against surprised targets, wiping out elite encounters before enemies act.",
+        "strengths": [
+          "Guaranteed 100% critical hits against all surprised enemies in opening turns",
+          "Highest round 1 burst damage from stealth in the entire game",
+          "Expertise in Stealth and Sleight of Hand handles all DC 30 lockpicking and trap disarming"
+        ],
+        "drawbacks": [
+          "Noticeably lower sustained DPR in long extended battles after round 1",
+          "Honor Mode legendary bosses with Alert perk or cutscene triggers cannot be surprised",
+          "Sharpshooter -5 attack penalty requires advantage sources (like Risky Ring) to maintain hit rate"
+        ],
+        "combatLoopBreakdown": {
+          "action": "Extra Attack x2 with Dread Ambusher bonus strike and Action Surge (6-7 ranged shots)",
+          "bonusAction": "Hunter's Mark target, or Hide to re-engage stealth advantage",
+          "reaction": "Riposte or standard opportunity attack"
+        },
+        "keyFeats": [
+          "Sharpshooter",
+          "Alert",
+          "Ability Score Improvement (+2 DEX)"
+        ],
+        "statGoals": {
+          "str": 8,
+          "dex": 20,
+          "con": 14,
+          "int": 8,
+          "wis": 16,
+          "cha": 10
+        },
+        "weapons": [
+          {
+            "name": "Titanstring Bow",
+            "act": 1,
+            "type": "Longbow",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Adds Strength modifier to damage, scaling drastically with Elixirs."
+          },
+          {
+            "name": "The Dead Shot",
+            "act": 3,
+            "type": "Longbow",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Bought from Fytz the Firecracker. Doubles proficiency bonus to ranged rolls and lowers crit threshold."
+          },
+          {
+            "name": "Gontr Mael",
+            "act": 3,
+            "type": "Longbow",
+            "sourceCategory": "Optional Secret / Boss",
+            "questLockWarning": "Looted from the Steel Watch Foundry boss titan.",
+            "description": "Inflicts Guiding Bolt and grants Celestial Haste."
+          },
+          {
+            "name": "Bows of the Banshee",
+            "act": 1,
+            "type": "Shortbow",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Sold by Corsair Greymon on the Underdark skiff. Inflicts Frightened on hit."
+          }
+        ],
+        "armor": {
+          "head": "Sarevok's Horned Helmet",
+          "chest": "Bhaalist Armor",
+          "gloves": "Craterflesh Gloves",
+          "boots": "Disintegrating Night Walkers",
+          "amulet": "Surgeon's Subjugation Amulet",
+          "rings": [
+            "Risky Ring",
+            "Killer's Sweetheart"
+          ],
+          "cloak": "Deathstalker Mantle"
+        },
+        "spellRecommendations": [
+          "Dread Ambusher: Ranged",
+          "Hunter's Mark",
+          "Misty Step",
+          "Pass Without Trace"
+        ]
+      }
+    ]
   },
   {
     "id": "shadowheart",
@@ -167,7 +829,14 @@
       "description": "Unique narrative access to Shar's Spear of Evening (Darkness blindness immunity) or Selûne's Spear of Night (Moonbeam and Moonmote).",
       "tag": "Radiant Orb Engine"
     },
-    "baseAbilities": { "str": 13, "dex": 13, "con": 15, "int": 10, "wis": 17, "cha": 8 },
+    "baseAbilities": {
+      "str": 13,
+      "dex": 13,
+      "con": 15,
+      "int": 10,
+      "wis": 17,
+      "cha": 8
+    },
     "recommendedMulticlass": "12 Light Cleric (or 11 Life Cleric / 1 Storm Sorcerer)",
     "optimizationRationale": "Spirit Guardians (Radiant) turns Shadowheart into a mobile area denial storm. Equipping Luminous Armor applies Radiating Orb on radiant damage hits, inflicting up to -10 to all enemy attack rolls in a wide perimeter. Coruscation Ring and Callous Glow Ring apply additional radiant damage ticks and Radiating Orb stacks. Boots of Stormy Clamour apply Reverberation whenever a condition is inflicted, tripping enemies prone with zero action cost. Respeccing to Light Cleric grants Radiance of the Dawn (channel divinity AoE incinerating hordes) and Warding Flare to impose disadvantage on enemy attack rolls.",
     "combatLoopBreakdown": {
@@ -177,9 +846,24 @@
     },
     "optimalGear": {
       "weapons": [
-        { "name": "Blood of Lathander", "act": 1, "type": "Mace", "description": "Lathander's Light blinds fiends/undead; Sunbeam 6th level ray; auto-revives upon reaching 0 HP." },
-        { "name": "Shar's Spear of Evening", "act": 2, "type": "Spear", "description": "Grants darkness sight immunity and Shar's Darkness cast." },
-        { "name": "Devotee's Mace", "act": 3, "type": "Mace", "description": "Divine Intervention weapon providing a 10-turn AoE healing aura." }
+        {
+          "name": "Blood of Lathander",
+          "act": 1,
+          "type": "Mace",
+          "description": "Lathander's Light blinds fiends/undead; Sunbeam 6th level ray; auto-revives upon reaching 0 HP."
+        },
+        {
+          "name": "Shar's Spear of Evening",
+          "act": 2,
+          "type": "Spear",
+          "description": "Grants darkness sight immunity and Shar's Darkness cast."
+        },
+        {
+          "name": "Devotee's Mace",
+          "act": 3,
+          "type": "Mace",
+          "description": "Divine Intervention weapon providing a 10-turn AoE healing aura."
+        }
       ],
       "armor": {
         "head": "Holy Lance Helm",
@@ -187,19 +871,349 @@
         "gloves": "Gloves of Belligerent Skies",
         "boots": "Boots of Stormy Clamour",
         "amulet": "The Whispering Promise",
-        "rings": ["Coruscation Ring", "Callous Glow Ring"],
+        "rings": [
+          "Coruscation Ring",
+          "Callous Glow Ring"
+        ],
         "cloak": "Cloak of the Weave"
       }
     },
     "skillPriority": {
-      "order": ["Spirit Guardians (Radiant)", "Radiance of the Dawn", "Healing Word", "Bless", "Fireball"],
-      "keyFeats": ["War Caster", "Resilient (Constitution)", "Alert"],
-      "statGoals": { "str": 8, "dex": 14, "con": 16, "int": 10, "wis": 20, "cha": 8 },
-      "spellRecommendations": ["Spirit Guardians", "Bless", "Healing Word", "Aid", "Heroes' Feast", "Sanctuary"]
+      "order": [
+        "Spirit Guardians (Radiant)",
+        "Radiance of the Dawn",
+        "Healing Word",
+        "Bless",
+        "Fireball"
+      ],
+      "keyFeats": [
+        "War Caster",
+        "Resilient (Constitution)",
+        "Alert"
+      ],
+      "statGoals": {
+        "str": 8,
+        "dex": 14,
+        "con": 16,
+        "int": 10,
+        "wis": 20,
+        "cha": 8
+      },
+      "spellRecommendations": [
+        "Spirit Guardians",
+        "Bless",
+        "Healing Word",
+        "Aid",
+        "Heroes' Feast",
+        "Sanctuary"
+      ]
     },
-    "damageTypes": ["Radiant", "Fire", "Thunder", "Force"],
+    "damageTypes": [
+      "Radiant",
+      "Fire",
+      "Thunder",
+      "Force"
+    ],
     "shortRestRecharge": false,
-    "tags": ["Radiant Orb", "Reverberation", "Healer", "Mass Bless"]
+    "tags": [
+      "Radiant Orb",
+      "Reverberation",
+      "Healer",
+      "Mass Bless"
+    ],
+    "builds": [
+      {
+        "id": "light-cleric-radiant",
+        "name": "Light Domain (Radiant Orb Lawnmower)",
+        "classSplit": "12 Light Cleric",
+        "primaryRole": "Support",
+        "secondaryRole": "AoE Blaster",
+        "shortRestRecharge": false,
+        "damageTypes": [
+          "Radiant",
+          "Fire",
+          "Thunder",
+          "Force"
+        ],
+        "tags": [
+          "Radiant Orb",
+          "Reverberation",
+          "Warding Flare",
+          "Mass Bless"
+        ],
+        "description": "Sprints through enemy frontlines with Spirit Guardians (Radiant), stacking -10 to enemy hit rolls via Luminous Armor and triggering Reverberation knockdowns, while firing Radiance of the Dawn and Fireball.",
+        "strengths": [
+          "Neutralizes enemy offensive threat by stacking -1 to -10 attack penalties on all nearby foes",
+          "Radiance of the Dawn vaporizes swarms of Act 2 undead without expending spell slots",
+          "Warding Flare reaction imposes disadvantage on attack rolls targeting Shadowheart or allies"
+        ],
+        "drawbacks": [
+          "Vulnerable to Radiant Retort (such as Sharran Sanctuary in Act 3) which redirects 200% damage back",
+          "Heavy Long Rest dependency: burning spell slots on Spirit Guardians drains supplies",
+          "Lacks martial weapon proficiency without racial or feat investment"
+        ],
+        "combatLoopBreakdown": {
+          "action": "Spirit Guardians (Radiant) or Radiance of the Dawn Channel Divinity AoE",
+          "bonusAction": "Mass Healing Word (procs Whispering Promise team-wide Bless and Blade Ward)",
+          "reaction": "Warding Flare to force enemy attack rolls to miss at disadvantage"
+        },
+        "keyFeats": [
+          "War Caster",
+          "Resilient (Constitution)",
+          "Alert"
+        ],
+        "statGoals": {
+          "str": 8,
+          "dex": 14,
+          "con": 16,
+          "int": 10,
+          "wis": 20,
+          "cha": 8
+        },
+        "weapons": [
+          {
+            "name": "Blood of Lathander",
+            "act": 1,
+            "type": "Mace",
+            "sourceCategory": "Optional Secret / Boss",
+            "questLockWarning": "Requires solving the Rosymorn Monastery crest puzzle or disarming the lance trap.",
+            "description": "Blinds fiends/undead, auto-revives from 0 HP once per long rest, and fires Sunbeam."
+          },
+          {
+            "name": "Phalar Aluve",
+            "act": 1,
+            "type": "Longsword",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Found in the Underdark. Shriek aura adds 1d4 thunder damage and -1d4 save penalty to all affected enemies."
+          },
+          {
+            "name": "Devotee's Mace",
+            "act": 3,
+            "type": "Mace",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Acquired through Divine Intervention at Cleric level 10. Emits an AoE healing aura for 10 turns."
+          },
+          {
+            "name": "Markoheshkir",
+            "act": 3,
+            "type": "Quarterstaff",
+            "sourceCategory": "Optional Secret / Boss",
+            "questLockWarning": "Locked inside Ramazith's Tower lower globe barrier.",
+            "description": "Provides Arcane Battery and elemental damage boosts for spellcasting mode."
+          }
+        ],
+        "armor": {
+          "head": "Holy Lance Helm",
+          "chest": "Luminous Armor",
+          "gloves": "Gloves of Belligerent Skies",
+          "boots": "Boots of Stormy Clamour",
+          "amulet": "The Whispering Promise",
+          "rings": [
+            "Coruscation Ring",
+            "Callous Glow Ring"
+          ],
+          "cloak": "Cloak of the Weave"
+        },
+        "spellRecommendations": [
+          "Spirit Guardians",
+          "Radiance of the Dawn",
+          "Fireball",
+          "Bless",
+          "Mass Healing Word",
+          "Sanctuary"
+        ]
+      },
+      {
+        "id": "life-cleric-sustain",
+        "name": "Life Domain (Unkillable Combat Medic)",
+        "classSplit": "11 Life Cleric / 1 Storm Sorcerer",
+        "primaryRole": "Support",
+        "secondaryRole": "Tank",
+        "shortRestRecharge": false,
+        "damageTypes": [
+          "Radiant",
+          "Bludgeoning",
+          "Thunder"
+        ],
+        "tags": [
+          "Preserve Life",
+          "Blade Ward Healing",
+          "Heavy Armor",
+          "Fly Disengage"
+        ],
+        "description": "The ultimate survival safety net. Disciple of Life boosts all healing, Preserve Life restores 40+ party HP with a Channel Divinity charge, and Tempestuous Magic allows flying without opportunity attacks.",
+        "strengths": [
+          "Near-impossible for the party to wipe: huge reactive AoE healing resets low HP emergencies",
+          "Every heal distributes 2 turns of Blade Ward (50% physical resistance) and 1d4 Bless to attack/saves",
+          "Heavy armor and shield proficiency allows reaching 22+ AC with minimal equipment conflict"
+        ],
+        "drawbacks": [
+          "Lower personal offensive DPR compared to Light Cleric or Tempest Cleric",
+          "Can lead to passive play if encounters do not stress party health pools",
+          "Requires 1 level in Storm Sorcerer to solve Cleric mobility deficits"
+        ],
+        "combatLoopBreakdown": {
+          "action": "Preserve Life Channel Divinity (huge burst heal) or cast Sanctuary on endangered allies",
+          "bonusAction": "Healing Word or Mass Healing Word, followed by Tempestuous Magic free fly move",
+          "reaction": "Shield spell (via Sorcerer) or War Caster opportunity spell"
+        },
+        "keyFeats": [
+          "War Caster",
+          "Alert",
+          "Ability Score Improvement (+2 WIS)"
+        ],
+        "statGoals": {
+          "str": 10,
+          "dex": 12,
+          "con": 16,
+          "int": 8,
+          "wis": 20,
+          "cha": 12
+        },
+        "weapons": [
+          {
+            "name": "The Whispering Promise (Dagger/Staff alternative)",
+            "act": 1,
+            "type": "Mace",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Equip with any standard 1H weapon while Whispering Promise ring/amulet handles buffing."
+          },
+          {
+            "name": "Selûne's Spear of Night",
+            "act": 2,
+            "type": "Spear",
+            "sourceCategory": "Quest Locked",
+            "questLockWarning": "Requires sparing Nightsong and rejecting the dark path in the Shadowfell.",
+            "description": "Grants advantage on Wisdom saves and Moonmote zone illumination."
+          },
+          {
+            "name": "Shar's Spear of Evening",
+            "act": 2,
+            "type": "Spear",
+            "sourceCategory": "Quest Locked",
+            "questLockWarning": "Requires slaying Nightsong and committing to Shar, locking out Selûnite rewards.",
+            "description": "Grants total blindness immunity, at-will Darkness, and bonus damage against obscured targets."
+          },
+          {
+            "name": "Ketheric's Warhammer",
+            "act": 2,
+            "type": "Warhammer",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Looted from Ketheric Thorm upon defeat, provides solid bludgeoning and radiant bonus."
+          }
+        ],
+        "armor": {
+          "head": "Wapira's Crown",
+          "chest": "Armour of Persistence",
+          "gloves": "Hellrider's Pride",
+          "boots": "Boots of Aid and Comfort",
+          "amulet": "Amulet of the Devout",
+          "rings": [
+            "The Whispering Promise",
+            "Ring of Salving"
+          ],
+          "cloak": "Cloak of Protection"
+        },
+        "spellRecommendations": [
+          "Preserve Life",
+          "Mass Healing Word",
+          "Aid (Upcast)",
+          "Heroes' Feast",
+          "Death Ward"
+        ]
+      },
+      {
+        "id": "trickery-stealth-cleric",
+        "name": "Trickery Domain (Canonical Shadow Infiltrator)",
+        "classSplit": "12 Trickery Cleric (Canonical Origin)",
+        "primaryRole": "Controller",
+        "secondaryRole": "Support",
+        "shortRestRecharge": false,
+        "damageTypes": [
+          "Radiant",
+          "Poison",
+          "Psychic"
+        ],
+        "tags": [
+          "Pass Without Trace",
+          "Invoke Duplicity",
+          "Stealth Advantage",
+          "Shar Canon"
+        ],
+        "description": "Shadowheart's canonical origin path. Utilizes Invoke Duplicity to grant advantage to melee companions, and Pass Without Trace (+10 Stealth) to initiate guaranteed surprise rounds.",
+        "strengths": [
+          "Pass Without Trace (+10 Stealth to entire party) guarantees initiating combat with Surprise rounds",
+          "Invoke Duplicity clone grants permanent attack advantage to martial allies in a 3m radius",
+          "Domain spells include Dimension Door and Polymorph for high exploratory utility"
+        ],
+        "drawbacks": [
+          "Channel Divinity Invoke Duplicity requires concentration, competing directly with Spirit Guardians and Bless",
+          "Significantly lower damage and burst healing than Light or Life domains",
+          "Poison and psychic domain spells face widespread damage resistance in Acts 2 and 3"
+        ],
+        "combatLoopBreakdown": {
+          "action": "Cast Pass Without Trace before combat, then drop Fear or Bestow Curse during battle",
+          "bonusAction": "Invoke Duplicity illusion to grant melee companions automatic attack advantage",
+          "reaction": "Shield of Faith reaction or standard opportunity attack"
+        },
+        "keyFeats": [
+          "War Caster",
+          "Alert",
+          "Resilient (Constitution)"
+        ],
+        "statGoals": {
+          "str": 10,
+          "dex": 14,
+          "con": 16,
+          "int": 10,
+          "wis": 18,
+          "cha": 8
+        },
+        "weapons": [
+          {
+            "name": "Dagger of Shar",
+            "act": 1,
+            "type": "Dagger",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Standard finesse weapon for stealth engagement."
+          },
+          {
+            "name": "Shar's Spear of Evening",
+            "act": 2,
+            "type": "Spear",
+            "sourceCategory": "Quest Locked",
+            "questLockWarning": "Requires completing Shar's Gauntlet and killing Nightsong.",
+            "description": "Canonical Sharran artifact granting Darkness sight immunity and Shar's Darkness."
+          },
+          {
+            "name": "Knife of the Undermountain King",
+            "act": 1,
+            "type": "Shortsword",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Purchased in Crèche Y'llek. Lowers crit threshold and rerolls low damage dice."
+          }
+        ],
+        "armor": {
+          "head": "Dark Justiciar Helm",
+          "chest": "Dark Justiciar Half-Plate",
+          "gloves": "Dark Justiciar Gauntlets",
+          "boots": "Dark Justiciar Boots",
+          "amulet": "Surgeon's Subjugation Amulet",
+          "rings": [
+            "Shadow-Cloaked Ring",
+            "Crypt Lord Ring"
+          ],
+          "cloak": "Shade-Slayer Cloak"
+        },
+        "spellRecommendations": [
+          "Pass Without Trace",
+          "Dimension Door",
+          "Spirit Guardians",
+          "Mirror Image",
+          "Fear"
+        ]
+      }
+    ]
   },
   {
     "id": "karlach",
@@ -219,7 +1233,14 @@
       "description": "Consuming a Soul Coin empowers her infernal engine, granting +2d4 fire damage to weapon and unarmed strikes when raging or below 25% HP.",
       "tag": "Soul Coin Fire Rage"
     },
-    "baseAbilities": { "str": 17, "dex": 13, "con": 15, "int": 8, "wis": 12, "cha": 10 },
+    "baseAbilities": {
+      "str": 17,
+      "dex": 13,
+      "con": 15,
+      "int": 8,
+      "wis": 12,
+      "cha": 10
+    },
     "recommendedMulticlass": "5 Berserker Barbarian / 4 Thief Rogue / 3 Champion Fighter",
     "optimizationRationale": "Tavern Brawler adds double Strength modifier (+10 to +12) to both attack and damage rolls with thrown weapons. Berserker unlocks Enraged Throw (a bonus action that knocks targets prone with no saving throw). 4 levels of Thief Rogue grant Fast Hands (an extra bonus action every turn), enabling two Enraged Throws per turn. 3 levels of Champion lower critical threshold to 19 and provide Action Surge. When Karlach consumes a Soul Coin, her Infernal Engine adds an extra 2d4 fire damage to every attack, producing over 160 DPR with zero spell slot expenditure.",
     "combatLoopBreakdown": {
@@ -229,9 +1250,24 @@
     },
     "optimalGear": {
       "weapons": [
-        { "name": "Returning Pike", "act": 1, "type": "Pike", "description": "Automatically returns to hand after being thrown; core Tavern Brawler Act 1 weapon." },
-        { "name": "Nyrulna", "act": 3, "type": "Trident", "description": "Returns when thrown, creates a 6m thunder blast, and increases movement speed by 3m." },
-        { "name": "Dwarven Thrower", "act": 3, "type": "Warhammer", "description": "Returns when thrown, deals +1d8 bludgeoning damage or +2d8 if shapeshifted as dwarf." }
+        {
+          "name": "Returning Pike",
+          "act": 1,
+          "type": "Pike",
+          "description": "Automatically returns to hand after being thrown; core Tavern Brawler Act 1 weapon."
+        },
+        {
+          "name": "Nyrulna",
+          "act": 3,
+          "type": "Trident",
+          "description": "Returns when thrown, creates a 6m thunder blast, and increases movement speed by 3m."
+        },
+        {
+          "name": "Dwarven Thrower",
+          "act": 3,
+          "type": "Warhammer",
+          "description": "Returns when thrown, deals +1d8 bludgeoning damage or +2d8 if shapeshifted as dwarf."
+        }
       ],
       "armor": {
         "head": "Helm of Balduran",
@@ -239,19 +1275,254 @@
         "gloves": "Kushigo Gloves",
         "boots": "Boots of Striding",
         "amulet": "Broodmother's Revenge",
-        "rings": ["Ring of Flinging", "Caustic Band"],
+        "rings": [
+          "Ring of Flinging",
+          "Caustic Band"
+        ],
         "cloak": "Fleshmelter Cloak"
       }
     },
     "skillPriority": {
-      "order": ["Frenzy Rage", "Enraged Throw", "Fast Hands Bonus Throw", "Reckless Attack", "Action Surge"],
-      "keyFeats": ["Tavern Brawler (+1 STR)", "Alert", "Great Weapon Master"],
-      "statGoals": { "str": 22, "dex": 14, "con": 16, "int": 8, "wis": 12, "cha": 8 },
-      "spellRecommendations": ["Soul Coin Overdrive", "Enraged Throw", "Rage", "Dash"]
+      "order": [
+        "Frenzy Rage",
+        "Enraged Throw",
+        "Fast Hands Bonus Throw",
+        "Reckless Attack",
+        "Action Surge"
+      ],
+      "keyFeats": [
+        "Tavern Brawler (+1 STR)",
+        "Alert",
+        "Great Weapon Master"
+      ],
+      "statGoals": {
+        "str": 22,
+        "dex": 14,
+        "con": 16,
+        "int": 8,
+        "wis": 12,
+        "cha": 8
+      },
+      "spellRecommendations": [
+        "Soul Coin Overdrive",
+        "Enraged Throw",
+        "Rage",
+        "Dash"
+      ]
     },
-    "damageTypes": ["Bludgeoning", "Piercing", "Fire", "Thunder"],
+    "damageTypes": [
+      "Bludgeoning",
+      "Piercing",
+      "Fire",
+      "Thunder"
+    ],
     "shortRestRecharge": true,
-    "tags": ["Throwzerker", "Prone on Hit", "Tavern Brawler", "Soul Coin"]
+    "tags": [
+      "Throwzerker",
+      "Prone on Hit",
+      "Tavern Brawler",
+      "Soul Coin"
+    ],
+    "builds": [
+      {
+        "id": "berserker-throwzerker",
+        "name": "Berserker Throwzerker (Honor Mode S-Tier)",
+        "classSplit": "5 Berserker Barbarian / 4 Thief Rogue / 3 Champion Fighter",
+        "primaryRole": "Tank",
+        "secondaryRole": "Striker",
+        "shortRestRecharge": true,
+        "damageTypes": [
+          "Bludgeoning",
+          "Piercing",
+          "Fire",
+          "Thunder"
+        ],
+        "tags": [
+          "Throwzerker",
+          "Prone on Hit",
+          "Tavern Brawler",
+          "Soul Coin Fire"
+        ],
+        "description": "The premier ranged physical carry in the game. Tavern Brawler adds double Strength modifier (+10 to +12) to attack and damage rolls with thrown weapons. Fast Hands gives two bonus actions for Enraged Throws that knock bosses prone without a saving throw.",
+        "strengths": [
+          "95% guaranteed hit accuracy against 25+ AC bosses due to double Strength scaling",
+          "Enraged Throw inflicts the Prone status condition with zero saving throw",
+          "Soul Coins add +2d4 fire damage to every attack while raging",
+          "Exceptional resource longevity: relies on Short Rests and weapon durability"
+        ],
+        "drawbacks": [
+          "Requires line-of-sight and clear ballistic arc: low ceilings or overhanging beams can obstruct throws",
+          "Thrown weapons occasionally fail to return if combat ends immediately upon throwing",
+          "Soul Coins are finite consumables across the campaign"
+        ],
+        "combatLoopBreakdown": {
+          "action": "Extra Attack: throw pike/trident twice with Tavern Brawler double STR bonus",
+          "bonusAction": "Fast Hands gives 2 bonus actions: Enraged Throw (inflicts prone) followed by Frenzied Strike",
+          "reaction": "Riposte or Opportunity Attack"
+        },
+        "keyFeats": [
+          "Tavern Brawler (+1 STR)",
+          "Alert",
+          "Great Weapon Master"
+        ],
+        "statGoals": {
+          "str": 22,
+          "dex": 14,
+          "con": 16,
+          "int": 8,
+          "wis": 12,
+          "cha": 8
+        },
+        "weapons": [
+          {
+            "name": "Returning Pike",
+            "act": 1,
+            "type": "Pike",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Bought from Grat the Trader in Goblin Camp. Automatically returns to hand when thrown."
+          },
+          {
+            "name": "Lightning Jabber",
+            "act": 2,
+            "type": "Spear",
+            "sourceCategory": "Optional Secret / Boss",
+            "questLockWarning": "Looted from the Kuo-Toa ambush in Reithwin. Does not auto-return unless bound by Eldritch Knight.",
+            "description": "Deals 1d4 additional lightning damage and can shock targets."
+          },
+          {
+            "name": "Nyrulna",
+            "act": 3,
+            "type": "Trident",
+            "sourceCategory": "Optional Secret / Boss",
+            "questLockWarning": "Won from Akabi the Djinni at the Circus by pickpocketing his cheating ring.",
+            "description": "Returns automatically, deals +3d4 thunder splash, and boosts movement speed by 3m."
+          },
+          {
+            "name": "Dwarven Thrower",
+            "act": 3,
+            "type": "Warhammer",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Sold by Ferg Drogher in Rivington. Deals bonus damage when thrown by dwarves or disguise self users."
+          }
+        ],
+        "armor": {
+          "head": "Helm of Balduran",
+          "chest": "Bonespike Garb",
+          "gloves": "Kushigo Gloves",
+          "boots": "Boots of Striding",
+          "amulet": "Broodmother's Revenge",
+          "rings": [
+            "Ring of Flinging",
+            "Caustic Band"
+          ],
+          "cloak": "Fleshmelter Cloak"
+        },
+        "spellRecommendations": [
+          "Soul Coin Overdrive",
+          "Enraged Throw",
+          "Frenzy Rage",
+          "Action Surge"
+        ]
+      },
+      {
+        "id": "wildheart-tiger-bleed",
+        "name": "Wildheart (Tiger Aspect Cleave & Bleed)",
+        "classSplit": "8 Wildheart Barbarian / 4 Champion Fighter",
+        "primaryRole": "Tank",
+        "secondaryRole": "Striker",
+        "shortRestRecharge": true,
+        "damageTypes": [
+          "Slashing",
+          "Fire",
+          "Thunder"
+        ],
+        "tags": [
+          "Tiger Cleave",
+          "Maim on Bleed",
+          "Wolverine Aspect",
+          "Melee Swarm"
+        ],
+        "description": "Tiger's Bloodlust attacks 3 adjacent targets in a wide arc every swing, inflicting Bleeding. Paired with Aspect of the Wolverine, bleeding targets are automatically Maimed (movement reduced to 0), pinning entire frontlines in place.",
+        "strengths": [
+          "Infinite multi-target cleave without expending resources or spell slots",
+          "Maim reduces enemy movement speed to 0 with no saving throw, locking bosses in place",
+          "High natural Barbarian HP and damage resistances keep Karlach in combat indefinitely"
+        ],
+        "drawbacks": [
+          "Requires grouping enemies in close proximity to maximize cleave effectiveness",
+          "Lower single-target boss burst than the Throwzerker setup",
+          "Bleed-immune constructs and undead in Act 3 bypass the Maim lockdown"
+        ],
+        "combatLoopBreakdown": {
+          "action": "Tiger's Bloodlust Cleave x2 (hitting up to 6 targets to inflict Bleed and Maim)",
+          "bonusAction": "Rage: Tiger Heart activation, or Great Weapon Master bonus attack on kill/crit",
+          "reaction": "Relentless Retaliation or Opportunity Attack"
+        },
+        "keyFeats": [
+          "Great Weapon Master",
+          "Alert",
+          "Savage Attacker"
+        ],
+        "statGoals": {
+          "str": 20,
+          "dex": 14,
+          "con": 16,
+          "int": 8,
+          "wis": 12,
+          "cha": 8
+        },
+        "weapons": [
+          {
+            "name": "Sword of Justice",
+            "act": 1,
+            "type": "Greatsword",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Early Act 1 greatsword granting Tyr's Protection for defensive frontline tanking."
+          },
+          {
+            "name": "Sorrow",
+            "act": 1,
+            "type": "Glaive",
+            "sourceCategory": "Main Story & Vendors",
+            "description": "Reward from Rath in the Emerald Grove. Grants Sorrowful Lash bonus action whip."
+          },
+          {
+            "name": "Voss' Silver Sword",
+            "act": 1,
+            "type": "Greatsword",
+            "sourceCategory": "Optional Secret / Boss",
+            "questLockWarning": "Requires disarming Kith'rak Voss at the Mountain Pass encounter.",
+            "description": "Deals bonus psychic damage and wrath on kill."
+          },
+          {
+            "name": "Balduran's Giantslayer",
+            "act": 3,
+            "type": "Greatsword",
+            "sourceCategory": "Optional Secret / Boss",
+            "questLockWarning": "Requires defeating Ansur in the Wyrmway under the city.",
+            "description": "Doubles Strength modifier on damage and grants Giant Form."
+          }
+        ],
+        "armor": {
+          "head": "Sarevok's Horned Helmet",
+          "chest": "Armour of Agility",
+          "gloves": "Enervating Gloves",
+          "boots": "Helldusk Boots",
+          "amulet": "Amulet of Greater Health",
+          "rings": [
+            "Killer's Sweetheart",
+            "Ring of Protection"
+          ],
+          "cloak": "Cloak of Displacement"
+        },
+        "spellRecommendations": [
+          "Tiger's Bloodlust",
+          "Rage: Tiger Heart",
+          "Reckless Attack",
+          "Dash"
+        ]
+      }
+    ]
   },
   {
     "id": "laezel",
@@ -271,13 +1542,35 @@
       "description": "Astral Knowledge grants proficiency in all skills of an ability until long rest. Zaith'isk purification allows using all Illithid Powers as bonus actions.",
       "tag": "Bonus Action Illithid & 3 Attacks"
     },
-    "baseAbilities": { "str": 17, "dex": 13, "con": 15, "int": 10, "wis": 12, "cha": 8 },
+    "baseAbilities": {
+      "str": 17,
+      "dex": 13,
+      "con": 15,
+      "int": 10,
+      "wis": 12,
+      "cha": 8
+    },
     "recommendedMulticlass": "12 Battle Master Fighter (or 11 Fighter / 1 War Cleric)",
     "optimalGear": {
       "weapons": [
-        { "name": "Silver Sword of the Astral Plane", "act": 3, "type": "Greatsword", "description": "+1d6 psychic damage, advantage on INT/WIS/CHA saves, and stun resistance when wielded by Githyanki." },
-        { "name": "Sword of Justice", "act": 1, "type": "Greatsword", "description": "Grants Tyr's Protection for +2 AC concentration shield." },
-        { "name": "Balduran's Giantslayer", "act": 3, "type": "Greatsword", "description": "Doubles Strength modifier on damage and grants Giant Form with +1d6 extra damage and temp HP." }
+        {
+          "name": "Silver Sword of the Astral Plane",
+          "act": 3,
+          "type": "Greatsword",
+          "description": "+1d6 psychic damage, advantage on INT/WIS/CHA saves, and stun resistance when wielded by Githyanki."
+        },
+        {
+          "name": "Sword of Justice",
+          "act": 1,
+          "type": "Greatsword",
+          "description": "Grants Tyr's Protection for +2 AC concentration shield."
+        },
+        {
+          "name": "Balduran's Giantslayer",
+          "act": 3,
+          "type": "Greatsword",
+          "description": "Doubles Strength modifier on damage and grants Giant Form with +1d6 extra damage and temp HP."
+        }
       ],
       "armor": {
         "head": "Grymskull Helm",
@@ -285,19 +1578,146 @@
         "gloves": "Gauntlets of Hill Giant Strength",
         "boots": "Disintegrating Night Walkers",
         "amulet": "Surgeon's Subjugation Amulet",
-        "rings": ["Killer's Sweetheart", "Ring of Protection"],
+        "rings": [
+          "Killer's Sweetheart",
+          "Ring of Protection"
+        ],
         "cloak": "Cloak of Displacement"
       }
     },
     "skillPriority": {
-      "order": ["Action Surge", "Trip Attack (Melee)", "Disarming Attack", "Menacing Attack", "Great Weapon Master Bonus Attack"],
-      "keyFeats": ["Great Weapon Master", "Alert", "Savage Attacker", "Heavy Armor Master"],
-      "statGoals": { "str": 24, "dex": 14, "con": 16, "int": 8, "wis": 12, "cha": 8 },
-      "spellRecommendations": ["Githyanki Jump", "Misty Step", "Astral Knowledge"]
+      "order": [
+        "Action Surge",
+        "Trip Attack (Melee)",
+        "Disarming Attack",
+        "Menacing Attack",
+        "Great Weapon Master Bonus Attack"
+      ],
+      "keyFeats": [
+        "Great Weapon Master",
+        "Alert",
+        "Savage Attacker",
+        "Heavy Armor Master"
+      ],
+      "statGoals": {
+        "str": 24,
+        "dex": 14,
+        "con": 16,
+        "int": 8,
+        "wis": 12,
+        "cha": 8
+      },
+      "spellRecommendations": [
+        "Githyanki Jump",
+        "Misty Step",
+        "Astral Knowledge"
+      ]
     },
-    "damageTypes": ["Slashing", "Psychic", "Force", "Bludgeoning"],
+    "damageTypes": [
+      "Slashing",
+      "Psychic",
+      "Force",
+      "Bludgeoning"
+    ],
     "shortRestRecharge": true,
-    "tags": ["Action Surge", "3 Attacks Per Action", "Silver Sword", "Disarm Master"]
+    "tags": [
+      "Action Surge",
+      "3 Attacks Per Action",
+      "Silver Sword",
+      "Disarm Master"
+    ],
+    "builds": [
+      {
+        "id": "laezel-canonical",
+        "name": "Fighter (Battle Master)",
+        "classSplit": "12 Battle Master Fighter (or 11 Fighter / 1 War Cleric)",
+        "primaryRole": "Striker",
+        "secondaryRole": "Tank",
+        "shortRestRecharge": true,
+        "damageTypes": [
+          "Slashing",
+          "Psychic",
+          "Force",
+          "Bludgeoning"
+        ],
+        "tags": [
+          "Action Surge",
+          "3 Attacks Per Action",
+          "Silver Sword",
+          "Disarm Master"
+        ],
+        "description": "Lae'zel of Crèche K'liir's primary optimized build template.",
+        "strengths": [
+          "High performance synergy with core party compositions",
+          "Reliable resource recovery",
+          "Strong thematic narrative fit"
+        ],
+        "drawbacks": [
+          "Requires standard itemization milestones",
+          "Specific situational resistances apply"
+        ],
+        "combatLoopBreakdown": {
+          "action": "Standard class actions and primary attack sequences",
+          "bonusAction": "Class bonus utility and spells",
+          "reaction": "Defensive reaction spells and counter-attacks"
+        },
+        "keyFeats": [
+          "Great Weapon Master",
+          "Alert",
+          "Savage Attacker",
+          "Heavy Armor Master"
+        ],
+        "statGoals": {
+          "str": 24,
+          "dex": 14,
+          "con": 16,
+          "int": 8,
+          "wis": 12,
+          "cha": 8
+        },
+        "weapons": [
+          {
+            "name": "Silver Sword of the Astral Plane",
+            "act": 3,
+            "type": "Greatsword",
+            "description": "+1d6 psychic damage, advantage on INT/WIS/CHA saves, and stun resistance when wielded by Githyanki.",
+            "sourceCategory": "Quest Locked",
+            "questLockWarning": "Locked behind companion story quest decisions."
+          },
+          {
+            "name": "Sword of Justice",
+            "act": 1,
+            "type": "Greatsword",
+            "description": "Grants Tyr's Protection for +2 AC concentration shield.",
+            "sourceCategory": "Main Story & Vendors"
+          },
+          {
+            "name": "Balduran's Giantslayer",
+            "act": 3,
+            "type": "Greatsword",
+            "description": "Doubles Strength modifier on damage and grants Giant Form with +1d6 extra damage and temp HP.",
+            "sourceCategory": "Optional Secret / Boss"
+          }
+        ],
+        "armor": {
+          "head": "Grymskull Helm",
+          "chest": "Armour of Agility",
+          "gloves": "Gauntlets of Hill Giant Strength",
+          "boots": "Disintegrating Night Walkers",
+          "amulet": "Surgeon's Subjugation Amulet",
+          "rings": [
+            "Killer's Sweetheart",
+            "Ring of Protection"
+          ],
+          "cloak": "Cloak of Displacement"
+        },
+        "spellRecommendations": [
+          "Githyanki Jump",
+          "Misty Step",
+          "Astral Knowledge"
+        ]
+      }
+    ]
   },
   {
     "id": "gale",
@@ -317,13 +1737,35 @@
       "description": "Access to camp visits from Tara the Tressym for magical rings, and superior ritual scroll learning at 50 gold per spell level.",
       "tag": "Scroll Mastery & Sculpt Spells"
     },
-    "baseAbilities": { "str": 8, "dex": 15, "con": 15, "int": 16, "wis": 11, "cha": 9 },
+    "baseAbilities": {
+      "str": 8,
+      "dex": 15,
+      "con": 15,
+      "int": 16,
+      "wis": 11,
+      "cha": 9
+    },
     "recommendedMulticlass": "12 Evocation Wizard (or 1 White Draconic Sorcerer / 1 Tempest Cleric / 10 Abjuration Wizard)",
     "optimalGear": {
       "weapons": [
-        { "name": "Markoheshkir", "act": 3, "type": "Quarterstaff", "description": "Kereska's Favour, Arcane Battery free spell cast, and +1 Spell Save DC." },
-        { "name": "Staff of the Emperor", "act": 3, "type": "Quarterstaff", "description": "+1 DC and inflicts spell condemnation on hit." },
-        { "name": "Melf's First Staff", "act": 1, "type": "Quarterstaff", "description": "+1 Spell Save DC and +1 to spell attack rolls." }
+        {
+          "name": "Markoheshkir",
+          "act": 3,
+          "type": "Quarterstaff",
+          "description": "Kereska's Favour, Arcane Battery free spell cast, and +1 Spell Save DC."
+        },
+        {
+          "name": "Staff of the Emperor",
+          "act": 3,
+          "type": "Quarterstaff",
+          "description": "+1 DC and inflicts spell condemnation on hit."
+        },
+        {
+          "name": "Melf's First Staff",
+          "act": 1,
+          "type": "Quarterstaff",
+          "description": "+1 Spell Save DC and +1 to spell attack rolls."
+        }
       ],
       "armor": {
         "head": "Birthright",
@@ -331,19 +1773,149 @@
         "gloves": "Spellmight Gloves",
         "boots": "Boots of Arcane Bolstering",
         "amulet": "Spellcrux Amulet",
-        "rings": ["Ring of Arcane Synergy", "Crypt Lord Ring"],
+        "rings": [
+          "Ring of Arcane Synergy",
+          "Crypt Lord Ring"
+        ],
         "cloak": "Weave Cloak"
       }
     },
     "skillPriority": {
-      "order": ["Sculpt Spells Fireball", "Globe of Invulnerability", "Otiluke's Freezing Sphere", "Chain Lightning", "Counterspell"],
-      "keyFeats": ["Alert", "Dual Wielder", "War Caster"],
-      "statGoals": { "str": 8, "dex": 14, "con": 16, "int": 20, "wis": 12, "cha": 10 },
-      "spellRecommendations": ["Globe of Invulnerability", "Fireball", "Haste", "Counterspell", "Black Holes"]
+      "order": [
+        "Sculpt Spells Fireball",
+        "Globe of Invulnerability",
+        "Otiluke's Freezing Sphere",
+        "Chain Lightning",
+        "Counterspell"
+      ],
+      "keyFeats": [
+        "Alert",
+        "Dual Wielder",
+        "War Caster"
+      ],
+      "statGoals": {
+        "str": 8,
+        "dex": 14,
+        "con": 16,
+        "int": 20,
+        "wis": 12,
+        "cha": 10
+      },
+      "spellRecommendations": [
+        "Globe of Invulnerability",
+        "Fireball",
+        "Haste",
+        "Counterspell",
+        "Black Holes"
+      ]
     },
-    "damageTypes": ["Fire", "Cold", "Lightning", "Force", "Acid"],
+    "damageTypes": [
+      "Fire",
+      "Cold",
+      "Lightning",
+      "Force",
+      "Acid"
+    ],
     "shortRestRecharge": false,
-    "tags": ["Sculpt Spells", "Globe Invulnerability", "Ritual Specialist", "Utility Wizard"]
+    "tags": [
+      "Sculpt Spells",
+      "Globe Invulnerability",
+      "Ritual Specialist",
+      "Utility Wizard"
+    ],
+    "builds": [
+      {
+        "id": "gale-canonical",
+        "name": "Wizard (Evocation (or Abjuration))",
+        "classSplit": "12 Evocation Wizard (or 1 White Draconic Sorcerer / 1 Tempest Cleric / 10 Abjuration Wizard)",
+        "primaryRole": "AoE Blaster",
+        "secondaryRole": "Controller",
+        "shortRestRecharge": false,
+        "damageTypes": [
+          "Fire",
+          "Cold",
+          "Lightning",
+          "Force",
+          "Acid"
+        ],
+        "tags": [
+          "Sculpt Spells",
+          "Globe Invulnerability",
+          "Ritual Specialist",
+          "Utility Wizard"
+        ],
+        "description": "Gale of Waterdeep's primary optimized build template.",
+        "strengths": [
+          "High performance synergy with core party compositions",
+          "Reliable resource recovery",
+          "Strong thematic narrative fit"
+        ],
+        "drawbacks": [
+          "Requires standard itemization milestones",
+          "Specific situational resistances apply"
+        ],
+        "combatLoopBreakdown": {
+          "action": "Standard class actions and primary attack sequences",
+          "bonusAction": "Class bonus utility and spells",
+          "reaction": "Defensive reaction spells and counter-attacks"
+        },
+        "keyFeats": [
+          "Alert",
+          "Dual Wielder",
+          "War Caster"
+        ],
+        "statGoals": {
+          "str": 8,
+          "dex": 14,
+          "con": 16,
+          "int": 20,
+          "wis": 12,
+          "cha": 10
+        },
+        "weapons": [
+          {
+            "name": "Markoheshkir",
+            "act": 3,
+            "type": "Quarterstaff",
+            "description": "Kereska's Favour, Arcane Battery free spell cast, and +1 Spell Save DC.",
+            "sourceCategory": "Optional Secret / Boss"
+          },
+          {
+            "name": "Staff of the Emperor",
+            "act": 3,
+            "type": "Quarterstaff",
+            "description": "+1 DC and inflicts spell condemnation on hit.",
+            "sourceCategory": "Main Story & Vendors"
+          },
+          {
+            "name": "Melf's First Staff",
+            "act": 1,
+            "type": "Quarterstaff",
+            "description": "+1 Spell Save DC and +1 to spell attack rolls.",
+            "sourceCategory": "Main Story & Vendors"
+          }
+        ],
+        "armor": {
+          "head": "Birthright",
+          "chest": "Armour of Landfall",
+          "gloves": "Spellmight Gloves",
+          "boots": "Boots of Arcane Bolstering",
+          "amulet": "Spellcrux Amulet",
+          "rings": [
+            "Ring of Arcane Synergy",
+            "Crypt Lord Ring"
+          ],
+          "cloak": "Weave Cloak"
+        },
+        "spellRecommendations": [
+          "Globe of Invulnerability",
+          "Fireball",
+          "Haste",
+          "Counterspell",
+          "Black Holes"
+        ]
+      }
+    ]
   },
   {
     "id": "wyll",
@@ -363,13 +1935,35 @@
       "description": "Mizora reward provides the Infernal Rapier (+1 Spell DC, attacks with Charisma modifier) and a summonable Cambion minion.",
       "tag": "Charisma Weapon Bind & Hadar Zone"
     },
-    "baseAbilities": { "str": 8, "dex": 13, "con": 15, "int": 14, "wis": 11, "cha": 17 },
+    "baseAbilities": {
+      "str": 8,
+      "dex": 13,
+      "con": 15,
+      "int": 14,
+      "wis": 11,
+      "cha": 17
+    },
     "recommendedMulticlass": "5 Fiend Warlock / 7 Oathbreaker Paladin (or 12 Fiend Warlock)",
     "optimalGear": {
       "weapons": [
-        { "name": "Infernal Rapier", "act": 2, "type": "Rapier", "description": "Attacks using Charisma modifier, grants Planar Ally: Cambion." },
-        { "name": "Duellist's Prerogative", "act": 3, "type": "Rapier", "description": "Extra reaction per round, lowers crit threshold, and deals bonus necrotic damage when off-hand is empty." },
-        { "name": "The Baneful", "act": 1, "type": "Shortsword", "description": "Binds weapon and inflicts bane on target strike." }
+        {
+          "name": "Infernal Rapier",
+          "act": 2,
+          "type": "Rapier",
+          "description": "Attacks using Charisma modifier, grants Planar Ally: Cambion."
+        },
+        {
+          "name": "Duellist's Prerogative",
+          "act": 3,
+          "type": "Rapier",
+          "description": "Extra reaction per round, lowers crit threshold, and deals bonus necrotic damage when off-hand is empty."
+        },
+        {
+          "name": "The Baneful",
+          "act": 1,
+          "type": "Shortsword",
+          "description": "Binds weapon and inflicts bane on target strike."
+        }
       ],
       "armor": {
         "head": "Birthright",
@@ -377,19 +1971,150 @@
         "gloves": "Daredevil Gloves",
         "boots": "Evasive Shoes",
         "amulet": "Spineshudder Amulet",
-        "rings": ["Ring of Mental Inhibition", "Strange Conduit Ring"],
+        "rings": [
+          "Ring of Mental Inhibition",
+          "Strange Conduit Ring"
+        ],
         "cloak": "Cloak of the Weave"
       }
     },
     "skillPriority": {
-      "order": ["Eldritch Blast (Agonizing/Repelling)", "Hunger of Hadar", "Bind Pact Weapon", "Fireball", "Hellish Rebuke"],
-      "keyFeats": ["Spell Sniper", "Alert", "Ability Score Improvement (+2 CHA)"],
-      "statGoals": { "str": 8, "dex": 14, "con": 16, "int": 10, "wis": 10, "cha": 20 },
-      "spellRecommendations": ["Hunger of Hadar", "Eldritch Blast", "Counterspell", "Fireball", "Armor of Agathys"]
+      "order": [
+        "Eldritch Blast (Agonizing/Repelling)",
+        "Hunger of Hadar",
+        "Bind Pact Weapon",
+        "Fireball",
+        "Hellish Rebuke"
+      ],
+      "keyFeats": [
+        "Spell Sniper",
+        "Alert",
+        "Ability Score Improvement (+2 CHA)"
+      ],
+      "statGoals": {
+        "str": 8,
+        "dex": 14,
+        "con": 16,
+        "int": 10,
+        "wis": 10,
+        "cha": 20
+      },
+      "spellRecommendations": [
+        "Hunger of Hadar",
+        "Eldritch Blast",
+        "Counterspell",
+        "Fireball",
+        "Armor of Agathys"
+      ]
     },
-    "damageTypes": ["Force", "Fire", "Cold", "Acid", "Necrotic"],
+    "damageTypes": [
+      "Force",
+      "Fire",
+      "Cold",
+      "Acid",
+      "Necrotic"
+    ],
     "shortRestRecharge": true,
-    "tags": ["Short Rest Spell Slots", "Potent Robe", "Repelling Blast", "Hunger of Hadar"]
+    "tags": [
+      "Short Rest Spell Slots",
+      "Potent Robe",
+      "Repelling Blast",
+      "Hunger of Hadar"
+    ],
+    "builds": [
+      {
+        "id": "wyll-canonical",
+        "name": "Warlock (The Fiend (Pact of the Blade))",
+        "classSplit": "5 Fiend Warlock / 7 Oathbreaker Paladin (or 12 Fiend Warlock)",
+        "primaryRole": "Controller",
+        "secondaryRole": "Striker",
+        "shortRestRecharge": true,
+        "damageTypes": [
+          "Force",
+          "Fire",
+          "Cold",
+          "Acid",
+          "Necrotic"
+        ],
+        "tags": [
+          "Short Rest Spell Slots",
+          "Potent Robe",
+          "Repelling Blast",
+          "Hunger of Hadar"
+        ],
+        "description": "Wyll Ravengard's primary optimized build template.",
+        "strengths": [
+          "High performance synergy with core party compositions",
+          "Reliable resource recovery",
+          "Strong thematic narrative fit"
+        ],
+        "drawbacks": [
+          "Requires standard itemization milestones",
+          "Specific situational resistances apply"
+        ],
+        "combatLoopBreakdown": {
+          "action": "Standard class actions and primary attack sequences",
+          "bonusAction": "Class bonus utility and spells",
+          "reaction": "Defensive reaction spells and counter-attacks"
+        },
+        "keyFeats": [
+          "Spell Sniper",
+          "Alert",
+          "Ability Score Improvement (+2 CHA)"
+        ],
+        "statGoals": {
+          "str": 8,
+          "dex": 14,
+          "con": 16,
+          "int": 10,
+          "wis": 10,
+          "cha": 20
+        },
+        "weapons": [
+          {
+            "name": "Infernal Rapier",
+            "act": 2,
+            "type": "Rapier",
+            "description": "Attacks using Charisma modifier, grants Planar Ally: Cambion.",
+            "sourceCategory": "Quest Locked",
+            "questLockWarning": "Locked behind companion story quest decisions."
+          },
+          {
+            "name": "Duellist's Prerogative",
+            "act": 3,
+            "type": "Rapier",
+            "description": "Extra reaction per round, lowers crit threshold, and deals bonus necrotic damage when off-hand is empty.",
+            "sourceCategory": "Main Story & Vendors"
+          },
+          {
+            "name": "The Baneful",
+            "act": 1,
+            "type": "Shortsword",
+            "description": "Binds weapon and inflicts bane on target strike.",
+            "sourceCategory": "Main Story & Vendors"
+          }
+        ],
+        "armor": {
+          "head": "Birthright",
+          "chest": "Potent Robe",
+          "gloves": "Daredevil Gloves",
+          "boots": "Evasive Shoes",
+          "amulet": "Spineshudder Amulet",
+          "rings": [
+            "Ring of Mental Inhibition",
+            "Strange Conduit Ring"
+          ],
+          "cloak": "Cloak of the Weave"
+        },
+        "spellRecommendations": [
+          "Hunger of Hadar",
+          "Eldritch Blast",
+          "Counterspell",
+          "Fireball",
+          "Armor of Agathys"
+        ]
+      }
+    ]
   },
   {
     "id": "minthara",
@@ -409,13 +2134,35 @@
       "description": "Bonus action granting an ally +4.5m movement speed and +2d4 extra fire damage on their next weapon strike.",
       "tag": "Soul Branding Speed Buff"
     },
-    "baseAbilities": { "str": 17, "dex": 12, "con": 13, "int": 8, "wis": 10, "cha": 15 },
+    "baseAbilities": {
+      "str": 17,
+      "dex": 12,
+      "con": 13,
+      "int": 8,
+      "wis": 10,
+      "cha": 15
+    },
     "recommendedMulticlass": "7 Oath of Vengeance Paladin / 5 Sorcerer (or 2 Paladin / 10 Swords Bard)",
     "optimalGear": {
       "weapons": [
-        { "name": "Balduran's Giantslayer", "act": 3, "type": "Greatsword", "description": "Doubles Strength modifier to damage, Giant Form enrage." },
-        { "name": "Voss' Silver Sword", "act": 1, "type": "Greatsword", "description": "+1d4 psychic damage and Wrath bonus." },
-        { "name": "Unseen Menace", "act": 1, "type": "Pike", "description": "Invisible weapon with permanent advantage and crit on 19." }
+        {
+          "name": "Balduran's Giantslayer",
+          "act": 3,
+          "type": "Greatsword",
+          "description": "Doubles Strength modifier to damage, Giant Form enrage."
+        },
+        {
+          "name": "Voss' Silver Sword",
+          "act": 1,
+          "type": "Greatsword",
+          "description": "+1d4 psychic damage and Wrath bonus."
+        },
+        {
+          "name": "Unseen Menace",
+          "act": 1,
+          "type": "Pike",
+          "description": "Invisible weapon with permanent advantage and crit on 19."
+        }
       ],
       "armor": {
         "head": "Helm of Balduran",
@@ -423,19 +2170,148 @@
         "gloves": "Legacy of the Masters",
         "boots": "Boots of Persistence",
         "amulet": "Broodmother's Revenge",
-        "rings": ["Ring of Protection", "Callous Glow Ring"],
+        "rings": [
+          "Ring of Protection",
+          "Callous Glow Ring"
+        ],
         "cloak": "Cloak of Protection"
       }
     },
     "skillPriority": {
-      "order": ["Vow of Enmity (Self)", "Divine Smite (Critical)", "Soul Branding Ally", "Aura of Protection", "Hold Person"],
-      "keyFeats": ["Great Weapon Master", "Savage Attacker", "Alert"],
-      "statGoals": { "str": 22, "dex": 12, "con": 14, "int": 8, "wis": 10, "cha": 18 },
-      "spellRecommendations": ["Divine Smite", "Misty Step", "Hold Person", "Haste", "Shield of Faith"]
+      "order": [
+        "Vow of Enmity (Self)",
+        "Divine Smite (Critical)",
+        "Soul Branding Ally",
+        "Aura of Protection",
+        "Hold Person"
+      ],
+      "keyFeats": [
+        "Great Weapon Master",
+        "Savage Attacker",
+        "Alert"
+      ],
+      "statGoals": {
+        "str": 22,
+        "dex": 12,
+        "con": 14,
+        "int": 8,
+        "wis": 10,
+        "cha": 18
+      },
+      "spellRecommendations": [
+        "Divine Smite",
+        "Misty Step",
+        "Hold Person",
+        "Haste",
+        "Shield of Faith"
+      ]
     },
-    "damageTypes": ["Radiant", "Slashing", "Fire", "Thunder"],
+    "damageTypes": [
+      "Radiant",
+      "Slashing",
+      "Fire",
+      "Thunder"
+    ],
     "shortRestRecharge": false,
-    "tags": ["Divine Smite Burst", "Aura of Protection", "Soul Branding", "Advantage on Demand"]
+    "tags": [
+      "Divine Smite Burst",
+      "Aura of Protection",
+      "Soul Branding",
+      "Advantage on Demand"
+    ],
+    "builds": [
+      {
+        "id": "minthara-canonical",
+        "name": "Paladin (Oath of Vengeance)",
+        "classSplit": "7 Oath of Vengeance Paladin / 5 Sorcerer (or 2 Paladin / 10 Swords Bard)",
+        "primaryRole": "Striker",
+        "secondaryRole": "Support",
+        "shortRestRecharge": false,
+        "damageTypes": [
+          "Radiant",
+          "Slashing",
+          "Fire",
+          "Thunder"
+        ],
+        "tags": [
+          "Divine Smite Burst",
+          "Aura of Protection",
+          "Soul Branding",
+          "Advantage on Demand"
+        ],
+        "description": "Minthara Baenre's primary optimized build template.",
+        "strengths": [
+          "High performance synergy with core party compositions",
+          "Reliable resource recovery",
+          "Strong thematic narrative fit"
+        ],
+        "drawbacks": [
+          "Requires standard itemization milestones",
+          "Specific situational resistances apply"
+        ],
+        "combatLoopBreakdown": {
+          "action": "Standard class actions and primary attack sequences",
+          "bonusAction": "Class bonus utility and spells",
+          "reaction": "Defensive reaction spells and counter-attacks"
+        },
+        "keyFeats": [
+          "Great Weapon Master",
+          "Savage Attacker",
+          "Alert"
+        ],
+        "statGoals": {
+          "str": 22,
+          "dex": 12,
+          "con": 14,
+          "int": 8,
+          "wis": 10,
+          "cha": 18
+        },
+        "weapons": [
+          {
+            "name": "Balduran's Giantslayer",
+            "act": 3,
+            "type": "Greatsword",
+            "description": "Doubles Strength modifier to damage, Giant Form enrage.",
+            "sourceCategory": "Optional Secret / Boss"
+          },
+          {
+            "name": "Voss' Silver Sword",
+            "act": 1,
+            "type": "Greatsword",
+            "description": "+1d4 psychic damage and Wrath bonus.",
+            "sourceCategory": "Quest Locked",
+            "questLockWarning": "Locked behind companion story quest decisions."
+          },
+          {
+            "name": "Unseen Menace",
+            "act": 1,
+            "type": "Pike",
+            "description": "Invisible weapon with permanent advantage and crit on 19.",
+            "sourceCategory": "Main Story & Vendors"
+          }
+        ],
+        "armor": {
+          "head": "Helm of Balduran",
+          "chest": "Armour of Persistence",
+          "gloves": "Legacy of the Masters",
+          "boots": "Boots of Persistence",
+          "amulet": "Broodmother's Revenge",
+          "rings": [
+            "Ring of Protection",
+            "Callous Glow Ring"
+          ],
+          "cloak": "Cloak of Protection"
+        },
+        "spellRecommendations": [
+          "Divine Smite",
+          "Misty Step",
+          "Hold Person",
+          "Haste",
+          "Shield of Faith"
+        ]
+      }
+    ]
   },
   {
     "id": "halsin",
@@ -455,13 +2331,35 @@
       "description": "Unique ferocious Cave Bear wild shape form that inflicts tearing claws and multi-attacks, retaining exceptional durability in melee.",
       "tag": "Cave Bear & Earth Myrmidon"
     },
-    "baseAbilities": { "str": 10, "dex": 14, "con": 14, "int": 8, "wis": 17, "cha": 12 },
+    "baseAbilities": {
+      "str": 10,
+      "dex": 14,
+      "con": 14,
+      "int": 8,
+      "wis": 17,
+      "cha": 12
+    },
     "recommendedMulticlass": "10 Circle of the Moon Druid / 1 White Draconic Sorcerer / 1 War Cleric",
     "optimalGear": {
       "weapons": [
-        { "name": "Staff of the Woodlands", "act": 2, "type": "Quarterstaff", "description": "Free cast of Pass Without Trace and Wall of Thorns." },
-        { "name": "Markoheshkir", "act": 3, "type": "Quarterstaff", "description": "Arcane Battery and elemental amplification for spellcasting mode." },
-        { "name": "Pale Oak", "act": 1, "type": "Quarterstaff", "description": "Immunity to entangled vines." }
+        {
+          "name": "Staff of the Woodlands",
+          "act": 2,
+          "type": "Quarterstaff",
+          "description": "Free cast of Pass Without Trace and Wall of Thorns."
+        },
+        {
+          "name": "Markoheshkir",
+          "act": 3,
+          "type": "Quarterstaff",
+          "description": "Arcane Battery and elemental amplification for spellcasting mode."
+        },
+        {
+          "name": "Pale Oak",
+          "act": 1,
+          "type": "Quarterstaff",
+          "description": "Immunity to entangled vines."
+        }
       ],
       "armor": {
         "head": "Shapeshifter's Hat",
@@ -469,19 +2367,149 @@
         "gloves": "Gloves of the Automaton",
         "boots": "Boots of Striding",
         "amulet": "Amulet of Greater Health",
-        "rings": ["Ring of Flinging", "Shapeshifter's Boon Ring"],
+        "rings": [
+          "Ring of Flinging",
+          "Shapeshifter's Boon Ring"
+        ],
         "cloak": "Cloak of Protection"
       }
     },
     "skillPriority": {
-      "order": ["Wild Shape: Earth Myrmidon / Bear", "Spike Growth", "Heroes' Feast", "Call Lightning", "Summon Woodland Being"],
-      "keyFeats": ["Tavern Brawler (+1 CON)", "War Caster", "Resilient (Constitution)"],
-      "statGoals": { "str": 10, "dex": 14, "con": 16, "int": 8, "wis": 20, "cha": 12 },
-      "spellRecommendations": ["Spike Growth", "Heroes' Feast", "Conjure Elemental", "Call Lightning", "Plant Growth"]
+      "order": [
+        "Wild Shape: Earth Myrmidon / Bear",
+        "Spike Growth",
+        "Heroes' Feast",
+        "Call Lightning",
+        "Summon Woodland Being"
+      ],
+      "keyFeats": [
+        "Tavern Brawler (+1 CON)",
+        "War Caster",
+        "Resilient (Constitution)"
+      ],
+      "statGoals": {
+        "str": 10,
+        "dex": 14,
+        "con": 16,
+        "int": 8,
+        "wis": 20,
+        "cha": 12
+      },
+      "spellRecommendations": [
+        "Spike Growth",
+        "Heroes' Feast",
+        "Conjure Elemental",
+        "Call Lightning",
+        "Plant Growth"
+      ]
     },
-    "damageTypes": ["Bludgeoning", "Slashing", "Thunder", "Lightning", "Poison"],
+    "damageTypes": [
+      "Bludgeoning",
+      "Slashing",
+      "Thunder",
+      "Lightning",
+      "Poison"
+    ],
     "shortRestRecharge": true,
-    "tags": ["Wild Shape Tank", "Tavern Brawler Myrmidon", "Plant Growth Choke", "Summon Swarm"]
+    "tags": [
+      "Wild Shape Tank",
+      "Tavern Brawler Myrmidon",
+      "Plant Growth Choke",
+      "Summon Swarm"
+    ],
+    "builds": [
+      {
+        "id": "halsin-canonical",
+        "name": "Druid (Circle of the Moon)",
+        "classSplit": "10 Circle of the Moon Druid / 1 White Draconic Sorcerer / 1 War Cleric",
+        "primaryRole": "Tank",
+        "secondaryRole": "Support",
+        "shortRestRecharge": true,
+        "damageTypes": [
+          "Bludgeoning",
+          "Slashing",
+          "Thunder",
+          "Lightning",
+          "Poison"
+        ],
+        "tags": [
+          "Wild Shape Tank",
+          "Tavern Brawler Myrmidon",
+          "Plant Growth Choke",
+          "Summon Swarm"
+        ],
+        "description": "Archdruid Halsin's primary optimized build template.",
+        "strengths": [
+          "High performance synergy with core party compositions",
+          "Reliable resource recovery",
+          "Strong thematic narrative fit"
+        ],
+        "drawbacks": [
+          "Requires standard itemization milestones",
+          "Specific situational resistances apply"
+        ],
+        "combatLoopBreakdown": {
+          "action": "Standard class actions and primary attack sequences",
+          "bonusAction": "Class bonus utility and spells",
+          "reaction": "Defensive reaction spells and counter-attacks"
+        },
+        "keyFeats": [
+          "Tavern Brawler (+1 CON)",
+          "War Caster",
+          "Resilient (Constitution)"
+        ],
+        "statGoals": {
+          "str": 10,
+          "dex": 14,
+          "con": 16,
+          "int": 8,
+          "wis": 20,
+          "cha": 12
+        },
+        "weapons": [
+          {
+            "name": "Staff of the Woodlands",
+            "act": 2,
+            "type": "Quarterstaff",
+            "description": "Free cast of Pass Without Trace and Wall of Thorns.",
+            "sourceCategory": "Main Story & Vendors"
+          },
+          {
+            "name": "Markoheshkir",
+            "act": 3,
+            "type": "Quarterstaff",
+            "description": "Arcane Battery and elemental amplification for spellcasting mode.",
+            "sourceCategory": "Optional Secret / Boss"
+          },
+          {
+            "name": "Pale Oak",
+            "act": 1,
+            "type": "Quarterstaff",
+            "description": "Immunity to entangled vines.",
+            "sourceCategory": "Main Story & Vendors"
+          }
+        ],
+        "armor": {
+          "head": "Shapeshifter's Hat",
+          "chest": "Armour of Moonbasking",
+          "gloves": "Gloves of the Automaton",
+          "boots": "Boots of Striding",
+          "amulet": "Amulet of Greater Health",
+          "rings": [
+            "Ring of Flinging",
+            "Shapeshifter's Boon Ring"
+          ],
+          "cloak": "Cloak of Protection"
+        },
+        "spellRecommendations": [
+          "Spike Growth",
+          "Heroes' Feast",
+          "Conjure Elemental",
+          "Call Lightning",
+          "Plant Growth"
+        ]
+      }
+    ]
   },
   {
     "id": "jaheira",
@@ -501,13 +2529,35 @@
       "description": "Dual wields scimitars using Wisdom modifier for attack rolls and damage rolls, bypassing the need for physical strength investment.",
       "tag": "Sylvan Dual Blades & Harper Magic"
     },
-    "baseAbilities": { "str": 10, "dex": 14, "con": 14, "int": 10, "wis": 17, "cha": 12 },
+    "baseAbilities": {
+      "str": 10,
+      "dex": 14,
+      "con": 14,
+      "int": 10,
+      "wis": 17,
+      "cha": 12
+    },
     "recommendedMulticlass": "6 Land Druid / 6 Battle Master Fighter (or 11 Land Druid / 1 Storm Sorcerer)",
     "optimalGear": {
       "weapons": [
-        { "name": "Belm", "act": 3, "type": "Scimitar", "description": "Grants Perfectly Balanced bonus strike per turn without dual wield offhand cost." },
-        { "name": "Sylvan Scimitar", "act": 2, "type": "Scimitar", "description": "Uses Spellcasting Ability Modifier (Wisdom) instead of Dexterity for attack/damage rolls." },
-        { "name": "Staff of Spellpower", "act": 3, "type": "Quarterstaff", "description": "Free spell slot replenishment for high tier crowd control." }
+        {
+          "name": "Belm",
+          "act": 3,
+          "type": "Scimitar",
+          "description": "Grants Perfectly Balanced bonus strike per turn without dual wield offhand cost."
+        },
+        {
+          "name": "Sylvan Scimitar",
+          "act": 2,
+          "type": "Scimitar",
+          "description": "Uses Spellcasting Ability Modifier (Wisdom) instead of Dexterity for attack/damage rolls."
+        },
+        {
+          "name": "Staff of Spellpower",
+          "act": 3,
+          "type": "Quarterstaff",
+          "description": "Free spell slot replenishment for high tier crowd control."
+        }
       ],
       "armor": {
         "head": "Circlet of Hunting",
@@ -515,19 +2565,147 @@
         "gloves": "Dark Justiciar Gauntlets",
         "boots": "Boots of Elemental Momentum",
         "amulet": "Khalid's Gift",
-        "rings": ["Ring of Free Action", "Coruscation Ring"],
+        "rings": [
+          "Ring of Free Action",
+          "Coruscation Ring"
+        ],
         "cloak": "Cloak of the Weave"
       }
     },
     "skillPriority": {
-      "order": ["Sleet Storm", "Ice Storm", "Spike Growth", "Whirlwind Attack", "Belm Whirlwind Strike"],
-      "keyFeats": ["War Caster", "Dual Wielder", "Alert"],
-      "statGoals": { "str": 10, "dex": 14, "con": 16, "int": 10, "wis": 20, "cha": 12 },
-      "spellRecommendations": ["Sleet Storm", "Ice Storm", "Spike Growth", "Insect Plague", "Daylight"]
+      "order": [
+        "Sleet Storm",
+        "Ice Storm",
+        "Spike Growth",
+        "Whirlwind Attack",
+        "Belm Whirlwind Strike"
+      ],
+      "keyFeats": [
+        "War Caster",
+        "Dual Wielder",
+        "Alert"
+      ],
+      "statGoals": {
+        "str": 10,
+        "dex": 14,
+        "con": 16,
+        "int": 10,
+        "wis": 20,
+        "cha": 12
+      },
+      "spellRecommendations": [
+        "Sleet Storm",
+        "Ice Storm",
+        "Spike Growth",
+        "Insect Plague",
+        "Daylight"
+      ]
     },
-    "damageTypes": ["Cold", "Slashing", "Piercing", "Thunder"],
+    "damageTypes": [
+      "Cold",
+      "Slashing",
+      "Piercing",
+      "Thunder"
+    ],
     "shortRestRecharge": false,
-    "tags": ["Sleet Storm Ice Choke", "Wisdom Dual Blades", "Control Druid", "Harper Support"]
+    "tags": [
+      "Sleet Storm Ice Choke",
+      "Wisdom Dual Blades",
+      "Control Druid",
+      "Harper Support"
+    ],
+    "builds": [
+      {
+        "id": "jaheira-canonical",
+        "name": "Druid (Circle of the Land)",
+        "classSplit": "6 Land Druid / 6 Battle Master Fighter (or 11 Land Druid / 1 Storm Sorcerer)",
+        "primaryRole": "Controller",
+        "secondaryRole": "Support",
+        "shortRestRecharge": false,
+        "damageTypes": [
+          "Cold",
+          "Slashing",
+          "Piercing",
+          "Thunder"
+        ],
+        "tags": [
+          "Sleet Storm Ice Choke",
+          "Wisdom Dual Blades",
+          "Control Druid",
+          "Harper Support"
+        ],
+        "description": "High Harper Jaheira's primary optimized build template.",
+        "strengths": [
+          "High performance synergy with core party compositions",
+          "Reliable resource recovery",
+          "Strong thematic narrative fit"
+        ],
+        "drawbacks": [
+          "Requires standard itemization milestones",
+          "Specific situational resistances apply"
+        ],
+        "combatLoopBreakdown": {
+          "action": "Standard class actions and primary attack sequences",
+          "bonusAction": "Class bonus utility and spells",
+          "reaction": "Defensive reaction spells and counter-attacks"
+        },
+        "keyFeats": [
+          "War Caster",
+          "Dual Wielder",
+          "Alert"
+        ],
+        "statGoals": {
+          "str": 10,
+          "dex": 14,
+          "con": 16,
+          "int": 10,
+          "wis": 20,
+          "cha": 12
+        },
+        "weapons": [
+          {
+            "name": "Belm",
+            "act": 3,
+            "type": "Scimitar",
+            "description": "Grants Perfectly Balanced bonus strike per turn without dual wield offhand cost.",
+            "sourceCategory": "Main Story & Vendors"
+          },
+          {
+            "name": "Sylvan Scimitar",
+            "act": 2,
+            "type": "Scimitar",
+            "description": "Uses Spellcasting Ability Modifier (Wisdom) instead of Dexterity for attack/damage rolls.",
+            "sourceCategory": "Main Story & Vendors"
+          },
+          {
+            "name": "Staff of Spellpower",
+            "act": 3,
+            "type": "Quarterstaff",
+            "description": "Free spell slot replenishment for high tier crowd control.",
+            "sourceCategory": "Main Story & Vendors"
+          }
+        ],
+        "armor": {
+          "head": "Circlet of Hunting",
+          "chest": "Armour of Landfall",
+          "gloves": "Dark Justiciar Gauntlets",
+          "boots": "Boots of Elemental Momentum",
+          "amulet": "Khalid's Gift",
+          "rings": [
+            "Ring of Free Action",
+            "Coruscation Ring"
+          ],
+          "cloak": "Cloak of the Weave"
+        },
+        "spellRecommendations": [
+          "Sleet Storm",
+          "Ice Storm",
+          "Spike Growth",
+          "Insect Plague",
+          "Daylight"
+        ]
+      }
+    ]
   },
   {
     "id": "minsc",
@@ -547,13 +2725,35 @@
       "description": "Summons Boo as a familiar to blind enemies, deliver distractions, and deal 1d4 psychic emotional damage.",
       "tag": "Boo the Space Hamster"
     },
-    "baseAbilities": { "str": 17, "dex": 15, "con": 14, "int": 8, "wis": 14, "cha": 10 },
+    "baseAbilities": {
+      "str": 17,
+      "dex": 15,
+      "con": 14,
+      "int": 8,
+      "wis": 14,
+      "cha": 10
+    },
     "recommendedMulticlass": "11 Hunter Ranger / 1 War Cleric (Volley & Whirlwind Specialist)",
     "optimalGear": {
       "weapons": [
-        { "name": "Gontr Mael", "act": 3, "type": "Longbow", "description": "Guiding Bolt on hit, Celestial Haste." },
-        { "name": "Dead Shot", "act": 3, "type": "Longbow", "description": "Crit reduction and proficiency bonus doubling." },
-        { "name": "Sword of Chaos", "act": 3, "type": "Greatsword", "description": "Restores 1d6 HP on every hit." }
+        {
+          "name": "Gontr Mael",
+          "act": 3,
+          "type": "Longbow",
+          "description": "Guiding Bolt on hit, Celestial Haste."
+        },
+        {
+          "name": "Dead Shot",
+          "act": 3,
+          "type": "Longbow",
+          "description": "Crit reduction and proficiency bonus doubling."
+        },
+        {
+          "name": "Sword of Chaos",
+          "act": 3,
+          "type": "Greatsword",
+          "description": "Restores 1d6 HP on every hit."
+        }
       ],
       "armor": {
         "head": "Sarevok's Horned Helmet",
@@ -561,18 +2761,144 @@
         "gloves": "Bhaalist Gloves",
         "boots": "Helldusk Boots",
         "amulet": "Amulet of the Devout",
-        "rings": ["Ring of Free Action", "Killer's Sweetheart"],
+        "rings": [
+          "Ring of Free Action",
+          "Killer's Sweetheart"
+        ],
         "cloak": "Deathstalker Mantle"
       }
     },
     "skillPriority": {
-      "order": ["Volley (Ranged AoE)", "Whirlwind Strike (Melee AoE)", "Throw Boo", "Hunter's Mark", "Colossus Slayer"],
-      "keyFeats": ["Sharpshooter", "Alert", "Great Weapon Master"],
-      "statGoals": { "str": 18, "dex": 20, "con": 16, "int": 8, "wis": 14, "cha": 10 },
-      "spellRecommendations": ["Hunter's Mark", "Spike Growth", "Conjure Volley", "Longstrider"]
+      "order": [
+        "Volley (Ranged AoE)",
+        "Whirlwind Strike (Melee AoE)",
+        "Throw Boo",
+        "Hunter's Mark",
+        "Colossus Slayer"
+      ],
+      "keyFeats": [
+        "Sharpshooter",
+        "Alert",
+        "Great Weapon Master"
+      ],
+      "statGoals": {
+        "str": 18,
+        "dex": 20,
+        "con": 16,
+        "int": 8,
+        "wis": 14,
+        "cha": 10
+      },
+      "spellRecommendations": [
+        "Hunter's Mark",
+        "Spike Growth",
+        "Conjure Volley",
+        "Longstrider"
+      ]
     },
-    "damageTypes": ["Piercing", "Slashing", "Force", "Psychic"],
+    "damageTypes": [
+      "Piercing",
+      "Slashing",
+      "Force",
+      "Psychic"
+    ],
     "shortRestRecharge": false,
-    "tags": ["Volley Infinite AoE", "Boo Summon", "Sharpshooter", "Cleave Striker"]
+    "tags": [
+      "Volley Infinite AoE",
+      "Boo Summon",
+      "Sharpshooter",
+      "Cleave Striker"
+    ],
+    "builds": [
+      {
+        "id": "minsc-canonical",
+        "name": "Ranger (Hunter)",
+        "classSplit": "11 Hunter Ranger / 1 War Cleric (Volley & Whirlwind Specialist)",
+        "primaryRole": "Striker",
+        "secondaryRole": "Tank",
+        "shortRestRecharge": false,
+        "damageTypes": [
+          "Piercing",
+          "Slashing",
+          "Force",
+          "Psychic"
+        ],
+        "tags": [
+          "Volley Infinite AoE",
+          "Boo Summon",
+          "Sharpshooter",
+          "Cleave Striker"
+        ],
+        "description": "Minsc & Boo's primary optimized build template.",
+        "strengths": [
+          "High performance synergy with core party compositions",
+          "Reliable resource recovery",
+          "Strong thematic narrative fit"
+        ],
+        "drawbacks": [
+          "Requires standard itemization milestones",
+          "Specific situational resistances apply"
+        ],
+        "combatLoopBreakdown": {
+          "action": "Standard class actions and primary attack sequences",
+          "bonusAction": "Class bonus utility and spells",
+          "reaction": "Defensive reaction spells and counter-attacks"
+        },
+        "keyFeats": [
+          "Sharpshooter",
+          "Alert",
+          "Great Weapon Master"
+        ],
+        "statGoals": {
+          "str": 18,
+          "dex": 20,
+          "con": 16,
+          "int": 8,
+          "wis": 14,
+          "cha": 10
+        },
+        "weapons": [
+          {
+            "name": "Gontr Mael",
+            "act": 3,
+            "type": "Longbow",
+            "description": "Guiding Bolt on hit, Celestial Haste.",
+            "sourceCategory": "Optional Secret / Boss"
+          },
+          {
+            "name": "Dead Shot",
+            "act": 3,
+            "type": "Longbow",
+            "description": "Crit reduction and proficiency bonus doubling.",
+            "sourceCategory": "Main Story & Vendors"
+          },
+          {
+            "name": "Sword of Chaos",
+            "act": 3,
+            "type": "Greatsword",
+            "description": "Restores 1d6 HP on every hit.",
+            "sourceCategory": "Main Story & Vendors"
+          }
+        ],
+        "armor": {
+          "head": "Sarevok's Horned Helmet",
+          "chest": "Armour of Agility",
+          "gloves": "Bhaalist Gloves",
+          "boots": "Helldusk Boots",
+          "amulet": "Amulet of the Devout",
+          "rings": [
+            "Ring of Free Action",
+            "Killer's Sweetheart"
+          ],
+          "cloak": "Deathstalker Mantle"
+        },
+        "spellRecommendations": [
+          "Hunter's Mark",
+          "Spike Growth",
+          "Conjure Volley",
+          "Longstrider"
+        ]
+      }
+    ]
   }
 ]
