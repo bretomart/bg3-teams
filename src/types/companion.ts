@@ -1,5 +1,21 @@
 export type OriginType = 'origin' | 'companion' | 'custom';
 
+export type GameDifficulty = 'Explorer' | 'Balanced' | 'Tactician' | 'Honor';
+
+export interface DifficultyRuleProfile {
+  id: GameDifficulty;
+  name: string;
+  badge: string;
+  campSuppliesPerLongRest: number;
+  enemyHpScaling: string;
+  enemyTacticsLevel: string;
+  multiclassAllowed: boolean;
+  permadeathOrSingleSave: boolean;
+  legendaryBossActions: boolean;
+  traderMarkupPercent: number;
+  summary: string;
+}
+
 export type CompanionId =
   | 'tav'
   | 'durge'

@@ -6,11 +6,69 @@ import type {
   CompanionId,
   CombatRole,
   DamageType,
-  MetaTeam
+  MetaTeam,
+  GameDifficulty,
+  DifficultyRuleProfile
 } from '../types/companion';
 
 const STORAGE_KEY_RECRUITED = 'bg3_recruited_companions';
 const STORAGE_KEY_CUSTOM_TAV = 'bg3_custom_tav_config';
+const STORAGE_KEY_DIFFICULTY = 'bg3_selected_difficulty';
+
+export const DIFFICULTY_PROFILES: Record<GameDifficulty, DifficultyRuleProfile> = {
+  Explorer: {
+    id: 'Explorer',
+    name: 'Explorer (Story Mode)',
+    badge: 'Relaxed Rules & +100% Player HP',
+    campSuppliesPerLongRest: 40,
+    enemyHpScaling: '-30% Enemy Vitality',
+    enemyTacticsLevel: 'Standard basic targeting',
+    multiclassAllowed: false,
+    permadeathOrSingleSave: false,
+    legendaryBossActions: false,
+    traderMarkupPercent: 0,
+    summary: 'Narrative focused. Enemies have 30% reduced HP and characters gain +100% bonus HP. Multiclassing is disabled by game rules.'
+  },
+  Balanced: {
+    id: 'Balanced',
+    name: 'Balanced (Standard D&D)',
+    badge: 'Standard 5e Rules Baseline',
+    campSuppliesPerLongRest: 40,
+    enemyHpScaling: '100% Standard Vitality',
+    enemyTacticsLevel: 'Standard tactical targeting',
+    multiclassAllowed: true,
+    permadeathOrSingleSave: false,
+    legendaryBossActions: false,
+    traderMarkupPercent: 0,
+    summary: 'The developer-intended standard playthrough. Balanced enemy health, standard 40 camp supply requirements, and unrestricted multiclassing.'
+  },
+  Tactician: {
+    id: 'Tactician',
+    name: 'Tactician (Hardcore Combat)',
+    badge: 'Aggressive AI & 80 Camp Supplies',
+    campSuppliesPerLongRest: 80,
+    enemyHpScaling: '+30% Vitality & Attack Boosts',
+    enemyTacticsLevel: 'Aggressive AI: hunts low-AC casters and executes downed allies',
+    multiclassAllowed: true,
+    permadeathOrSingleSave: false,
+    legendaryBossActions: false,
+    traderMarkupPercent: 20,
+    summary: 'Punishing tactical challenge. Camp supply consumption doubles to 80 per long rest, merchant trade prices are inflated, and enemies prioritize squishy backliners.'
+  },
+  Honor: {
+    id: 'Honor',
+    name: 'Honor Mode (Ironman & Legendary Actions)',
+    badge: 'Single Save File & Legendary Actions',
+    campSuppliesPerLongRest: 80,
+    enemyHpScaling: '+30% Vitality & Legendary Actions',
+    enemyTacticsLevel: 'Deadly AI with Boss Legendary Actions and Reaction Attacks',
+    multiclassAllowed: true,
+    permadeathOrSingleSave: true,
+    legendaryBossActions: true,
+    traderMarkupPercent: 25,
+    summary: 'The ultimate survival test. Major bosses feature non-negotiable Legendary Actions. Permadeath enforces a single save file with zero reloads on wipe.'
+  }
+};
 
 export interface CustomTavConfig {
   name: string;
@@ -33,6 +91,7 @@ export interface CustomTavConfig {
 export interface TeamSynergyReport {
   score: number; // 0 to 100
   partyCompositionHealth: 'Transcendent' | 'Balanced' | 'Specialized' | 'Deficient';
+  difficultyRules: DifficultyRuleProfile;
   roleCoverage: Record<CombatRole, number>;
   missingRoles: CombatRole[];
   shortRestAdvantageCount: number;
@@ -111,6 +170,16 @@ export const useTeamStore = defineStore('team', {
       // Ignore
     }
 
+    let savedDifficulty: GameDifficulty = 'Tactician';
+    try {
+      const storedDiff = localStorage.getItem(STORAGE_KEY_DIFFICULTY) as GameDifficulty;
+      if (storedDiff && DIFFICULTY_PROFILES[storedDiff]) {
+        savedDifficulty = storedDiff;
+      }
+    } catch {
+      // Ignore
+    }
+
     return {
       allCompanions: companionsData as Companion[],
       metaTeams: metaTeamsData as MetaTeam[],
@@ -122,6 +191,7 @@ export const useTeamStore = defineStore('team', {
         'karlach'
       ] as (CompanionId | null)[],
       customTavConfig: customTav,
+      currentDifficulty: savedDifficulty,
       searchQuery: '',
       filterRole: '' as CombatRole | '',
       filterOriginType: '' as string,
@@ -184,6 +254,8 @@ export const useTeamStore = defineStore('team', {
     synergyReport(): TeamSynergyReport {
       const active = this.teamCompanions.filter((c): c is Companion => c !== null);
       const activeIds = active.map((c) => c.id);
+      const currentDiff = this.currentDifficulty;
+      const diffRules = DIFFICULTY_PROFILES[currentDiff];
 
       const roleCoverage: Record<CombatRole, number> = {
         'Striker': 0,
@@ -286,7 +358,7 @@ export const useTeamStore = defineStore('team', {
         tacticalAdvice.push('Song of Rest provides an extra third Short Rest each adventuring day, doubling the efficiency of Fighters, Warlocks, and Monks.');
       }
 
-      // Warnings
+      // Base Warnings
       if (active.length < 4) {
         criticalWarnings.push(`Party has only ${active.length} of 4 member slots assigned.`);
       }
@@ -311,6 +383,32 @@ export const useTeamStore = defineStore('team', {
         missingCrucialDamageTypes.push('Force (bypasses all resistances and breaks sturdy environmental objects)');
       }
 
+      // 7. DIFFICULTY-SPECIFIC DOWNSIDES AND ADAPTIVE WARNINGS
+      if (currentDiff === 'Explorer') {
+        tacticalAdvice.push('Explorer Mode grants party +100% maximum HP and a +2 proficiency bonus to all checks. Multiclassing is disabled by game engine rules, so single-class progression (levels 1-12) is mandatory.');
+      } else if (currentDiff === 'Balanced') {
+        tacticalAdvice.push('Standard Balanced difficulty rules applied. Standard 40 camp supplies consumed per Long Rest. Full multiclass freedom enabled.');
+      } else if (currentDiff === 'Tactician') {
+        criticalWarnings.push('Tactician Rule Strain: Long Rests demand 80 Camp Supplies (double normal cost). Conserve full spell slots by prioritizing Short Rest martial engines.');
+        if (shortRestCount < 2) {
+          criticalWarnings.push('Heavy Resource Depletion Hazard: With only ' + shortRestCount + ' Short-Rest combatant(s) and 80 Camp Supplies per Long Rest, this party will rapidly exhaust food supplies.');
+        }
+        if (!hasSustain) {
+          criticalWarnings.push('Tactician AI Vulnerability: Enemies aggressively target low-AC spellcasters and execute downed allies before they can be stabilized.');
+        }
+        tacticalAdvice.push('Vendors apply a 20% price penalty on Tactician. Having a high Charisma Party Face with Persuasion expertise is vital to offset expensive potion and gear purchases.');
+      } else if (currentDiff === 'Honor') {
+        criticalWarnings.push('Honor Mode Single Save Threat: Total party wipe immediately deletes the save file. Zero tactical reloads permitted on wipe.');
+        criticalWarnings.push('Boss Legendary Actions Active: Major encounters react outside turn order with devastating legendary counter-moves. High initiative (Alert feat) and round-1 turn denial (Hold/Command) are mandatory.');
+        if (shortRestCount < 2) {
+          criticalWarnings.push('Camp Supply Pressure: 80 Camp Supplies per Long Rest. Short Rest units (Monk, Fighter, Warlock) are strongly advised over 4-caster spell burn.');
+        }
+        if (!hasHighControl) {
+          criticalWarnings.push('Missing Inescapable Turn Denial: Lacks high Spell Save DC controllers (Arcane Acuity / Divination) to neutralize legendary boss actions in round 1.');
+        }
+        tacticalAdvice.push('Ensure at least 3 party members possess the Alert feat (+5 Initiative) to guarantee acting before enemy legendary alpha strikes.');
+      }
+
       // Calculate score
       let score = 30;
       score += active.length * 10;
@@ -321,6 +419,13 @@ export const useTeamStore = defineStore('team', {
       score += Math.min(detectedSynergies.length * 6, 20);
       if (shortRestCount >= 2) score += 5;
       if (missingRoles.length > 2) score -= 10;
+
+      // Difficulty penalty adjustments
+      if (currentDiff === 'Tactician' || currentDiff === 'Honor') {
+        if (shortRestCount < 2) score -= 8;
+        if (!hasSustain) score -= 8;
+        if (currentDiff === 'Honor' && !hasHighControl) score -= 10;
+      }
       score = Math.max(10, Math.min(100, score));
 
       let partyCompositionHealth: TeamSynergyReport['partyCompositionHealth'] = 'Balanced';
@@ -336,13 +441,10 @@ export const useTeamStore = defineStore('team', {
         restingViability = 'Resource Heavy';
       }
 
-      if (restingViability === 'Resource Heavy') {
-        tacticalAdvice.push('Heavy reliance on Long Rests detected. Stock up on camp supplies and avoid consecutive boss encounters without resting.');
-      }
-
       return {
         score,
         partyCompositionHealth,
+        difficultyRules: diffRules,
         roleCoverage,
         missingRoles,
         shortRestAdvantageCount: shortRestCount,
@@ -426,6 +528,17 @@ export const useTeamStore = defineStore('team', {
         }
       });
       this.persistRecruited();
+    },
+
+    setDifficulty(difficulty: GameDifficulty) {
+      if (DIFFICULTY_PROFILES[difficulty]) {
+        this.currentDifficulty = difficulty;
+        try {
+          localStorage.setItem(STORAGE_KEY_DIFFICULTY, difficulty);
+        } catch {
+          // Ignore
+        }
+      }
     },
 
     clearTeam() {

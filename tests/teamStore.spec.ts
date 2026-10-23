@@ -63,4 +63,23 @@ describe('BG3 Team Store & Synergy Engine', () => {
     expect(activeTav?.canonicalClass).toBe('Paladin');
     expect(activeTav?.primaryRole).toBe('Tank');
   });
+
+  it('adapts warnings and rules based on campaign difficulty slider', () => {
+    const store = useTeamStore();
+    store.setDifficulty('Tactician');
+    expect(store.currentDifficulty).toBe('Tactician');
+    let report = store.synergyReport;
+    expect(report.difficultyRules.campSuppliesPerLongRest).toBe(80);
+    expect(report.criticalWarnings.some((w) => w.includes('80 Camp Supplies'))).toBe(true);
+
+    store.setDifficulty('Honor');
+    report = store.synergyReport;
+    expect(report.difficultyRules.legendaryBossActions).toBe(true);
+    expect(report.criticalWarnings.some((w) => w.includes('Boss Legendary Actions Active'))).toBe(true);
+
+    store.setDifficulty('Explorer');
+    report = store.synergyReport;
+    expect(report.difficultyRules.multiclassAllowed).toBe(false);
+    expect(report.tacticalAdvice.some((a) => a.includes('+100% maximum HP'))).toBe(true);
+  });
 });
