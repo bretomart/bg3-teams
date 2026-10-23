@@ -465,19 +465,22 @@
             "name": "Markoheshkir",
             "act": 3,
             "type": "Quarterstaff",
-            "description": "Free Kereska's Favour (Bolts of Doom) granting Chain Lightning and lightning resistance."
+            "description": "Free Kereska's Favour (Bolts of Doom) granting Chain Lightning and lightning resistance.",
+            "sourceCategory": "Optional Secret / Boss"
           },
           {
             "name": "Spellsparkler",
             "act": 1,
             "type": "Quarterstaff",
-            "description": "Generates 2 Lightning Charges per hit, boosting spell damage and save DC."
+            "description": "Generates 2 Lightning Charges per hit, boosting spell damage and save DC.",
+            "sourceCategory": "Main Story & Vendors"
           },
           {
             "name": "Staff of Spellpower",
             "act": 3,
             "type": "Quarterstaff",
-            "description": "Provides an extra free level 6 spell cast without expending a spell slot."
+            "description": "Provides an extra free level 6 spell cast without expending a spell slot.",
+            "sourceCategory": "Main Story & Vendors"
           }
         ],
         "armor": {
@@ -1677,19 +1680,23 @@
             "name": "Silver Sword of the Astral Plane",
             "act": 3,
             "type": "Greatsword",
-            "description": "+1d6 psychic damage, advantage on INT/WIS/CHA saves, and stun resistance when wielded by Githyanki."
+            "description": "+1d6 psychic damage, advantage on INT/WIS/CHA saves, and stun resistance when wielded by Githyanki.",
+            "sourceCategory": "Quest Locked",
+            "questLockWarning": "Locked behind companion story quest decisions."
           },
           {
             "name": "Sword of Justice",
             "act": 1,
             "type": "Greatsword",
-            "description": "Grants Tyr's Protection for +2 AC concentration shield."
+            "description": "Grants Tyr's Protection for +2 AC concentration shield.",
+            "sourceCategory": "Main Story & Vendors"
           },
           {
             "name": "Balduran's Giantslayer",
             "act": 3,
             "type": "Greatsword",
-            "description": "Doubles Strength modifier on damage and grants Giant Form with +1d6 extra damage and temp HP."
+            "description": "Doubles Strength modifier on damage and grants Giant Form with +1d6 extra damage and temp HP.",
+            "sourceCategory": "Optional Secret / Boss"
           }
         ],
         "armor": {
@@ -1870,19 +1877,22 @@
             "name": "Markoheshkir",
             "act": 3,
             "type": "Quarterstaff",
-            "description": "Kereska's Favour, Arcane Battery free spell cast, and +1 Spell Save DC."
+            "description": "Kereska's Favour, Arcane Battery free spell cast, and +1 Spell Save DC.",
+            "sourceCategory": "Optional Secret / Boss"
           },
           {
             "name": "Staff of the Emperor",
             "act": 3,
             "type": "Quarterstaff",
-            "description": "+1 DC and inflicts spell condemnation on hit."
+            "description": "+1 DC and inflicts spell condemnation on hit.",
+            "sourceCategory": "Main Story & Vendors"
           },
           {
             "name": "Melf's First Staff",
             "act": 1,
             "type": "Quarterstaff",
-            "description": "+1 Spell Save DC and +1 to spell attack rolls."
+            "description": "+1 Spell Save DC and +1 to spell attack rolls.",
+            "sourceCategory": "Main Story & Vendors"
           }
         ],
         "armor": {
@@ -2065,19 +2075,23 @@
             "name": "Infernal Rapier",
             "act": 2,
             "type": "Rapier",
-            "description": "Attacks using Charisma modifier, grants Planar Ally: Cambion."
+            "description": "Attacks using Charisma modifier, grants Planar Ally: Cambion.",
+            "sourceCategory": "Quest Locked",
+            "questLockWarning": "Locked behind companion story quest decisions."
           },
           {
             "name": "Duellist's Prerogative",
             "act": 3,
             "type": "Rapier",
-            "description": "Extra reaction per round, lowers crit threshold, and deals bonus necrotic damage when off-hand is empty."
+            "description": "Extra reaction per round, lowers crit threshold, and deals bonus necrotic damage when off-hand is empty.",
+            "sourceCategory": "Main Story & Vendors"
           },
           {
             "name": "The Baneful",
             "act": 1,
             "type": "Shortsword",
-            "description": "Binds weapon and inflicts bane on target strike."
+            "description": "Binds weapon and inflicts bane on target strike.",
+            "sourceCategory": "Main Story & Vendors"
           }
         ],
         "armor": {
@@ -2258,19 +2272,23 @@
             "name": "Balduran's Giantslayer",
             "act": 3,
             "type": "Greatsword",
-            "description": "Doubles Strength modifier to damage, Giant Form enrage."
+            "description": "Doubles Strength modifier to damage, Giant Form enrage.",
+            "sourceCategory": "Optional Secret / Boss"
           },
           {
             "name": "Voss' Silver Sword",
             "act": 1,
             "type": "Greatsword",
-            "description": "+1d4 psychic damage and Wrath bonus."
+            "description": "+1d4 psychic damage and Wrath bonus.",
+            "sourceCategory": "Quest Locked",
+            "questLockWarning": "Locked behind companion story quest decisions."
           },
           {
             "name": "Unseen Menace",
             "act": 1,
             "type": "Pike",
-            "description": "Invisible weapon with permanent advantage and crit on 19."
+            "description": "Invisible weapon with permanent advantage and crit on 19.",
+            "sourceCategory": "Main Story & Vendors"
           }
         ],
         "armor": {
@@ -2453,19 +2471,22 @@
             "name": "Staff of the Woodlands",
             "act": 2,
             "type": "Quarterstaff",
-            "description": "Free cast of Pass Without Trace and Wall of Thorns."
+            "description": "Free cast of Pass Without Trace and Wall of Thorns.",
+            "sourceCategory": "Main Story & Vendors"
           },
           {
             "name": "Markoheshkir",
             "act": 3,
             "type": "Quarterstaff",
-            "description": "Arcane Battery and elemental amplification for spellcasting mode."
+            "description": "Arcane Battery and elemental amplification for spellcasting mode.",
+            "sourceCategory": "Optional Secret / Boss"
           },
           {
             "name": "Pale Oak",
             "act": 1,
             "type": "Quarterstaff",
-            "description": "Immunity to entangled vines."
+            "description": "Immunity to entangled vines.",
+            "sourceCategory": "Main Story & Vendors"
           }
         ],
         "armor": {
@@ -2646,19 +2667,22 @@
             "name": "Belm",
             "act": 3,
             "type": "Scimitar",
-            "description": "Grants Perfectly Balanced bonus strike per turn without dual wield offhand cost."
+            "description": "Grants Perfectly Balanced bonus strike per turn without dual wield offhand cost.",
+            "sourceCategory": "Main Story & Vendors"
           },
           {
             "name": "Sylvan Scimitar",
             "act": 2,
             "type": "Scimitar",
-            "description": "Uses Spellcasting Ability Modifier (Wisdom) instead of Dexterity for attack/damage rolls."
+            "description": "Uses Spellcasting Ability Modifier (Wisdom) instead of Dexterity for attack/damage rolls.",
+            "sourceCategory": "Main Story & Vendors"
           },
           {
             "name": "Staff of Spellpower",
             "act": 3,
             "type": "Quarterstaff",
-            "description": "Free spell slot replenishment for high tier crowd control."
+            "description": "Free spell slot replenishment for high tier crowd control.",
+            "sourceCategory": "Main Story & Vendors"
           }
         ],
         "armor": {
@@ -2838,19 +2862,22 @@
             "name": "Gontr Mael",
             "act": 3,
             "type": "Longbow",
-            "description": "Guiding Bolt on hit, Celestial Haste."
+            "description": "Guiding Bolt on hit, Celestial Haste.",
+            "sourceCategory": "Optional Secret / Boss"
           },
           {
             "name": "Dead Shot",
             "act": 3,
             "type": "Longbow",
-            "description": "Crit reduction and proficiency bonus doubling."
+            "description": "Crit reduction and proficiency bonus doubling.",
+            "sourceCategory": "Main Story & Vendors"
           },
           {
             "name": "Sword of Chaos",
             "act": 3,
             "type": "Greatsword",
-            "description": "Restores 1d6 HP on every hit."
+            "description": "Restores 1d6 HP on every hit.",
+            "sourceCategory": "Main Story & Vendors"
           }
         ],
         "armor": {
