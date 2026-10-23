@@ -5,7 +5,7 @@ import CompanionAvatar from './CompanionAvatar.vue';
 import CustomTavModal from './CustomTavModal.vue';
 import SlotAssignModal from './SlotAssignModal.vue';
 import D20Icon from './D20Icon.vue';
-import type { Companion } from '../types/companion';
+import type { Companion, BuildOption } from '../types/companion';
 import {
   Shield,
   Trash2,
@@ -16,26 +16,48 @@ import {
   ChevronDown,
   ChevronUp,
   RotateCcw,
-  BookOpen
+  BookOpen,
+  Check,
+  AlertTriangle,
+  Sparkles
 } from 'lucide-vue-next';
 
 const store = useTeamStore();
 const showTavModal = ref(false);
 const activeAssignSlot = ref<number | null>(null);
-const activeTab = ref<'gear' | 'stats' | 'rationale' | 'rotation'>('gear');
+const activeTab = ref<'gear' | 'rationale' | 'stats' | 'rotation'>('gear');
 const isInspectorCollapsed = ref(false);
 
 const activeCompanion = computed<Companion | null>(() => {
   return store.selectedCompanionDetail || store.teamCompanions[store.inspectingSlotIndex] || null;
 });
 
+const availableBuilds = computed<BuildOption[]>(() => {
+  if (!activeCompanion.value) return [];
+  const base = store.allCompanions.find((c) => c.id === activeCompanion.value?.id);
+  return base?.builds || [];
+});
+
+const currentSelectedBuildId = computed(() => {
+  if (!activeCompanion.value) return '';
+  return store.selectedBuildIds[activeCompanion.value.id] || availableBuilds.value[0]?.id || '';
+});
+
+const activeBuildOption = computed<BuildOption | null>(() => {
+  return availableBuilds.value.find((b) => b.id === currentSelectedBuildId.value) || availableBuilds.value[0] || null;
+});
+
+const handleSelectBuild = (buildId: string) => {
+  if (activeCompanion.value) {
+    store.setCompanionBuild(activeCompanion.value.id, buildId);
+  }
+};
+
 const handleSlotClick = (index: number) => {
   const member = store.teamCompanions[index];
   if (!member) {
-    // Empty slot: open slot assignment modal
     activeAssignSlot.value = index;
   } else {
-    // Occupied slot: inspect
     store.setInspectingSlot(index);
     isInspectorCollapsed.value = false;
   }
@@ -63,7 +85,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
             <span>Active Adventuring Party (4 Slots)</span>
           </h2>
           <p class="text-xs text-slate-400 mt-1">
-            Click any active party slot to inspect optimized builds and combat synergies below. Click empty slots to assign from your camp inventory.
+            Click any active party slot to customize their build, weapons, and evaluate strengths and drawbacks.
           </p>
         </div>
 
@@ -192,8 +214,9 @@ const removeSlot = (index: number, event: MouseEvent) => {
         </div>
 
         <div class="flex items-center gap-3 self-end lg:self-auto">
+          <!-- Active Build Badge Indicator -->
           <div class="bg-slate-950 px-3 py-2 rounded-xl border border-slate-800 text-right">
-            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Meta Multiclass</span>
+            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Active Build Setup</span>
             <span class="text-xs font-bold text-amber-300">{{ activeCompanion.recommendedMulticlass }}</span>
           </div>
 
@@ -214,6 +237,47 @@ const removeSlot = (index: number, event: MouseEvent) => {
 
       <!-- Collapsible Body with Tabbed Progressive Disclosure -->
       <div v-show="!isInspectorCollapsed" class="p-6 space-y-6">
+        <!-- Interactive Build Path Selector for Origin / Custom Characters -->
+        <div v-if="availableBuilds.length > 1" class="p-4 rounded-xl bg-slate-950/80 border border-slate-800">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800/80 mb-3">
+            <div class="flex items-center gap-2">
+              <Sparkles class="w-4 h-4 text-amber-400" />
+              <h3 class="text-xs font-bold uppercase tracking-wider text-slate-200">
+                Choose {{ activeCompanion.name }}'s Build Archetype
+              </h3>
+            </div>
+            <span class="text-[11px] text-slate-400">Reactive: updates party synergies, gear, and drawbacks immediately</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            <button
+              v-for="b in availableBuilds"
+              :key="b.id"
+              @click="handleSelectBuild(b.id)"
+              :class="[
+                'p-3 rounded-xl border text-left transition-all flex flex-col justify-between',
+                currentSelectedBuildId === b.id
+                  ? 'bg-amber-500/15 border-amber-500/60 ring-1 ring-amber-400/40 shadow-sm'
+                  : 'bg-slate-900 border-slate-800 hover:border-slate-700 hover:bg-slate-900/80'
+              ]"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-1">
+                  <h4 class="text-xs font-bold text-slate-100">{{ b.name }}</h4>
+                  <Check v-if="currentSelectedBuildId === b.id" class="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                </div>
+                <p class="text-[11px] text-amber-300 font-semibold mt-0.5">{{ b.classSplit }}</p>
+                <p class="text-[10px] text-slate-400 mt-1 line-clamp-2">{{ b.description }}</p>
+              </div>
+
+              <div class="mt-2.5 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[9px]">
+                <span class="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 font-bold">{{ b.primaryRole }}</span>
+                <span class="text-slate-500 font-medium">{{ b.shortRestRecharge ? 'Short Rest' : 'Long Rest' }}</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
         <!-- Tabbed Navigation Bar -->
         <div class="flex items-center gap-2 border-b border-slate-800 pb-3 flex-wrap">
           <button
@@ -226,7 +290,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
             ]"
           >
             <Sword class="w-3.5 h-3.5" />
-            Weapons & Equipment Matrix
+            Weapons & Modular Options
           </button>
 
           <button
@@ -239,7 +303,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
             ]"
           >
             <BookOpen class="w-3.5 h-3.5" />
-            Optimization Rationale & Mechanics
+            Build Strategy & Drawbacks
           </button>
 
           <button
@@ -269,24 +333,27 @@ const removeSlot = (index: number, event: MouseEvent) => {
           </button>
         </div>
 
-        <!-- TAB 1: WEAPONS & EQUIPMENT -->
+        <!-- TAB 1: WEAPONS & MODULAR ARSENAL -->
         <div v-show="activeTab === 'gear'" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          <!-- Optimal Weapons by Act -->
+          <!-- Modular Progression Weapons & Quest Alternatives -->
           <div class="lg:col-span-6 bg-slate-950/70 p-4 rounded-xl border border-slate-800">
-            <div class="flex items-center gap-2 mb-3">
-              <Sword class="w-4 h-4 text-amber-400" />
-              <h3 class="text-xs font-bold uppercase tracking-wider text-slate-200">
-                Progression Weapon Arsenal (Acts 1-3)
-              </h3>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <Sword class="w-4 h-4 text-amber-400" />
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-200">
+                  Weapon Options & Quest Alternatives
+                </h3>
+              </div>
+              <span class="text-[10px] text-slate-500">Includes story, vendor, & secret drops</span>
             </div>
 
             <div class="space-y-2.5">
               <div
                 v-for="wpn in activeCompanion.optimalGear.weapons"
                 :key="wpn.name"
-                class="p-2.5 rounded-lg bg-slate-900 border border-slate-800/80 flex items-start justify-between gap-3"
+                class="p-2.5 rounded-lg bg-slate-900 border border-slate-800/80 flex flex-col gap-1.5"
               >
-                <div>
+                <div class="flex items-center justify-between gap-2 flex-wrap">
                   <div class="flex items-center gap-2">
                     <span class="text-xs font-bold text-slate-200">{{ wpn.name }}</span>
                     <span class="px-1.5 py-0.5 text-[9px] font-bold rounded bg-amber-500/10 text-amber-300 border border-amber-500/30">
@@ -294,7 +361,30 @@ const removeSlot = (index: number, event: MouseEvent) => {
                     </span>
                     <span class="text-[10px] text-slate-500">{{ wpn.type }}</span>
                   </div>
-                  <p class="text-[11px] text-slate-400 mt-1 leading-snug">{{ wpn.description }}</p>
+
+                  <span
+                    v-if="wpn.sourceCategory"
+                    :class="[
+                      'text-[9px] font-semibold px-1.5 py-0.5 rounded border',
+                      wpn.sourceCategory === 'Quest Locked'
+                        ? 'bg-rose-500/15 text-rose-300 border-rose-500/30'
+                        : wpn.sourceCategory === 'Optional Secret / Boss'
+                        ? 'bg-purple-500/15 text-purple-300 border-purple-500/30'
+                        : 'bg-slate-800 text-slate-300 border-slate-700'
+                    ]"
+                  >
+                    {{ wpn.sourceCategory }}
+                  </span>
+                </div>
+
+                <p class="text-[11px] text-slate-400 leading-snug">{{ wpn.description }}</p>
+
+                <div
+                  v-if="wpn.questLockWarning"
+                  class="mt-1 p-1.5 rounded bg-amber-950/30 border border-amber-500/30 flex items-start gap-1.5 text-[10px] text-amber-300"
+                >
+                  <AlertTriangle class="w-3 h-3 text-amber-400 shrink-0 mt-0.5" />
+                  <span>{{ wpn.questLockWarning }}</span>
                 </div>
               </div>
             </div>
@@ -305,7 +395,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
             <div class="flex items-center gap-2 mb-3">
               <Shield class="w-4 h-4 text-amber-400" />
               <h3 class="text-xs font-bold uppercase tracking-wider text-slate-200">
-                Best-in-Slot Armor & Jewelry Matrix
+                Recommended Armor & Jewelry Matrix
               </h3>
             </div>
 
@@ -348,31 +438,44 @@ const removeSlot = (index: number, event: MouseEvent) => {
           </div>
         </div>
 
-        <!-- TAB 2: DETAILED OPTIMIZATION RATIONALE -->
+        <!-- TAB 2: DETAILED STRATEGY, POSITIVES & DRAWBACKS -->
         <div v-show="activeTab === 'rationale'" class="space-y-4">
           <div class="p-4 rounded-xl bg-slate-950/80 border border-slate-800">
             <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2 flex items-center gap-2">
               <BookOpen class="w-4 h-4" />
-              Build Strategy & Core Mechanics
+              Build Overview: {{ activeCompanion.recommendedMulticlass }}
             </h3>
             <p class="text-xs text-slate-300 leading-relaxed font-sans">
               {{ activeCompanion.optimizationRationale || 'This build maximizes single-round action economy, accuracy scaling, and status condition amplification to reliably overcome Honor Mode legendary actions.' }}
             </p>
           </div>
 
-          <!-- Combat Action Breakdown -->
-          <div v-if="activeCompanion.combatLoopBreakdown" class="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div class="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800">
-              <span class="text-[10px] font-bold uppercase tracking-wider text-amber-400 block mb-1">Standard Action</span>
-              <p class="text-xs text-slate-300 leading-snug">{{ activeCompanion.combatLoopBreakdown.action }}</p>
+          <!-- Strengths vs Drawbacks Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Strengths -->
+            <div class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/30">
+              <span class="text-xs font-bold uppercase tracking-wider text-emerald-300 block mb-2 flex items-center gap-1.5">
+                <Check class="w-4 h-4 text-emerald-400" />
+                Build Strengths & Tactical Upsides
+              </span>
+              <ul class="space-y-1.5 text-xs text-emerald-200/90 list-disc list-inside">
+                <li v-for="str in (activeBuildOption?.strengths || ['High synergy output with party'])" :key="str">
+                  {{ str }}
+                </li>
+              </ul>
             </div>
-            <div class="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800">
-              <span class="text-[10px] font-bold uppercase tracking-wider text-amber-400 block mb-1">Bonus Action Economy</span>
-              <p class="text-xs text-slate-300 leading-snug">{{ activeCompanion.combatLoopBreakdown.bonusAction }}</p>
-            </div>
-            <div class="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800">
-              <span class="text-[10px] font-bold uppercase tracking-wider text-amber-400 block mb-1">Reaction Triggers</span>
-              <p class="text-xs text-slate-300 leading-snug">{{ activeCompanion.combatLoopBreakdown.reaction }}</p>
+
+            <!-- Drawbacks & Vulnerabilities -->
+            <div class="p-4 rounded-xl bg-rose-950/20 border border-rose-500/30">
+              <span class="text-xs font-bold uppercase tracking-wider text-rose-300 block mb-2 flex items-center gap-1.5">
+                <AlertTriangle class="w-4 h-4 text-rose-400" />
+                Build Drawbacks & Specific Vulnerabilities
+              </span>
+              <ul class="space-y-1.5 text-xs text-rose-200/90 list-disc list-inside">
+                <li v-for="drw in (activeBuildOption?.drawbacks || ['Requires standard rest and resource pacing'])" :key="drw">
+                  {{ drw }}
+                </li>
+              </ul>
             </div>
           </div>
         </div>

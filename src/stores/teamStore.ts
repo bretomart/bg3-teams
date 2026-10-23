@@ -14,6 +14,7 @@ import type {
 const STORAGE_KEY_RECRUITED = 'bg3_recruited_companions';
 const STORAGE_KEY_CUSTOM_TAV = 'bg3_custom_tav_config';
 const STORAGE_KEY_DIFFICULTY = 'bg3_selected_difficulty';
+const STORAGE_KEY_SELECTED_BUILDS = 'bg3_companion_selected_builds';
 
 export const DIFFICULTY_PROFILES: Record<GameDifficulty, DifficultyRuleProfile> = {
   Explorer: {
@@ -180,6 +181,21 @@ export const useTeamStore = defineStore('team', {
       // Ignore
     }
 
+    let savedBuilds: Record<string, string> = {
+      tav: 'swords-bard-controller',
+      shadowheart: 'light-cleric-radiant',
+      karlach: 'berserker-throwzerker',
+      astarion: 'open-hand-monk-thief'
+    };
+    try {
+      const storedBuilds = localStorage.getItem(STORAGE_KEY_SELECTED_BUILDS);
+      if (storedBuilds) {
+        savedBuilds = { ...savedBuilds, ...JSON.parse(storedBuilds) };
+      }
+    } catch {
+      // Ignore
+    }
+
     return {
       allCompanions: companionsData as Companion[],
       metaTeams: metaTeamsData as MetaTeam[],
@@ -192,6 +208,7 @@ export const useTeamStore = defineStore('team', {
       ] as (CompanionId | null)[],
       customTavConfig: customTav,
       currentDifficulty: savedDifficulty,
+      selectedBuildIds: savedBuilds,
       searchQuery: '',
       filterRole: '' as CombatRole | '',
       filterOriginType: '' as string,
@@ -206,9 +223,14 @@ export const useTeamStore = defineStore('team', {
         if (!id) return null;
         const comp = state.allCompanions.find((c) => c.id === id);
         if (!comp) return null;
+
+        // Clone base companion
+        let companionClone: Companion = { ...comp };
+
+        // If custom Tav, apply identity fields
         if (comp.id === 'tav') {
-          return {
-            ...comp,
+          companionClone = {
+            ...companionClone,
             name: state.customTavConfig.name,
             avatar: state.customTavConfig.gender === 'female' ? '/companions/tav-female.svg' : '/companions/tav-male.svg',
             race: state.customTavConfig.race,
@@ -227,7 +249,36 @@ export const useTeamStore = defineStore('team', {
             }
           };
         }
-        return comp;
+
+        // Apply active build override if available (unless custom Tav customizes their own role)
+        const activeBuildId = state.selectedBuildIds[comp.id];
+        const activeBuild = comp.builds?.find((b) => b.id === activeBuildId) || comp.builds?.[0];
+        if (activeBuild) {
+          companionClone.recommendedMulticlass = activeBuild.classSplit;
+          if (comp.id !== 'tav') {
+            companionClone.primaryRole = activeBuild.primaryRole;
+            companionClone.secondaryRole = activeBuild.secondaryRole;
+          }
+          companionClone.shortRestRecharge = activeBuild.shortRestRecharge;
+          companionClone.damageTypes = activeBuild.damageTypes;
+          companionClone.tags = activeBuild.tags;
+          companionClone.optimizationRationale = activeBuild.description;
+          companionClone.combatLoopBreakdown = activeBuild.combatLoopBreakdown;
+          companionClone.optimalGear = {
+            weapons: activeBuild.weapons,
+            armor: activeBuild.armor
+          };
+          companionClone.skillPriority = {
+            order: activeBuild.combatLoopBreakdown
+              ? [activeBuild.combatLoopBreakdown.action, activeBuild.combatLoopBreakdown.bonusAction, activeBuild.combatLoopBreakdown.reaction]
+              : companionClone.skillPriority.order,
+            keyFeats: activeBuild.keyFeats,
+            statGoals: activeBuild.statGoals,
+            spellRecommendations: activeBuild.spellRecommendations
+          };
+        }
+
+        return companionClone;
       });
     },
 
@@ -538,6 +589,19 @@ export const useTeamStore = defineStore('team', {
         } catch {
           // Ignore
         }
+      }
+    },
+
+    setCompanionBuild(companionId: string, buildId: string) {
+      this.selectedBuildIds[companionId] = buildId;
+      try {
+        localStorage.setItem(STORAGE_KEY_SELECTED_BUILDS, JSON.stringify(this.selectedBuildIds));
+      } catch {
+        // Ignore
+      }
+      // Refresh inspection if current
+      if (this.inspectingSlotIndex >= 0) {
+        this.setInspectingSlot(this.inspectingSlotIndex);
       }
     },
 

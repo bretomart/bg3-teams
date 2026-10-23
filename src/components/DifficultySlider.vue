@@ -16,6 +16,16 @@ const currentProfile = computed(() => DIFFICULTY_PROFILES[store.currentDifficult
 
 const difficultyKeys: GameDifficulty[] = ['Explorer', 'Balanced', 'Tactician', 'Honor'];
 
+const sliderValue = computed({
+  get: () => difficultyKeys.indexOf(store.currentDifficulty),
+  set: (val: number) => {
+    const key = difficultyKeys[val];
+    if (key) {
+      store.setDifficulty(key);
+    }
+  }
+});
+
 const selectDifficulty = (diff: GameDifficulty) => {
   store.setDifficulty(diff);
 };
@@ -41,37 +51,53 @@ const getButtonTheme = (diff: GameDifficulty) => {
 
 <template>
   <div class="bg-slate-900/90 rounded-2xl border border-slate-800 p-5 shadow-2xl backdrop-blur-md">
-    <!-- Header with Difficulty Selection Tabs -->
+    <!-- Header with Difficulty Selection Tabs and Slider -->
     <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-800">
       <div>
         <div class="flex items-center gap-2">
           <D20Icon class="w-5 h-5 text-amber-400 shrink-0" />
           <h2 class="text-lg font-bold font-serif text-slate-100 tracking-wide">
-            Campaign Difficulty Rules & Strain Calibration
+            Campaign Difficulty & Tactical Risk Calibration
           </h2>
         </div>
         <p class="text-xs text-slate-400 mt-1">
-          Adjust the campaign difficulty to evaluate enemy aggression levels, camp supply consumption, and permadeath constraints.
+          Slide or select difficulty to dynamically scale party strain, camp supply costs, and combat penalties.
         </p>
       </div>
 
       <!-- Segmented Difficulty Controller -->
-      <div class="flex items-center bg-slate-950 p-1.5 rounded-xl border border-slate-800 gap-1 self-stretch lg:self-auto overflow-x-auto">
-        <button
-          v-for="diff in difficultyKeys"
-          :key="diff"
-          @click="selectDifficulty(diff)"
-          :class="[
-            'px-3.5 py-1.5 text-xs font-bold rounded-lg border transition-all flex items-center gap-1.5 whitespace-nowrap',
-            getButtonTheme(diff)
-          ]"
-        >
-          <Heart v-if="diff === 'Explorer'" class="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-          <Shield v-else-if="diff === 'Balanced'" class="w-3.5 h-3.5 text-sky-400 shrink-0" />
-          <Swords v-else-if="diff === 'Tactician'" class="w-3.5 h-3.5 text-amber-400 shrink-0" />
-          <Skull v-else-if="diff === 'Honor'" class="w-3.5 h-3.5 text-rose-400 shrink-0" />
-          <span>{{ diff }}</span>
-        </button>
+      <div class="flex flex-col sm:flex-row items-center gap-3">
+        <!-- Interactive Range Slider -->
+        <div class="flex items-center gap-2 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800 w-full sm:w-auto">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Tier Slider</span>
+          <input
+            v-model.number="sliderValue"
+            type="range"
+            min="0"
+            max="3"
+            step="1"
+            class="w-28 sm:w-32 h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-400"
+          />
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex items-center bg-slate-950 p-1.5 rounded-xl border border-slate-800 gap-1 w-full sm:w-auto overflow-x-auto">
+          <button
+            v-for="diff in difficultyKeys"
+            :key="diff"
+            @click="selectDifficulty(diff)"
+            :class="[
+              'px-3.5 py-1.5 text-xs font-bold rounded-lg border transition-all flex items-center gap-1.5 whitespace-nowrap',
+              getButtonTheme(diff)
+            ]"
+          >
+            <Heart v-if="diff === 'Explorer'" class="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            <Shield v-else-if="diff === 'Balanced'" class="w-3.5 h-3.5 text-sky-400 shrink-0" />
+            <Swords v-else-if="diff === 'Tactician'" class="w-3.5 h-3.5 text-amber-400 shrink-0" />
+            <Skull v-else-if="diff === 'Honor'" class="w-3.5 h-3.5 text-rose-400 shrink-0" />
+            <span>{{ diff }}</span>
+          </button>
+        </div>
       </div>
     </div>
 
