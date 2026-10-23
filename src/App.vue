@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue';
 import { useTeamStore } from './stores/teamStore';
 import TeamSlots from './components/TeamSlots.vue';
+import DifficultySlider from './components/DifficultySlider.vue';
 import SynergyAnalysis from './components/SynergyAnalysis.vue';
 import MetaTeamList from './components/MetaTeamList.vue';
 import RosterPicker from './components/RosterPicker.vue';
@@ -77,10 +78,13 @@ const bg3LogoSrc = computed(() => `${baseUrl}bg3-logo.png`);
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       <!-- Mode View: Party Builder -->
       <div v-show="activeView === 'builder'" class="space-y-8">
-        <!-- 4-Party Active Slots & PCPartPicker Matrix -->
+        <!-- Campaign Difficulty Controller -->
+        <DifficultySlider />
+
+        <!-- 4-Party Active Slots & Component Matrix -->
         <TeamSlots />
 
-        <!-- Synergy Engine & Honor Viability Diagnostic -->
+        <!-- Synergy Engine & Diagnostic Matrix -->
         <SynergyAnalysis />
 
         <!-- Camp Roster & Recruitment Inventory -->

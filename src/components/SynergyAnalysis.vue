@@ -33,11 +33,11 @@ const scoreColor = computed(() => {
         <div class="flex items-center gap-2">
           <Zap class="w-5 h-5 text-amber-400" />
           <h2 class="text-xl font-bold font-serif text-slate-100 tracking-wide">
-            Tactical Synergy & Honor Mode Engine
+            Tactical Synergy & Combat Engine
           </h2>
         </div>
         <p class="text-xs text-slate-400 mt-1">
-          Real-time dynamic analysis of crowd control DC, resting economy, damage vulnerability loops, and skill proficiencies.
+          Real-time dynamic analysis of crowd control DC, resting economy, damage vulnerability loops, and <span class="text-amber-300 font-semibold">{{ report.difficultyRules.name }}</span> rules.
         </p>
       </div>
 
