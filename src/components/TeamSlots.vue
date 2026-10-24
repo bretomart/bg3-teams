@@ -5,6 +5,7 @@ import CompanionAvatar from './CompanionAvatar.vue';
 import CustomTavModal from './CustomTavModal.vue';
 import SlotAssignModal from './SlotAssignModal.vue';
 import D20Icon from './D20Icon.vue';
+import GearIcon from './GearIcon.vue';
 import type { Companion, BuildOption } from '../types/companion';
 import {
   Shield,
@@ -379,6 +380,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
               >
                 <div class="flex items-center justify-between gap-2 flex-wrap">
                   <div class="flex items-center gap-2">
+                    <GearIcon :name="wpn.type" class="w-4 h-4 text-[#d4af37]" />
                     <span class="text-xs font-bold text-[#fcedb6] font-sans">{{ wpn.name }}</span>
                     <span class="px-1.5 py-0.5 text-[9px] font-bold rounded bg-[#2a1e14] text-[#e6ca65] border border-[#5d442e] font-sans">
                       Act {{ wpn.act }}
@@ -424,40 +426,61 @@ const removeSlot = (index: number, event: MouseEvent) => {
             </div>
 
             <div class="grid grid-cols-2 gap-2.5 text-xs">
-              <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d]">
-                <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Headgear</span>
-                <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.head }}</span>
+              <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center gap-2.5">
+                <GearIcon name="head" class="w-4 h-4 text-[#d4af37]" />
+                <div class="min-w-0">
+                  <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Headgear</span>
+                  <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.head }}</span>
+                </div>
               </div>
 
-              <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d]">
-                <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Chest Armor</span>
-                <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.chest }}</span>
+              <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center gap-2.5">
+                <GearIcon name="chest" class="w-4 h-4 text-[#d4af37]" />
+                <div class="min-w-0">
+                  <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Chest Armor</span>
+                  <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.chest }}</span>
+                </div>
               </div>
 
-              <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d]">
-                <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Gloves</span>
-                <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.gloves }}</span>
+              <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center gap-2.5">
+                <GearIcon name="gloves" class="w-4 h-4 text-[#d4af37]" />
+                <div class="min-w-0">
+                  <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Gloves</span>
+                  <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.gloves }}</span>
+                </div>
               </div>
 
-              <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d]">
-                <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Boots</span>
-                <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.boots }}</span>
+              <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center gap-2.5">
+                <GearIcon name="boots" class="w-4 h-4 text-[#d4af37]" />
+                <div class="min-w-0">
+                  <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Boots</span>
+                  <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.boots }}</span>
+                </div>
               </div>
 
-              <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d]">
-                <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Amulet</span>
-                <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.amulet }}</span>
+              <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center gap-2.5">
+                <GearIcon name="amulet" class="w-4 h-4 text-[#d4af37]" />
+                <div class="min-w-0">
+                  <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Amulet</span>
+                  <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.amulet }}</span>
+                </div>
               </div>
 
-              <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d]">
-                <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Rings</span>
-                <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.rings.join(', ') }}</span>
+              <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center gap-2.5">
+                <GearIcon name="rings" class="w-4 h-4 text-[#d4af37]" />
+                <div class="min-w-0">
+                  <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Rings</span>
+                  <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.rings.join(', ') }}</span>
+                </div>
               </div>
             </div>
 
-            <div v-if="activeCompanion.optimalGear.armor.cloak" class="mt-2.5 p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d] text-xs">
-              <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Cloak</span>
-              <span class="font-semibold text-[#e6ca65] font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.cloak }}</span>
+            <div v-if="activeCompanion.optimalGear.armor.cloak" class="mt-2.5 p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d] text-xs flex items-center gap-2.5">
+              <GearIcon name="cloak" class="w-4 h-4 text-[#d4af37]" />
+              <div class="min-w-0">
+                <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Cloak</span>
+                <span class="font-semibold text-[#e6ca65] font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.cloak }}</span>
+              </div>
             </div>
           </div>
         </div>
