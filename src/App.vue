@@ -55,7 +55,7 @@ const bg3LogoSrc = computed(() => `${baseUrl}bg3-logo.png`);
               ]"
             >
               <Sparkles class="w-3.5 h-3.5" />
-              <span>Party Folio</span>
+              <span>Party Builder & Loadout</span>
             </button>
             <button
               @click="activeView = 'meta'"
@@ -67,7 +67,7 @@ const bg3LogoSrc = computed(() => `${baseUrl}bg3-logo.png`);
               ]"
             >
               <BookOpen class="w-3.5 h-3.5" />
-              <span>Proven Parties</span>
+              <span>Meta Team Compositions</span>
             </button>
           </div>
 

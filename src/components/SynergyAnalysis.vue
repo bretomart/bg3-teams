@@ -11,7 +11,8 @@ import {
   Lock,
   Layers,
   HeartPulse,
-  Award
+  Award,
+  Eye
 } from 'lucide-vue-next';
 
 const store = useTeamStore();
@@ -39,11 +40,11 @@ const scoreColor = computed(() => {
         <div class="flex items-center gap-2.5">
           <Zap class="w-5 h-5 text-[#d4af37]" />
           <h2 class="text-xl font-bold font-['Cinzel'] text-[#fcedb6] tracking-wide">
-            Tactical Synergy & Combat Engine
+            Party Synergy Diagnostics & Honor Mode Compliance
           </h2>
         </div>
         <p class="text-xs text-[#b5a07e] font-sans mt-1">
-          Dynamic combat diagnostics: Spell DC thresholds, resting economy, damage vulnerability loops, and <span class="text-[#fcedb6] font-semibold font-sans">{{ report.difficultyRules.name }}</span> difficulty rules.
+          Quantitative tactical metrics: Turn 1 initiative spread, item contention detection, concentration slots, and <span class="text-[#fcedb6] font-semibold font-sans">{{ report.difficultyRules.name }}</span> difficulty rules.
         </p>
       </div>
 
@@ -59,6 +60,126 @@ const scoreColor = computed(() => {
             {{ report.partyCompositionHealth }} Composition
           </span>
         </div>
+      </div>
+    </div>
+
+    <!-- ITEM CONTENTION WARNING BANNER -->
+    <div
+      v-if="report.itemContentions && report.itemContentions.length > 0"
+      class="p-4 rounded-xl bg-gradient-to-r from-[#451a03]/80 via-[#271004]/90 to-[#180a02] border-2 border-[#f59e0b]/80 shadow-lg"
+    >
+      <div class="flex items-center justify-between gap-2 mb-2.5">
+        <div class="flex items-center gap-2 text-[#fbbf24] text-xs font-bold font-sans tracking-wide">
+          <AlertTriangle class="w-4 h-4 shrink-0 text-[#f59e0b]" />
+          <span>Unique Item Contention Detected ({{ report.itemContentions.length }} Conflicts)</span>
+        </div>
+        <span class="text-[10px] text-[#fde68a] font-sans px-2 py-0.5 rounded bg-[#78350f]/60 border border-[#b45309]">
+          Single Campaign Copy
+        </span>
+      </div>
+
+      <div class="space-y-2 text-xs">
+        <div
+          v-for="item in report.itemContentions"
+          :key="item.itemName"
+          class="p-2.5 rounded-lg bg-[#140b05] border border-[#78350f] flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+        >
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-[#fcedb6] font-sans">{{ item.itemName }}</span>
+            <span class="text-[10px] text-[#8c785b] uppercase font-sans">({{ item.itemSlot }})</span>
+            <span class="text-[#fca5a5] text-[11px] font-sans">
+              Contenders: {{ item.conflictingMembers.map(m => m.companionName).join(' & ') }}
+            </span>
+          </div>
+          <p class="text-[11px] text-[#e2d6b5] font-sans italic">
+            {{ item.resolutionSuggestion }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TACTICAL HUD: TURN 1 INITIATIVE READINESS & CONCENTRATION ALLOCATION -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+      <!-- Turn 1 Initiative Readiness -->
+      <div class="lg:col-span-7 p-4 rounded-xl grimoire-inset flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <div class="flex items-center gap-2">
+              <Zap class="w-4 h-4 text-[#d4af37]" />
+              <h3 class="text-xs font-bold uppercase tracking-wider text-[#fcedb6] font-sans">
+                Turn 1 Initiative Readiness (1d4 Die Mechanics)
+              </h3>
+            </div>
+            <span
+              :class="[
+                'text-[10px] font-bold px-2 py-0.5 rounded border font-sans',
+                report.initiativeAnalysis.turn1DominanceTier.includes('Guaranteed')
+                  ? 'bg-[#064e3b] text-[#a7f3d0] border-[#10b981]'
+                  : 'bg-[#78350f] text-[#fde68a] border-[#f59e0b]'
+              ]"
+            >
+              {{ report.initiativeAnalysis.turn1DominanceTier }}
+            </span>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+            <div
+              v-for="init in report.initiativeAnalysis.initiativeList"
+              :key="init.companionName"
+              class="p-2 rounded bg-[#18110b] border border-[#3d2c1d] flex flex-col gap-0.5"
+            >
+              <span class="text-[11px] font-bold text-[#fcedb6] font-sans truncate">{{ init.companionName }}</span>
+              <span class="text-sm font-black text-[#d4af37] font-sans">+{{ init.totalBonus }} Init</span>
+              <span class="text-[9px] text-[#8c785b] font-sans truncate">{{ init.breakdown }}</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-[11px] text-[#c5b89a] font-sans mt-3 pt-2 border-t border-[#38281a]">
+          {{ report.initiativeAnalysis.d4RollSpread }}. Flat initiative bonuses reliably secure round 1 boss turn-denial in Honor Mode.
+        </p>
+      </div>
+
+      <!-- Concentration Slot Allocation Tracker -->
+      <div class="lg:col-span-5 p-4 rounded-xl grimoire-inset flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <div class="flex items-center gap-2">
+              <Eye class="w-4 h-4 text-[#d4af37]" />
+              <h3 class="text-xs font-bold uppercase tracking-wider text-[#fcedb6] font-sans">
+                Concentration Slots
+              </h3>
+            </div>
+            <span
+              :class="[
+                'text-[10px] font-bold px-2 py-0.5 rounded border font-sans',
+                report.concentrationAnalysis.saturationTier.includes('Optimal')
+                  ? 'bg-[#064e3b] text-[#a7f3d0] border-[#10b981]'
+                  : 'bg-[#450a0a] text-[#fca5a5] border-[#b91c1c]'
+              ]"
+            >
+              {{ report.concentrationAnalysis.saturationTier }}
+            </span>
+          </div>
+
+          <div class="space-y-1.5 text-xs">
+            <div
+              v-for="spell in report.concentrationAnalysis.competingSpells"
+              :key="spell.companionName"
+              class="p-1.5 rounded bg-[#18110b] border border-[#3d2c1d] flex items-center justify-between gap-2"
+            >
+              <span class="text-[11px] font-bold text-[#fcedb6] font-sans truncate">{{ spell.companionName }}</span>
+              <span class="text-[10px] text-[#e6ca65] font-sans truncate">{{ spell.spellName }}</span>
+            </div>
+          </div>
+        </div>
+
+        <p v-if="report.concentrationAnalysis.conflictWarning" class="text-[10px] text-[#fca5a5] font-sans mt-2">
+          {{ report.concentrationAnalysis.conflictWarning }}
+        </p>
+        <p v-else class="text-[11px] text-[#a7f3d0] font-sans mt-2">
+          Concentration load safely balanced across party members.
+        </p>
       </div>
     </div>
 

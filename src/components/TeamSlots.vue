@@ -26,7 +26,7 @@ import {
 const store = useTeamStore();
 const showTavModal = ref(false);
 const activeAssignSlot = ref<number | null>(null);
-const activeTab = ref<'gear' | 'rationale' | 'stats' | 'rotation'>('gear');
+const activeTab = ref<'gear' | 'rationale' | 'stats' | 'rotation' | 'roadmap'>('gear');
 const isInspectorCollapsed = ref(false);
 
 const activeCompanion = computed<Companion | null>(() => {
@@ -64,6 +64,11 @@ const handleSlotClick = (index: number) => {
   }
 };
 
+const getSlotItemConflicts = (slotIdx: number) => {
+  const contentions = store.synergyReport.itemContentions || [];
+  return contentions.filter(c => c.conflictingMembers.some(m => m.slotIndex === slotIdx));
+};
+
 const openSlotPicker = (index: number, event: MouseEvent) => {
   event.stopPropagation();
   activeAssignSlot.value = index;
@@ -89,10 +94,10 @@ const removeSlot = (index: number, event: MouseEvent) => {
         <div>
           <h2 class="text-xl font-bold font-['Cinzel'] text-[#fcedb6] tracking-wide flex items-center gap-2.5">
             <D20Icon class="w-5 h-5 text-[#d4af37] shrink-0" />
-            <span>Active Adventuring Party (4 Slots)</span>
+            <span>Active Party Configuration (4 Combat Slots)</span>
           </h2>
           <p class="text-xs text-[#b5a07e] font-sans mt-1">
-            Click any active folio slot to inscribe builds, alter modular weapons, or review tactical synergy.
+            Select an assigned party slot to inspect combat loops, equip weapon variants, and review stat milestones.
           </p>
         </div>
 
@@ -123,6 +128,15 @@ const removeSlot = (index: number, event: MouseEvent) => {
           <!-- Corner Accents on Card -->
           <span class="absolute top-1.5 left-2 text-[9px] text-[#8c6d37]/50 pointer-events-none">✦</span>
           <span class="absolute top-1.5 right-2 text-[9px] text-[#8c6d37]/50 pointer-events-none">✦</span>
+
+          <!-- Item Conflict Badge -->
+          <div
+            v-if="member && getSlotItemConflicts(index).length > 0"
+            class="absolute -top-2 left-1/2 -translate-x-1/2 z-10 px-2 py-0.5 rounded-full bg-[#78350f] border border-[#f59e0b] text-[9px] font-bold text-[#fef08a] font-sans flex items-center gap-1 shadow-md shadow-black"
+          >
+            <AlertTriangle class="w-2.5 h-2.5 text-[#fbbf24]" />
+            <span>{{ getSlotItemConflicts(index).length }} Item Conflict</span>
+          </div>
 
           <!-- Empty Slot -->
           <div v-if="!member" class="h-full flex flex-col items-center justify-center text-center p-3">
@@ -354,7 +368,20 @@ const removeSlot = (index: number, event: MouseEvent) => {
             ]"
           >
             <Layers class="w-3.5 h-3.5" />
-            Combat Rites & Turn Economy
+            Turn 1 Action Economy & Spells
+          </button>
+
+          <button
+            @click="activeTab = 'roadmap'"
+            :class="[
+              'flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all font-sans tracking-wide',
+              activeTab === 'roadmap'
+                ? 'bg-gradient-to-b from-[#d4af37] to-[#aa8524] text-[#140e09] border border-[#f5df86] shadow-md shadow-[#d4af37]/20 font-black'
+                : 'text-[#b5a07e] hover:text-[#fcedb6] hover:bg-[#231911]'
+            ]"
+          >
+            <Sparkles class="w-3.5 h-3.5 text-[#d4af37]" />
+            Act Progression Roadmap
           </button>
         </div>
 
@@ -380,7 +407,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
               >
                 <div class="flex items-center justify-between gap-2 flex-wrap">
                   <div class="flex items-center gap-2">
-                    <GearIcon :name="wpn.type" class="w-4 h-4 text-[#d4af37]" />
+                    <GearIcon :name="wpn.type" :item-name="wpn.name" class="w-6 h-6 text-[#d4af37]" />
                     <span class="text-xs font-bold text-[#fcedb6] font-sans">{{ wpn.name }}</span>
                     <span class="px-1.5 py-0.5 text-[9px] font-bold rounded bg-[#2a1e14] text-[#e6ca65] border border-[#5d442e] font-sans">
                       Act {{ wpn.act }}
@@ -427,7 +454,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
 
             <div class="grid grid-cols-2 gap-2.5 text-xs">
               <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center gap-2.5">
-                <GearIcon name="head" class="w-4 h-4 text-[#d4af37]" />
+                <GearIcon name="head" :item-name="activeCompanion.optimalGear.armor.head" class="w-6 h-6 text-[#d4af37]" />
                 <div class="min-w-0">
                   <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Headgear</span>
                   <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.head }}</span>
@@ -435,7 +462,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
               </div>
 
               <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center gap-2.5">
-                <GearIcon name="chest" class="w-4 h-4 text-[#d4af37]" />
+                <GearIcon name="chest" :item-name="activeCompanion.optimalGear.armor.chest" class="w-6 h-6 text-[#d4af37]" />
                 <div class="min-w-0">
                   <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Chest Armor</span>
                   <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.chest }}</span>
@@ -443,7 +470,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
               </div>
 
               <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center gap-2.5">
-                <GearIcon name="gloves" class="w-4 h-4 text-[#d4af37]" />
+                <GearIcon name="gloves" :item-name="activeCompanion.optimalGear.armor.gloves" class="w-6 h-6 text-[#d4af37]" />
                 <div class="min-w-0">
                   <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Gloves</span>
                   <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.gloves }}</span>
@@ -451,7 +478,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
               </div>
 
               <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center gap-2.5">
-                <GearIcon name="boots" class="w-4 h-4 text-[#d4af37]" />
+                <GearIcon name="boots" :item-name="activeCompanion.optimalGear.armor.boots" class="w-6 h-6 text-[#d4af37]" />
                 <div class="min-w-0">
                   <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Boots</span>
                   <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.boots }}</span>
@@ -459,7 +486,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
               </div>
 
               <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center gap-2.5">
-                <GearIcon name="amulet" class="w-4 h-4 text-[#d4af37]" />
+                <GearIcon name="amulet" :item-name="activeCompanion.optimalGear.armor.amulet" class="w-6 h-6 text-[#d4af37]" />
                 <div class="min-w-0">
                   <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Amulet</span>
                   <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.amulet }}</span>
@@ -467,7 +494,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
               </div>
 
               <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center gap-2.5">
-                <GearIcon name="rings" class="w-4 h-4 text-[#d4af37]" />
+                <GearIcon name="rings" :item-name="activeCompanion.optimalGear.armor.rings[0]" class="w-6 h-6 text-[#d4af37]" />
                 <div class="min-w-0">
                   <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Rings</span>
                   <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.rings.join(', ') }}</span>
@@ -476,7 +503,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
             </div>
 
             <div v-if="activeCompanion.optimalGear.armor.cloak" class="mt-2.5 p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d] text-xs flex items-center gap-2.5">
-              <GearIcon name="cloak" class="w-4 h-4 text-[#d4af37]" />
+              <GearIcon name="cloak" :item-name="activeCompanion.optimalGear.armor.cloak" class="w-6 h-6 text-[#d4af37]" />
               <div class="min-w-0">
                 <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Cloak</span>
                 <span class="font-semibold text-[#e6ca65] font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.cloak }}</span>
@@ -610,6 +637,98 @@ const removeSlot = (index: number, event: MouseEvent) => {
               >
                 {{ spell }}
               </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 5: ACT PROGRESSION & POWER SPIKE ROADMAP -->
+        <div v-show="activeTab === 'roadmap'" class="space-y-4">
+          <div class="p-4 rounded-xl grimoire-inset flex items-center justify-between gap-3">
+            <div>
+              <h3 class="text-xs font-bold uppercase tracking-wider text-[#d4af37] font-sans flex items-center gap-2">
+                <Sparkles class="w-4 h-4" />
+                Campaign Act Progression & Power Spike Milestones
+              </h3>
+              <p class="text-xs text-[#b5a07e] font-sans mt-0.5">
+                Exact level respec points, feat timings, and key gear acquisition by act.
+              </p>
+            </div>
+            <span class="text-[10px] text-[#fcedb6] font-sans px-2.5 py-1 rounded bg-[#24170d] border border-[#5d442e]">
+              Honor Mode Verified
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Act 1: The Wilderness & Underdark (Levels 1-5) -->
+            <div class="p-4 rounded-xl grimoire-inset flex flex-col justify-between border-t-2 border-[#10b981]">
+              <div class="space-y-2.5">
+                <div class="flex items-center justify-between pb-2 border-b border-[#3d2c1d]">
+                  <span class="text-xs font-black text-[#10b981] font-sans uppercase tracking-wider">Act 1: Wilderness</span>
+                  <span class="text-[10px] text-[#a7f3d0] bg-[#064e3b] px-2 py-0.5 rounded font-bold font-sans">Levels 1-5</span>
+                </div>
+                <div>
+                  <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Key Feat Spike</span>
+                  <p class="text-xs font-bold text-[#fcedb6] font-sans">Level 4: Tavern Brawler / Alert / Sharpshooter</p>
+                </div>
+                <div>
+                  <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Tactical Benchmark</span>
+                  <p class="text-xs text-[#dfd1ba] font-sans leading-snug">
+                    Level 5 Extra Attack & 3rd level spells. Acquire Returning Pike from Goblin Camp or Titanstring Bow from Zhentarim.
+                  </p>
+                </div>
+              </div>
+              <div class="mt-3 pt-2 border-t border-[#3d2c1d] text-[10px] text-[#a7f3d0] font-sans flex items-center gap-1.5">
+                <Check class="w-3.5 h-3.5 text-[#10b981]" />
+                <span>Withers respec at level 4 to fix odd stats.</span>
+              </div>
+            </div>
+
+            <!-- Act 2: Shadow-Cursed Lands (Levels 6-9) -->
+            <div class="p-4 rounded-xl grimoire-inset flex flex-col justify-between border-t-2 border-[#f59e0b]">
+              <div class="space-y-2.5">
+                <div class="flex items-center justify-between pb-2 border-b border-[#3d2c1d]">
+                  <span class="text-xs font-black text-[#f59e0b] font-sans uppercase tracking-wider">Act 2: Shadowfell</span>
+                  <span class="text-[10px] text-[#fde68a] bg-[#78350f] px-2 py-0.5 rounded font-bold font-sans">Levels 6-9</span>
+                </div>
+                <div>
+                  <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Key Feat Spike</span>
+                  <p class="text-xs font-bold text-[#fcedb6] font-sans">Level 8: Alert / Great Weapon Master / ASI</p>
+                </div>
+                <div>
+                  <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Tactical Benchmark</span>
+                  <p class="text-xs text-[#dfd1ba] font-sans leading-snug">
+                    Helmet of Arcane Acuity & Risky Ring from Moonrise. Radiant Orb stacks neutralize shadow undead regeneration.
+                  </p>
+                </div>
+              </div>
+              <div class="mt-3 pt-2 border-t border-[#3d2c1d] text-[10px] text-[#fde68a] font-sans flex items-center gap-1.5">
+                <Check class="w-3.5 h-3.5 text-[#f59e0b]" />
+                <span>Multiclass splits come online at level 7-8.</span>
+              </div>
+            </div>
+
+            <!-- Act 3: Baldur's Gate City & Endgame (Levels 10-12) -->
+            <div class="p-4 rounded-xl grimoire-inset flex flex-col justify-between border-t-2 border-[#d4af37]">
+              <div class="space-y-2.5">
+                <div class="flex items-center justify-between pb-2 border-b border-[#3d2c1d]">
+                  <span class="text-xs font-black text-[#d4af37] font-sans uppercase tracking-wider">Act 3: Lower City</span>
+                  <span class="text-[10px] text-[#fef08a] bg-[#451a03] px-2 py-0.5 rounded font-bold font-sans">Levels 10-12</span>
+                </div>
+                <div>
+                  <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Key Feat Spike</span>
+                  <p class="text-xs font-bold text-[#fcedb6] font-sans">Level 12: Capstone Feat or Dual Wielder</p>
+                </div>
+                <div>
+                  <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Tactical Benchmark</span>
+                  <p class="text-xs text-[#dfd1ba] font-sans leading-snug">
+                    Band of the Mystic Scoundrel & Markoheshkir. 100% spell DC Hold Monster shuts down endgame bosses on Turn 1.
+                  </p>
+                </div>
+              </div>
+              <div class="mt-3 pt-2 border-t border-[#3d2c1d] text-[10px] text-[#fef08a] font-sans flex items-center gap-1.5">
+                <Check class="w-3.5 h-3.5 text-[#d4af37]" />
+                <span>Stat maximization via 23 STR/CON items.</span>
+              </div>
             </div>
           </div>
         </div>

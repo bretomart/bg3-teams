@@ -8,7 +8,10 @@ import type {
   DamageType,
   MetaTeam,
   GameDifficulty,
-  DifficultyRuleProfile
+  DifficultyRuleProfile,
+  ItemContention,
+  InitiativeAnalysis,
+  ConcentrationAnalysis
 } from '../types/companion';
 
 const STORAGE_KEY_RECRUITED = 'bg3_recruited_companions';
@@ -111,6 +114,9 @@ export interface TeamSynergyReport {
   }[];
   criticalWarnings: string[];
   tacticalAdvice: string[];
+  itemContentions: ItemContention[];
+  initiativeAnalysis: InitiativeAnalysis;
+  concentrationAnalysis: ConcentrationAnalysis;
 }
 
 export const useTeamStore = defineStore('team', {
@@ -492,6 +498,150 @@ export const useTeamStore = defineStore('team', {
         restingViability = 'Resource Heavy';
       }
 
+      // --- ITEM CONTENTION ENGINE ---
+      const comps = active;
+      const itemOccurrences: Record<string, { companionId: CompanionId; companionName: string; slotIndex: number; assignedRole: string }[]> = {};
+      const itemSlotMap: Record<string, string> = {};
+
+      for (let i = 0; i < comps.length; i++) {
+        const c = comps[i];
+        if (!c || !c.optimalGear) continue;
+
+        // Collect weapons
+        for (const w of c.optimalGear.weapons || []) {
+          if (!w.name) continue;
+          const wName = w.name.trim();
+          itemSlotMap[wName] = 'Weapon';
+          if (!itemOccurrences[wName]) itemOccurrences[wName] = [];
+          itemOccurrences[wName].push({
+            companionId: c.id,
+            companionName: c.name,
+            slotIndex: i,
+            assignedRole: c.primaryRole
+          });
+        }
+
+        // Collect armor and accessories
+        const armor = c.optimalGear.armor;
+        if (armor) {
+          const slots: [string, string][] = [
+            ['Headwear', armor.head],
+            ['Chest Armor', armor.chest],
+            ['Gloves', armor.gloves],
+            ['Footwear', armor.boots],
+            ['Amulet', armor.amulet],
+            ['Cloak', armor.cloak || '']
+          ];
+
+          for (const [sName, iName] of slots) {
+            if (iName && iName.trim()) {
+              const trimmed = iName.trim();
+              itemSlotMap[trimmed] = sName;
+              if (!itemOccurrences[trimmed]) itemOccurrences[trimmed] = [];
+              itemOccurrences[trimmed].push({
+                companionId: c.id,
+                companionName: c.name,
+                slotIndex: i,
+                assignedRole: c.primaryRole
+              });
+            }
+          }
+
+          for (const ring of armor.rings || []) {
+            if (ring && ring.trim()) {
+              const trimmed = ring.trim();
+              itemSlotMap[trimmed] = 'Ring';
+              if (!itemOccurrences[trimmed]) itemOccurrences[trimmed] = [];
+              itemOccurrences[trimmed].push({
+                companionId: c.id,
+                companionName: c.name,
+                slotIndex: i,
+                assignedRole: c.primaryRole
+              });
+            }
+          }
+        }
+      }
+
+      const itemContentions: ItemContention[] = [];
+      for (const [itemName, users] of Object.entries(itemOccurrences)) {
+        if (users.length > 1) {
+          const slot = itemSlotMap[itemName] || 'Gear';
+          itemContentions.push({
+            itemName,
+            itemSlot: slot,
+            conflictingMembers: users,
+            resolutionSuggestion: `Prioritize on ${users[0].companionName} (${users[0].assignedRole}) for primary combat loop efficiency; equip secondary alternative on ${users.slice(1).map(u => u.companionName).join(', ')}.`
+          });
+        }
+      }
+
+      // --- TURN 1 INITIATIVE READINESS (+d4 CALCULATION) ---
+      const initiativeList = comps.map((c) => {
+        const dex = c.skillPriority?.statGoals?.dex || 14;
+        const dexMod = Math.floor((dex - 10) / 2);
+        // Alert feat grant or high dex synergy
+        const hasAlert = c.tags?.includes('Alert Feat') || dexMod >= 4;
+        const bonus = dexMod + (hasAlert ? 5 : 0);
+        return {
+          companionName: c.name,
+          totalBonus: bonus,
+          breakdown: `+${dexMod} DEX${hasAlert ? ', +5 Alert Feat' : ''}`
+        };
+      });
+
+      const avgInit = initiativeList.length > 0
+        ? Number((initiativeList.reduce((acc, curr) => acc + curr.totalBonus, 0) / initiativeList.length).toFixed(1))
+        : 0;
+
+      const spreadMin = Math.round(avgInit + 1);
+      const spreadMax = Math.round(avgInit + 4);
+      let turn1DominanceTier: InitiativeAnalysis['turn1DominanceTier'] = 'High Probability';
+      if (avgInit >= 7) turn1DominanceTier = 'Guaranteed Turn 1 (Honor Safe)';
+      else if (avgInit < 4) turn1DominanceTier = 'Ambush Risk';
+
+      const initiativeAnalysis: InitiativeAnalysis = {
+        averageInitiative: avgInit,
+        d4RollSpread: `Average ${avgInit} (Roll Window: ${spreadMin} - ${spreadMax})`,
+        turn1DominanceTier,
+        initiativeList
+      };
+
+      // --- CONCENTRATION SLOT TRACKER ---
+      const spellMapping: Record<string, string> = {
+        shadowheart: 'Spirit Guardians (Radiant Lawnmower)',
+        gale: 'Hypnotic Pattern / Haste (Mass Control)',
+        wyll: 'Hunger of Hadar (Choke Denial)',
+        tav: 'Hold Monster / Extended Command (Boss Turn Denial)',
+        durge: 'Hold Monster / Extended Command (Boss Turn Denial)',
+        halsin: 'Call Lightning / Spike Growth',
+        jaheira: 'Moonbeam / Ice Storm Control',
+        minthara: 'Bless / Compelled Duel'
+      };
+
+      const competingSpells = comps.filter(c => spellMapping[c.id]).map(c => ({
+        companionName: c.name,
+        spellName: spellMapping[c.id],
+        targetRole: c.primaryRole
+      }));
+
+      let saturationTier: ConcentrationAnalysis['saturationTier'] = 'Optimal Distribution';
+      let concWarning: string | undefined = undefined;
+
+      if (competingSpells.length >= 3) {
+        saturationTier = 'Concentration Contention Hazard';
+        concWarning = `${competingSpells.length} active party members rely on sustained concentration simultaneously. Protect concentration with War Caster or Peerless Focus elixirs to avoid cascades.`;
+      } else if (competingSpells.length === 2) {
+        saturationTier = 'Balanced';
+      }
+
+      const concentrationAnalysis: ConcentrationAnalysis = {
+        activeCastersCount: competingSpells.length,
+        competingSpells,
+        saturationTier,
+        conflictWarning: concWarning
+      };
+
       return {
         score,
         partyCompositionHealth,
@@ -508,7 +658,10 @@ export const useTeamStore = defineStore('team', {
         hasHighControl,
         detectedSynergies,
         criticalWarnings,
-        tacticalAdvice
+        tacticalAdvice,
+        itemContentions,
+        initiativeAnalysis,
+        concentrationAnalysis
       };
     }
   },

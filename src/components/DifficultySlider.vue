@@ -63,11 +63,11 @@ const getButtonTheme = (diff: GameDifficulty) => {
         <div class="flex items-center gap-2.5">
           <D20Icon class="w-5 h-5 text-[#d4af37] shrink-0" />
           <h2 class="text-xl font-bold font-['Cinzel'] text-[#fcedb6] tracking-wide">
-            Campaign Difficulty & Tactical Risk Calibration
+            Ruleset Lethality & Camp Supply Multipliers
           </h2>
         </div>
         <p class="text-xs text-[#b5a07e] font-sans mt-1">
-          Adjust the difficulty seal to dynamically scale combat lethality, camp supply strain, and legendary actions.
+          Configure rule mechanics, boss legendary actions, long rest supply consumption (40 vs 80), and single save constraints.
         </p>
       </div>
 
@@ -75,7 +75,7 @@ const getButtonTheme = (diff: GameDifficulty) => {
       <div class="flex flex-col sm:flex-row items-center gap-3">
         <!-- Interactive Range Slider -->
         <div class="flex items-center gap-2.5 bg-[#120d09] px-3.5 py-2 rounded-xl border border-[#3d2c1d] w-full sm:w-auto shadow-inner">
-          <span class="text-[10px] font-bold uppercase tracking-wider text-[#8c785b] font-sans">Tier Dial</span>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-[#8c785b] font-sans">Ruleset Preset</span>
           <input
             v-model.number="sliderValue"
             type="range"

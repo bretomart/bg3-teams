@@ -184,3 +184,37 @@ export interface MetaTeam {
     impact: string;
   }[];
 }
+
+export interface ItemContention {
+  itemName: string;
+  itemSlot: string;
+  conflictingMembers: {
+    companionId: CompanionId;
+    companionName: string;
+    slotIndex: number;
+    assignedRole: string;
+  }[];
+  resolutionSuggestion: string;
+}
+
+export interface InitiativeAnalysis {
+  averageInitiative: number;
+  d4RollSpread: string;
+  turn1DominanceTier: 'Guaranteed Turn 1 (Honor Safe)' | 'High Probability' | 'Ambush Risk';
+  initiativeList: {
+    companionName: string;
+    totalBonus: number;
+    breakdown: string;
+  }[];
+}
+
+export interface ConcentrationAnalysis {
+  activeCastersCount: number;
+  competingSpells: {
+    companionName: string;
+    spellName: string;
+    targetRole: string;
+  }[];
+  saturationTier: 'Optimal Distribution' | 'Balanced' | 'Concentration Contention Hazard';
+  conflictWarning?: string;
+}
