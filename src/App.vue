@@ -6,7 +6,7 @@ import DifficultySlider from './components/DifficultySlider.vue';
 import SynergyAnalysis from './components/SynergyAnalysis.vue';
 import MetaTeamList from './components/MetaTeamList.vue';
 import RosterPicker from './components/RosterPicker.vue';
-import { RotateCcw } from 'lucide-vue-next';
+import { RotateCcw, BookOpen, Sparkles } from 'lucide-vue-next';
 
 const store = useTeamStore();
 const activeView = ref<'builder' | 'meta'>('builder');
@@ -15,70 +15,81 @@ const bg3LogoSrc = computed(() => `${baseUrl}bg3-logo.png`);
 </script>
 
 <template>
-  <div class="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-amber-500/30 selection:text-amber-200">
-    <!-- Top Navigation & Global Header -->
-    <header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+  <div class="min-h-screen text-[#f4ebd9] flex flex-col font-serif selection:bg-[#d4af37]/30 selection:text-[#fcedb6]">
+    <!-- Top Grimoire Navigation & Header -->
+    <header class="sticky top-0 z-40 bg-[#120d09]/95 backdrop-blur-md border-b border-[#4d3926] shadow-xl shadow-black/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         <!-- Logo & Title -->
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-slate-900 border border-amber-500/30 flex items-center justify-center p-1 shadow-lg shadow-amber-950/30 overflow-hidden group">
+        <div class="flex items-center gap-3.5">
+          <div class="w-12 h-12 rounded-xl bg-[#1c150f] border-2 border-[#b89127] flex items-center justify-center p-1.5 shadow-lg shadow-black/60 group relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-tr from-[#d4af37]/15 to-transparent pointer-events-none"></div>
             <img
               :src="bg3LogoSrc"
               alt="Baldur's Gate 3"
-              class="w-full h-full object-contain filter drop-shadow group-hover:scale-105 transition-transform"
+              class="w-full h-full object-contain filter drop-shadow-md group-hover:scale-105 transition-transform"
             />
           </div>
           <div>
-            <h1 class="text-base sm:text-lg font-bold font-serif tracking-wider text-slate-100">
-              Baldur's Gate 3 <span class="text-amber-400 font-normal">Party Architect</span>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] tracking-widest text-[#c5a059] uppercase font-bold font-sans">D&D 5e Tactician Grimoire</span>
+              <span class="text-[10px] text-[#8c6d37]">✦</span>
+              <span class="text-[10px] tracking-widest text-[#d97706] font-bold font-sans">Honor Mode</span>
+            </div>
+            <h1 class="text-lg sm:text-xl font-bold font-['Cinzel'] tracking-wide text-[#fcedb6] flex items-center gap-2">
+              Baldur's Gate 3 <span class="text-[#d4af37] font-semibold">Party Architect</span>
             </h1>
-            <p class="text-[10px] text-slate-400 font-medium">Honor Mode Strategy & Build Configurator</p>
+            <p class="text-[11px] text-[#b5a07e] font-['EB_Garamond'] italic">Synergy Engine, Build Configurator & Tactical Compendium</p>
           </div>
         </div>
 
-        <!-- Navigation Tabs & Team Reset -->
+        <!-- Navigation Tabs & Party Reset -->
         <div class="flex items-center gap-3">
-          <div class="flex items-center bg-slate-900 p-1 rounded-xl border border-slate-800">
+          <div class="flex items-center bg-[#18110b] p-1 rounded-xl border border-[#443221] shadow-inner">
             <button
               @click="activeView = 'builder'"
               :class="[
-                'px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all',
+                'px-4 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 font-[\'Cinzel\'] tracking-wider',
                 activeView === 'builder'
-                  ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-gradient-to-b from-[#d4af37] to-[#aa8524] text-[#140e09] border border-[#f5df86] shadow-md shadow-[#d4af37]/20 font-black'
+                  : 'text-[#c5b89a] hover:text-[#fcedb6] hover:bg-[#251b12]'
               ]"
             >
-              Party Builder
+              <Sparkles class="w-3.5 h-3.5" />
+              <span>Party Folio</span>
             </button>
             <button
               @click="activeView = 'meta'"
               :class="[
-                'px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all',
+                'px-4 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 font-[\'Cinzel\'] tracking-wider',
                 activeView === 'meta'
-                  ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'bg-gradient-to-b from-[#d4af37] to-[#aa8524] text-[#140e09] border border-[#f5df86] shadow-md shadow-[#d4af37]/20 font-black'
+                  : 'text-[#c5b89a] hover:text-[#fcedb6] hover:bg-[#251b12]'
               ]"
             >
-              Honor Meta Teams
+              <BookOpen class="w-3.5 h-3.5" />
+              <span>Proven Parties</span>
             </button>
           </div>
 
           <button
             @click="store.clearTeam()"
-            title="Reset Party Slots"
-            class="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-rose-400 hover:border-slate-700 transition-all"
+            title="Reset Active Party Slots"
+            class="p-2.5 rounded-xl bg-[#1c140e] border border-[#443221] text-[#c5a059] hover:text-[#ef4444] hover:border-[#b91c1c] transition-all shadow-md group"
           >
-            <RotateCcw class="w-4 h-4" />
+            <RotateCcw class="w-4 h-4 group-hover:rotate-180 transition-transform duration-300" />
           </button>
         </div>
       </div>
+
+      <!-- Golden Trim Accent Line -->
+      <div class="h-[1px] bg-gradient-to-r from-transparent via-[#d4af37]/50 to-transparent"></div>
     </header>
 
-    <!-- Main Content Body -->
+    <!-- Main Grimoire Content Surface -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       <!-- Mode View: Party Builder -->
       <div v-show="activeView === 'builder'" class="space-y-8">
-        <!-- Campaign Difficulty Controller -->
+        <!-- Campaign Difficulty Calibration -->
         <DifficultySlider />
 
         <!-- 4-Party Active Slots & Component Matrix -->
@@ -97,11 +108,18 @@ const bg3LogoSrc = computed(() => `${baseUrl}bg3-logo.png`);
       </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-900 bg-slate-950 py-6 text-center text-xs text-slate-500">
-      <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-        <p>Baldur's Gate 3 Party Architect. Engineered for Honor Mode tactical optimization.</p>
-        <p>Baldur's Gate 3 is a registered trademark of Larian Studios and Wizards of the Coast.</p>
+    <!-- Grimoire Footer -->
+    <footer class="border-t border-[#3d2c1d] bg-[#0c0805] py-8 text-center text-xs text-[#9d896e]">
+      <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <span class="text-[#d4af37] font-['Cinzel'] text-sm">❖</span>
+          <p class="font-['EB_Garamond'] text-sm text-[#c5b89a]">
+            Baldur's Gate 3 Party Architect: Immersive tactical optimizer for Honor Mode runs.
+          </p>
+        </div>
+        <p class="text-[11px] text-[#7d6850]">
+          Baldur's Gate 3 is a registered trademark of Larian Studios and Wizards of the Coast.
+        </p>
       </div>
     </footer>
   </div>

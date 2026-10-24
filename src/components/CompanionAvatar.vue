@@ -34,13 +34,13 @@ const initials = computed(() => {
 const badgeColor = computed(() => {
   switch (props.originType) {
     case 'origin':
-      return 'bg-amber-500/20 text-amber-300 border-amber-500/40';
+      return 'bg-gradient-to-r from-[#d4af37] to-[#aa8524] text-[#140e09] border-[#f5df86] font-bold shadow-md shadow-black/60';
     case 'companion':
-      return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
+      return 'bg-gradient-to-r from-[#064e3b] to-[#043327] text-[#a7f3d0] border-[#10b981]/70 font-bold shadow-md shadow-black/60';
     case 'custom':
-      return 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40';
+      return 'bg-gradient-to-r from-[#78350f] to-[#451a03] text-[#fde68a] border-[#f59e0b]/80 font-bold shadow-md shadow-black/60';
     default:
-      return 'bg-slate-500/20 text-slate-300 border-slate-500/40';
+      return 'bg-[#261c14] text-[#c5a059] border-[#443221] shadow-md shadow-black/60';
   }
 });
 
@@ -64,27 +64,29 @@ const sizeClasses = computed(() => {
     <div
       :class="[
         sizeClasses,
-        'rounded-2xl overflow-hidden border transition-all duration-200 shadow-md bg-slate-900 flex items-center justify-center',
+        'rounded-2xl overflow-hidden border-2 transition-all duration-200 shadow-xl bg-[#140e0a] flex items-center justify-center relative',
         highlighted
-          ? 'border-amber-400 ring-2 ring-amber-400/40 scale-105'
-          : 'border-slate-700/80 hover:border-slate-500'
+          ? 'border-[#d4af37] ring-2 ring-[#d4af37]/50 shadow-lg shadow-[#d4af37]/30 scale-105'
+          : 'border-[#4a3622] hover:border-[#8c6d37]'
       ]"
     >
       <img
         v-if="!imageError"
         :src="resolvedAvatar"
         :alt="name"
-        class="w-full h-full object-cover object-top"
+        class="w-full h-full object-cover object-top filter contrast-[1.05]"
         loading="lazy"
         @error="imageError = true"
       />
       <!-- Fallback initials if image cannot load -->
       <span
         v-else
-        class="font-serif font-black text-amber-300 text-xs tracking-wider"
+        class="font-['Cinzel'] font-black text-[#d4af37] text-xs tracking-wider"
       >
         {{ initials }}
       </span>
+      <!-- Subtle inner vignette overlay -->
+      <div class="absolute inset-0 ring-1 ring-inset ring-black/40 pointer-events-none rounded-2xl"></div>
     </div>
 
     <!-- Origin Category Indicator -->
@@ -92,7 +94,7 @@ const sizeClasses = computed(() => {
       v-if="originType"
       :class="[
         badgeColor,
-        'absolute bottom-0 right-0 text-[8px] uppercase font-bold tracking-wider px-1.5 py-0.2 rounded-md border shadow-md backdrop-blur-sm pointer-events-none'
+        'absolute -bottom-1 -right-1 text-[8px] uppercase tracking-wider px-1.5 py-0.2 rounded-md border font-[\'Cinzel\'] pointer-events-none'
       ]"
     >
       {{ originType === 'custom' ? 'Tav' : originType }}

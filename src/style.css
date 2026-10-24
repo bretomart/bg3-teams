@@ -1,23 +1,87 @@
 @import "tailwindcss";
 
+@theme {
+  --font-cinzel: "Cinzel", Georgia, serif;
+  --font-medieval: "MedievalSharp", cursive;
+  --font-garamond: "EB Garamond", Georgia, serif;
+  --font-fell: "IM Fell English", Georgia, serif;
+  --font-cormorant: "Cormorant Garamond", Georgia, serif;
+
+  --color-obsidian-950: #0a0705;
+  --color-obsidian-900: #0f0a07;
+  --color-obsidian-850: #140e0a;
+  --color-leather-950: #120e0a;
+  --color-leather-900: #17120e;
+  --color-leather-800: #211913;
+  --color-leather-750: #261d16;
+  --color-leather-700: #2f2319;
+  --color-leather-600: #3f2f21;
+  --color-leather-500: #543f2c;
+  --color-leather-border: #423223;
+  --color-leather-border-light: #5d452f;
+
+  --color-gold-200: #fcedb6;
+  --color-gold-300: #f5df86;
+  --color-gold-400: #e6ca65;
+  --color-gold-500: #d4af37;
+  --color-gold-600: #c5a059;
+  --color-gold-700: #a7803b;
+  --color-brass-600: #8c6d37;
+  --color-brass-700: #6d5325;
+  --color-brass-800: #4e3a17;
+
+  --color-parchment-50: #fdfbf7;
+  --color-parchment-100: #f7f2e7;
+  --color-parchment-200: #f4ebd9;
+  --color-parchment-300: #e5d7be;
+  --color-parchment-400: #d2c0a1;
+  --color-parchment-500: #b5a07e;
+  --color-parchment-600: #927e5e;
+
+  --color-ruby-400: #f87171;
+  --color-ruby-500: #ef4444;
+  --color-ruby-600: #dc2626;
+  --color-ruby-700: #b91c1c;
+  --color-ruby-900: #7f1d1d;
+  --color-ruby-950: #450a0a;
+
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
+}
+
 @layer base {
   :root {
-    --bg-main: #0b0d13;
-    --bg-surface: #131722;
-    --bg-card: #181d2a;
-    --border-subtle: #262f43;
-    --border-accent: #3b82f6;
-    --text-primary: #f1f5f9;
-    --text-secondary: #94a3b8;
+    --bg-main: #0a0705;
+    --bg-surface: #17120e;
+    --bg-card: #211913;
+    --border-subtle: #423223;
+    --border-accent: #d4af37;
+    --text-primary: #f4ebd9;
+    --text-secondary: #c5b89a;
+    --text-muted: #8c785b;
   }
 
   body {
-    background-color: var(--bg-main);
+    background-color: #0a0705;
+    background-image: 
+      radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.09) 0%, transparent 60%),
+      radial-gradient(circle at 10% 30%, rgba(185, 28, 28, 0.04) 0%, transparent 45%),
+      radial-gradient(circle at 90% 70%, rgba(212, 175, 55, 0.04) 0%, transparent 50%),
+      linear-gradient(to bottom, #0e0906 0%, #0a0705 50%, #080504 100%);
+    background-attachment: fixed;
     color: var(--text-primary);
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.6;
     margin: 0;
     padding: 0;
     min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cinzel', Georgia, serif;
+    letter-spacing: 0.04em;
   }
 
   #app {
@@ -30,4 +94,149 @@
     display: flex;
     flex-direction: column;
   }
+
+  /* Custom Grimoire Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0f0a07;
+    border-left: 1px solid #2a1e14;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #3d2c1e;
+    border: 1px solid #6b4f32;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #5a422d;
+    border-color: #c5a059;
+  }
+}
+
+/* Grimoire and High Fantasy Components */
+.grimoire-card {
+  background: linear-gradient(175deg, #211913 0%, #17120e 70%, #120e0a 100%);
+  border: 1px solid #4a3725;
+  box-shadow: 
+    0 10px 30px -5px rgba(0, 0, 0, 0.8),
+    0 0 0 1px #1a130d,
+    inset 0 1px 0 rgba(212, 175, 55, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.grimoire-card-subtle {
+  background: linear-gradient(175deg, #19130f 0%, #130e0a 100%);
+  border: 1px solid #38291b;
+  box-shadow: 
+    0 6px 20px -3px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(212, 175, 55, 0.1);
+}
+
+.grimoire-inset {
+  background: #0e0a07;
+  border: 1px solid #332417;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+/* Gold leaf foil header effect */
+.gold-leaf-text {
+  background: linear-gradient(135deg, #fdedb6 0%, #e5bd57 40%, #c59f47 70%, #997825 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.8));
+}
+
+.brass-text {
+  color: #c5a059;
+  letter-spacing: 0.05em;
+}
+
+/* Ornamental corner filigree styling */
+.filigree-frame {
+  position: relative;
+}
+
+.filigree-frame::before,
+.filigree-frame::after {
+  content: "◆";
+  position: absolute;
+  font-size: 8px;
+  color: #c5a059;
+  opacity: 0.75;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.filigree-frame::before {
+  top: 5px;
+  left: 6px;
+}
+
+.filigree-frame::after {
+  bottom: 5px;
+  right: 6px;
+}
+
+/* Grimoire button styles */
+.btn-grimoire-gold {
+  background: linear-gradient(180deg, #d4af37 0%, #b89127 50%, #9c781d 100%);
+  color: #120c06;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  border: 1px solid #e7cb68;
+  box-shadow: 
+    0 2px 8px rgba(212, 175, 55, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  transition: all 0.2s ease;
+}
+
+.btn-grimoire-gold:hover {
+  background: linear-gradient(180deg, #e4be42 0%, #ca9f2e 50%, #ad8622 100%);
+  box-shadow: 
+    0 4px 14px rgba(212, 175, 55, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transform: translateY(-1px);
+}
+
+.btn-grimoire-leather {
+  background: linear-gradient(180deg, #2a1f16 0%, #1e150e 100%);
+  color: #e5d7be;
+  font-family: 'Cinzel', serif;
+  border: 1px solid #4a3725;
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(212, 175, 55, 0.15);
+  transition: all 0.2s ease;
+}
+
+.btn-grimoire-leather:hover {
+  background: linear-gradient(180deg, #38291e 0%, #261b12 100%);
+  border-color: #8c6d37;
+  color: #fcedb6;
+}
+
+/* Runic Flourish Divider */
+.grimoire-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #8c6d37;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+}
+
+.grimoire-divider::before,
+.grimoire-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #6b4f32 50%, transparent);
 }

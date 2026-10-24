@@ -33,68 +33,74 @@ const selectDifficulty = (diff: GameDifficulty) => {
 const getButtonTheme = (diff: GameDifficulty) => {
   const isSelected = store.currentDifficulty === diff;
   if (!isSelected) {
-    return 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40 border-transparent';
+    return 'text-[#b5a07e] hover:text-[#fcedb6] hover:bg-[#231911] border-[#3d2c1d]';
   }
 
   switch (diff) {
     case 'Explorer':
-      return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/50 shadow-emerald-950/40 shadow-sm';
+      return 'bg-gradient-to-b from-[#064e3b]/80 to-[#043327]/90 text-[#a7f3d0] border-[#10b981] shadow-lg shadow-[#064e3b]/40 ring-1 ring-[#34d399]/40';
     case 'Balanced':
-      return 'bg-sky-500/20 text-sky-300 border-sky-500/50 shadow-sky-950/40 shadow-sm';
+      return 'bg-gradient-to-b from-[#0c4a6e]/80 to-[#082f49]/90 text-[#bae6fd] border-[#38bdf8] shadow-lg shadow-[#0c4a6e]/40 ring-1 ring-[#38bdf8]/40';
     case 'Tactician':
-      return 'bg-amber-500/20 text-amber-300 border-amber-500/50 shadow-amber-950/40 shadow-sm';
+      return 'bg-gradient-to-b from-[#78350f]/80 to-[#451a03]/90 text-[#fde68a] border-[#f59e0b] shadow-lg shadow-[#78350f]/40 ring-1 ring-[#fbbf24]/40';
     case 'Honor':
-      return 'bg-rose-500/25 text-rose-300 border-rose-500/60 shadow-rose-950/50 shadow-sm';
+      return 'bg-gradient-to-b from-[#7f1d1d]/85 to-[#450a0a]/95 text-[#fecaca] border-[#ef4444] shadow-lg shadow-[#7f1d1d]/50 ring-1 ring-[#f87171]/50';
   }
 };
 </script>
 
 <template>
-  <div class="bg-slate-900/90 rounded-2xl border border-slate-800 p-5 shadow-2xl backdrop-blur-md">
+  <div class="grimoire-card rounded-2xl p-6 relative overflow-hidden">
+    <!-- Ornamental Brass Corner Filigrees -->
+    <div class="absolute top-2 left-2 text-[#8c6d37] text-xs select-none pointer-events-none opacity-70">❖</div>
+    <div class="absolute top-2 right-2 text-[#8c6d37] text-xs select-none pointer-events-none opacity-70">❖</div>
+    <div class="absolute bottom-2 left-2 text-[#8c6d37] text-xs select-none pointer-events-none opacity-70">❖</div>
+    <div class="absolute bottom-2 right-2 text-[#8c6d37] text-xs select-none pointer-events-none opacity-70">❖</div>
+
     <!-- Header with Difficulty Selection Tabs and Slider -->
-    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5 pb-5 border-b border-[#443221]">
       <div>
-        <div class="flex items-center gap-2">
-          <D20Icon class="w-5 h-5 text-amber-400 shrink-0" />
-          <h2 class="text-lg font-bold font-serif text-slate-100 tracking-wide">
+        <div class="flex items-center gap-2.5">
+          <D20Icon class="w-5 h-5 text-[#d4af37] shrink-0" />
+          <h2 class="text-xl font-bold font-['Cinzel'] text-[#fcedb6] tracking-wide">
             Campaign Difficulty & Tactical Risk Calibration
           </h2>
         </div>
-        <p class="text-xs text-slate-400 mt-1">
-          Slide or select difficulty to dynamically scale party strain, camp supply costs, and combat penalties.
+        <p class="text-xs text-[#b5a07e] font-['EB_Garamond'] text-[14px] mt-1">
+          Adjust the difficulty seal to dynamically scale combat lethality, camp supply strain, and legendary actions.
         </p>
       </div>
 
       <!-- Segmented Difficulty Controller -->
       <div class="flex flex-col sm:flex-row items-center gap-3">
         <!-- Interactive Range Slider -->
-        <div class="flex items-center gap-2 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800 w-full sm:w-auto">
-          <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Tier Slider</span>
+        <div class="flex items-center gap-2.5 bg-[#120d09] px-3.5 py-2 rounded-xl border border-[#3d2c1d] w-full sm:w-auto shadow-inner">
+          <span class="text-[10px] font-bold uppercase tracking-wider text-[#8c785b] font-['Cinzel']">Tier Dial</span>
           <input
             v-model.number="sliderValue"
             type="range"
             min="0"
             max="3"
             step="1"
-            class="w-28 sm:w-32 h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-400"
+            class="w-28 sm:w-32 h-2 bg-[#261c13] rounded-lg appearance-none cursor-pointer accent-[#d4af37]"
           />
         </div>
 
-        <!-- Buttons -->
-        <div class="flex items-center bg-slate-950 p-1.5 rounded-xl border border-slate-800 gap-1 w-full sm:w-auto overflow-x-auto">
+        <!-- Buttons styled as high fantasy seals -->
+        <div class="flex items-center bg-[#120d09] p-1.5 rounded-xl border border-[#3d2c1d] gap-1.5 w-full sm:w-auto overflow-x-auto shadow-inner">
           <button
             v-for="diff in difficultyKeys"
             :key="diff"
             @click="selectDifficulty(diff)"
             :class="[
-              'px-3.5 py-1.5 text-xs font-bold rounded-lg border transition-all flex items-center gap-1.5 whitespace-nowrap',
+              'px-3.5 py-1.5 text-xs font-bold rounded-lg border transition-all flex items-center gap-1.5 whitespace-nowrap font-[\'Cinzel\'] tracking-wider',
               getButtonTheme(diff)
             ]"
           >
-            <Heart v-if="diff === 'Explorer'" class="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-            <Shield v-else-if="diff === 'Balanced'" class="w-3.5 h-3.5 text-sky-400 shrink-0" />
-            <Swords v-else-if="diff === 'Tactician'" class="w-3.5 h-3.5 text-amber-400 shrink-0" />
-            <Skull v-else-if="diff === 'Honor'" class="w-3.5 h-3.5 text-rose-400 shrink-0" />
+            <Heart v-if="diff === 'Explorer'" class="w-3.5 h-3.5 text-[#34d399] shrink-0" />
+            <Shield v-else-if="diff === 'Balanced'" class="w-3.5 h-3.5 text-[#38bdf8] shrink-0" />
+            <Swords v-else-if="diff === 'Tactician'" class="w-3.5 h-3.5 text-[#fbbf24] shrink-0" />
+            <Skull v-else-if="diff === 'Honor'" class="w-3.5 h-3.5 text-[#f87171] shrink-0" />
             <span>{{ diff }}</span>
           </button>
         </div>
@@ -102,21 +108,21 @@ const getButtonTheme = (diff: GameDifficulty) => {
     </div>
 
     <!-- Active Difficulty Specification Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mt-4">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-3.5 mt-5">
       <!-- Camp Supplies Requirement -->
-      <div class="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center justify-between">
+      <div class="p-4 rounded-xl grimoire-inset flex items-center justify-between">
         <div>
-          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Long Rest Supplies</span>
-          <span class="text-sm font-bold text-amber-300">
-            {{ currentProfile.campSuppliesPerLongRest }} Food Supplies
+          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-['Cinzel']">Long Rest Food</span>
+          <span class="text-sm font-bold text-[#e6ca65] font-['Cinzel']">
+            {{ currentProfile.campSuppliesPerLongRest }} Supplies
           </span>
         </div>
         <span
           :class="[
-            'text-[10px] font-semibold px-2 py-0.5 rounded border',
+            'text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider font-[\'Cinzel\']',
             currentProfile.campSuppliesPerLongRest > 40
-              ? 'bg-rose-500/10 text-rose-300 border-rose-500/30'
-              : 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30'
+              ? 'bg-[#450a0a]/60 text-[#fca5a5] border-[#b91c1c]'
+              : 'bg-[#064e3b]/50 text-[#a7f3d0] border-[#059669]'
           ]"
         >
           {{ currentProfile.campSuppliesPerLongRest > 40 ? '2x Heavy' : 'Standard' }}
@@ -124,43 +130,62 @@ const getButtonTheme = (diff: GameDifficulty) => {
       </div>
 
       <!-- Enemy Vitality & Scaling -->
-      <div class="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center justify-between">
+      <div class="p-4 rounded-xl grimoire-inset flex items-center justify-between">
         <div>
-          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Enemy Health Scaling</span>
-          <span class="text-sm font-bold text-slate-200">
+          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-['Cinzel']">Foe Vitality Scale</span>
+          <span class="text-sm font-bold text-[#f4ebd9] font-['Cinzel']">
             {{ currentProfile.enemyHpScaling }}
           </span>
         </div>
+        <span class="text-[10px] font-['Cinzel'] text-[#c5a059]">Modifier</span>
       </div>
 
       <!-- Multiclassing Rules -->
-      <div class="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center justify-between">
+      <div class="p-4 rounded-xl grimoire-inset flex items-center justify-between">
         <div>
-          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Multiclassing</span>
-          <span :class="['text-sm font-bold', currentProfile.multiclassAllowed ? 'text-emerald-300' : 'text-rose-400']">
-            {{ currentProfile.multiclassAllowed ? 'Unrestricted' : 'Disabled in Engine' }}
+          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-['Cinzel']">Multiclassing</span>
+          <span :class="['text-sm font-bold font-[\'Cinzel\']', currentProfile.multiclassAllowed ? 'text-[#34d399]' : 'text-[#f87171]']">
+            {{ currentProfile.multiclassAllowed ? 'Unrestricted' : 'Locked in Engine' }}
           </span>
         </div>
+        <span :class="['text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider font-[\'Cinzel\']', currentProfile.multiclassAllowed ? 'bg-[#064e3b]/50 text-[#a7f3d0] border-[#059669]' : 'bg-[#450a0a]/60 text-[#fca5a5] border-[#b91c1c]']">
+          {{ currentProfile.multiclassAllowed ? 'Active' : 'Sealed' }}
+        </span>
       </div>
 
       <!-- Permadeath / Single Save -->
-      <div class="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 flex items-center justify-between">
+      <div class="p-4 rounded-xl grimoire-inset flex items-center justify-between">
         <div>
-          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Save Rules</span>
-          <span :class="['text-sm font-bold', currentProfile.permadeathOrSingleSave ? 'text-rose-400' : 'text-emerald-300']">
+          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-['Cinzel']">Save Scroll Rites</span>
+          <span :class="['text-sm font-bold font-[\'Cinzel\']', currentProfile.permadeathOrSingleSave ? 'text-[#fca5a5]' : 'text-[#34d399]']">
             {{ currentProfile.permadeathOrSingleSave ? 'Single Save File' : 'Unlimited Reloads' }}
           </span>
         </div>
+        <span :class="['text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider font-[\'Cinzel\']', currentProfile.permadeathOrSingleSave ? 'bg-[#450a0a]/60 text-[#fca5a5] border-[#b91c1c]' : 'bg-[#064e3b]/50 text-[#a7f3d0] border-[#059669]']">
+          {{ currentProfile.permadeathOrSingleSave ? 'Honor Rule' : 'Standard' }}
+        </span>
       </div>
     </div>
 
     <!-- Mode Detailed Impact Banner -->
-    <div class="mt-3 p-3.5 rounded-xl bg-slate-950/50 border border-slate-800 flex items-start gap-3">
-      <Info class="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-      <div class="text-xs leading-relaxed text-slate-300">
-        <span class="font-bold text-amber-300">{{ currentProfile.name }}:</span> {{ currentProfile.summary }}
-        <span v-if="currentProfile.legendaryBossActions" class="block text-rose-300 font-semibold mt-1">
-          ⚠️ Major bosses feature non-negotiable Legendary Actions that trigger outside standard initiative turn order.
+    <div
+      :class="[
+        'mt-4 p-4 rounded-xl border flex items-start gap-3.5 transition-colors',
+        currentProfile.legendaryBossActions
+          ? 'bg-gradient-to-r from-[#380e0e]/70 to-[#1e0a0a]/70 border-[#b91c1c]/70'
+          : 'bg-[#120d09]/80 border-[#3d2c1d]'
+      ]"
+    >
+      <Info
+        :class="[
+          'w-5 h-5 shrink-0 mt-0.5',
+          currentProfile.legendaryBossActions ? 'text-[#ef4444]' : 'text-[#d4af37]'
+        ]"
+      />
+      <div class="text-xs leading-relaxed text-[#dfd1ba] font-['EB_Garamond'] text-[14px]">
+        <span class="font-bold font-['Cinzel'] text-[#fcedb6]">{{ currentProfile.name }}:</span> {{ currentProfile.summary }}
+        <span v-if="currentProfile.legendaryBossActions" class="block text-[#fca5a5] font-semibold mt-1 font-['Cinzel'] text-xs">
+          ⚠️ Crucial: Bosses gain Legendary Actions triggering reaction attacks outside standard initiative turns.
         </span>
       </div>
     </div>

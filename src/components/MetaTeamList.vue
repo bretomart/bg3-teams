@@ -34,33 +34,39 @@ const getCompanion = (id: string) => {
 </script>
 
 <template>
-  <div class="bg-slate-900/90 rounded-2xl border border-slate-800 p-6 shadow-2xl backdrop-blur-md">
+  <div class="grimoire-card rounded-2xl p-6 relative overflow-hidden">
+    <!-- Corner Filigree Ornaments -->
+    <div class="absolute top-2 left-2 text-[#8c6d37] text-xs pointer-events-none opacity-70">❖</div>
+    <div class="absolute top-2 right-2 text-[#8c6d37] text-xs pointer-events-none opacity-70">❖</div>
+    <div class="absolute bottom-2 left-2 text-[#8c6d37] text-xs pointer-events-none opacity-70">❖</div>
+    <div class="absolute bottom-2 right-2 text-[#8c6d37] text-xs pointer-events-none opacity-70">❖</div>
+
     <!-- Header -->
-    <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+    <div class="flex items-center justify-between pb-5 border-b border-[#443221]">
       <div>
-        <div class="flex items-center gap-2">
-          <Trophy class="w-5 h-5 text-amber-400" />
-          <h2 class="text-xl font-bold font-serif text-slate-100 tracking-wide">
+        <div class="flex items-center gap-2.5">
+          <Trophy class="w-5 h-5 text-[#d4af37]" />
+          <h2 class="text-xl font-bold font-['Cinzel'] text-[#fcedb6] tracking-wide">
             Verified Honor Mode Meta Parties
           </h2>
         </div>
-        <p class="text-xs text-slate-400 mt-1">
-          One-click party loading for community-tested Honor Mode setups with complete round-by-round turn sequencing and item milestones.
+        <p class="text-xs text-[#b5a07e] font-['EB_Garamond'] text-[14px] mt-1">
+          One-click party loading for community battle-tested Honor Mode setups with complete round-by-round turn sequencing and item milestones.
         </p>
       </div>
     </div>
 
     <!-- Meta Teams Accordion List -->
-    <div class="space-y-4 mt-5">
+    <div class="space-y-4 mt-6">
       <div
         v-for="team in store.metaTeams"
         :key="team.id"
-        class="rounded-xl border border-slate-800 bg-slate-950/60 overflow-hidden transition-all duration-200"
+        class="rounded-xl border border-[#443221] bg-gradient-to-b from-[#1c140e] to-[#120d09] overflow-hidden transition-all duration-200 shadow-md"
       >
         <!-- Collapsed Bar / Summary Header -->
         <div
           @click="toggleExpand(team.id)"
-          class="p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer hover:bg-slate-900/60 transition-colors"
+          class="p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 cursor-pointer hover:bg-[#251b12]/60 transition-colors"
         >
           <!-- Left: Team Identity & 4 Avatars -->
           <div class="flex items-center gap-4">
@@ -72,19 +78,19 @@ const getCompanion = (id: string) => {
                   :name="getCompanion(slotId)!.name"
                   :origin-type="getCompanion(slotId)!.originType"
                   size="sm"
-                  class="ring-2 ring-slate-900 shadow-md"
+                  class="ring-2 ring-[#120d09] shadow-md"
                 />
               </template>
             </div>
 
             <div>
               <div class="flex items-center gap-2">
-                <h3 class="text-base font-bold text-slate-100">{{ team.name }}</h3>
-                <span class="px-2 py-0.5 text-[9px] font-bold rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                <h3 class="text-base font-bold text-[#fcedb6] font-['Cinzel']">{{ team.name }}</h3>
+                <span class="px-2 py-0.5 text-[9px] font-bold rounded bg-[#2a1e14] text-[#e6ca65] border border-[#5d442e] font-['Cinzel']">
                   {{ team.difficultyTier }}
                 </span>
               </div>
-              <p class="text-xs text-slate-400 mt-0.5 line-clamp-1">
+              <p class="text-xs text-[#b5a07e] mt-0.5 line-clamp-1 font-['EB_Garamond'] text-[14px]">
                 {{ team.coreSynergyConcept }}
               </p>
             </div>
@@ -94,7 +100,7 @@ const getCompanion = (id: string) => {
           <div class="flex items-center gap-3 self-end md:self-auto">
             <span
               v-if="!areAllRecruited(team)"
-              class="text-[11px] text-amber-400/80 flex items-center gap-1 font-medium"
+              class="text-[11px] text-[#fbbf24] flex items-center gap-1 font-medium font-['EB_Garamond']"
             >
               <AlertCircle class="w-3.5 h-3.5" />
               Recruitment Needed
@@ -103,17 +109,17 @@ const getCompanion = (id: string) => {
             <button
               @click.stop="store.loadMetaTeam(team.id)"
               :class="[
-                'px-4 py-2 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5',
+                'px-4 py-2 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 font-[\'Cinzel\'] tracking-wider shadow-md',
                 isPartyLoaded(team)
-                  ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
-                  : 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-lg shadow-amber-500/20'
+                  ? 'bg-gradient-to-r from-[#064e3b] to-[#043327] text-[#a7f3d0] border border-[#10b981]'
+                  : 'btn-grimoire-gold'
               ]"
             >
               <Check v-if="isPartyLoaded(team)" class="w-3.5 h-3.5" />
-              <span>{{ isPartyLoaded(team) ? 'Active Party' : 'Load Party' }}</span>
+              <span>{{ isPartyLoaded(team) ? 'Active Party' : 'Summon Party' }}</span>
             </button>
 
-            <button class="text-slate-400 p-1">
+            <button class="text-[#8c785b] hover:text-[#d4af37] p-1">
               <ChevronUp v-if="expandedTeamId === team.id" class="w-5 h-5" />
               <ChevronDown v-else class="w-5 h-5" />
             </button>
@@ -123,22 +129,22 @@ const getCompanion = (id: string) => {
         <!-- Expanded Drawer Content -->
         <div
           v-if="expandedTeamId === team.id"
-          class="p-5 border-t border-slate-800/80 bg-slate-900/40 space-y-5 animate-in fade-in duration-200"
+          class="p-5 border-t border-[#38281a] bg-[#140e0a]/80 space-y-5 animate-in fade-in duration-200"
         >
           <!-- Description Paragraph -->
-          <p class="text-xs text-slate-300 leading-relaxed font-sans bg-slate-950/60 p-3.5 rounded-xl border border-slate-800">
+          <p class="text-xs text-[#dfd1ba] leading-relaxed font-['EB_Garamond'] text-[15px] grimoire-inset p-4 rounded-xl">
             {{ team.description }}
           </p>
 
           <!-- 4 Slot Build Breakdown Matrix -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
             <div
               v-for="b in team.slotBuilds"
               :key="b.companionId"
-              class="p-3 rounded-xl bg-slate-950 border border-slate-800 flex flex-col justify-between"
+              class="p-3.5 rounded-xl grimoire-inset flex flex-col justify-between"
             >
               <div>
-                <div class="flex items-center gap-2 mb-2">
+                <div class="flex items-center gap-2.5 mb-2.5">
                   <CompanionAvatar
                     v-if="getCompanion(b.companionId)"
                     :avatar="getCompanion(b.companionId)!.avatar"
@@ -147,55 +153,55 @@ const getCompanion = (id: string) => {
                     size="sm"
                   />
                   <div>
-                    <h4 class="text-xs font-bold text-slate-200 truncate">
+                    <h4 class="text-xs font-bold text-[#fcedb6] truncate font-['Cinzel']">
                       {{ getCompanion(b.companionId)?.name }}
                     </h4>
-                    <span class="text-[10px] text-amber-400 font-semibold">{{ b.assignedRole }}</span>
+                    <span class="text-[10px] text-[#d4af37] font-semibold font-['Cinzel']">{{ b.assignedRole }}</span>
                   </div>
                 </div>
 
-                <div class="space-y-1 text-[11px] text-slate-300">
-                  <p><span class="text-slate-500 font-semibold">Split:</span> {{ b.classSplit }}</p>
-                  <p><span class="text-slate-500 font-semibold">Feat:</span> {{ b.coreFeat }}</p>
-                  <p><span class="text-slate-500 font-semibold">Key Gear:</span> {{ b.keyGear }}</p>
+                <div class="space-y-1 text-[12px] text-[#c5b89a] font-['EB_Garamond']">
+                  <p><span class="text-[#8c785b] font-semibold font-['Cinzel'] text-[10px]">Split:</span> {{ b.classSplit }}</p>
+                  <p><span class="text-[#8c785b] font-semibold font-['Cinzel'] text-[10px]">Feat:</span> {{ b.coreFeat }}</p>
+                  <p><span class="text-[#8c785b] font-semibold font-['Cinzel'] text-[10px]">Key Gear:</span> {{ b.keyGear }}</p>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Turn-by-Turn Sequencing Guide -->
-          <div class="p-4 rounded-xl bg-slate-950/80 border border-slate-800">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2 flex items-center gap-1.5">
-              <Layers class="w-3.5 h-3.5" />
+          <div class="p-5 rounded-xl grimoire-inset">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-[#d4af37] mb-3 flex items-center gap-2 font-['Cinzel']">
+              <Layers class="w-4 h-4" />
               Round 1 Tactical Turn Sequencing
             </h4>
-            <ol class="space-y-1.5 text-xs text-slate-300">
+            <ol class="space-y-2 text-xs text-[#dfd1ba] font-['EB_Garamond'] text-[14px]">
               <li
                 v-for="(turn, idx) in team.turnSequencing"
                 :key="idx"
-                class="flex items-start gap-2"
+                class="flex items-start gap-2.5"
               >
-                <span class="text-amber-400 font-bold shrink-0">{{ idx + 1 }}.</span>
+                <span class="text-[#d4af37] font-bold shrink-0 font-['Cinzel']">{{ idx + 1 }}.</span>
                 <span>{{ turn }}</span>
               </li>
             </ol>
           </div>
 
           <!-- Act Milestones & Key Power Spikes -->
-          <div class="p-4 rounded-xl bg-slate-950/80 border border-slate-800">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-2 flex items-center gap-1.5">
-              <ShieldCheck class="w-3.5 h-3.5" />
+          <div class="p-5 rounded-xl grimoire-inset">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-[#d4af37] mb-3 flex items-center gap-2 font-['Cinzel']">
+              <ShieldCheck class="w-4 h-4" />
               Campaign Progression Milestones
             </h4>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs">
               <div
                 v-for="ms in team.progressionMilestones"
                 :key="ms.act"
-                class="p-2.5 rounded-lg bg-slate-900 border border-slate-800"
+                class="p-3.5 rounded-lg bg-[#18110b] border border-[#3d2c1d]"
               >
-                <span class="text-[10px] font-bold text-amber-400 uppercase block mb-0.5">{{ ms.act }}</span>
-                <p class="font-semibold text-slate-200">{{ ms.objective }}</p>
-                <p class="text-[11px] text-slate-400 mt-1">{{ ms.impact }}</p>
+                <span class="text-[10px] font-bold text-[#e6ca65] uppercase block mb-1 font-['Cinzel']">{{ ms.act }}</span>
+                <p class="font-semibold text-[#fcedb6] font-['Cinzel'] text-xs">{{ ms.objective }}</p>
+                <p class="text-[13px] text-[#c5b89a] mt-1.5 font-['EB_Garamond']">{{ ms.impact }}</p>
               </div>
             </div>
           </div>

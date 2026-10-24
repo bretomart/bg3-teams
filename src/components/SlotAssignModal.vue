@@ -1,47 +1,51 @@
 <template>
-  <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-    <div class="bg-slate-900 border border-amber-500/40 w-full max-w-4xl rounded-2xl shadow-2xl p-6 overflow-hidden flex flex-col max-h-[88vh] text-slate-100">
+  <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
+    <div class="bg-gradient-to-b from-[#211913] to-[#140e0a] border-2 border-[#d4af37] w-full max-w-4xl rounded-2xl shadow-2xl p-6 overflow-hidden flex flex-col max-h-[88vh] text-[#f4ebd9] relative">
+      <!-- Corner Filigree Ornaments -->
+      <div class="absolute top-2 left-2 text-[#8c6d37] text-xs pointer-events-none opacity-70">❖</div>
+      <div class="absolute top-2 right-2 text-[#8c6d37] text-xs pointer-events-none opacity-70">❖</div>
+
       <!-- Modal Header -->
-      <div class="flex items-center justify-between pb-4 border-b border-slate-800 shrink-0">
+      <div class="flex items-center justify-between pb-4 border-b border-[#443221] shrink-0">
         <div class="flex items-center gap-3">
-          <div class="p-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400">
-            <D20Icon class="w-6 h-6 text-amber-400" />
+          <div class="p-2.5 rounded-xl bg-[#2a1d13] border border-[#8c6d37] text-[#d4af37]">
+            <D20Icon class="w-6 h-6 text-[#d4af37]" />
           </div>
           <div>
-            <h3 class="text-lg font-bold font-serif text-slate-100 tracking-wide flex items-center gap-2">
-              Select Hero for Party Slot {{ slotIndex + 1 }}
+            <h3 class="text-xl font-bold font-['Cinzel'] text-[#fcedb6] tracking-wide flex items-center gap-2">
+              Summon Hero for Party Slot {{ slotIndex + 1 }}
             </h3>
-            <p class="text-xs text-slate-400">
-              Showing recruited camp inventory. Click any hero to assign to this party slot.
+            <p class="text-xs text-[#b5a07e] font-['EB_Garamond'] text-[14px]">
+              Showing recruited camp inventory. Click any companion to bind them to this slot.
             </p>
           </div>
         </div>
 
         <button
           @click="emit('close')"
-          class="text-slate-400 hover:text-slate-200 p-1.5 rounded-lg hover:bg-slate-800 transition-colors"
+          class="text-[#8c785b] hover:text-[#fcedb6] p-1.5 rounded-lg hover:bg-[#261c14] transition-colors"
         >
           <X class="w-5 h-5" />
         </button>
       </div>
 
       <!-- Search & Category Filters -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-3 pt-4 pb-2 shrink-0">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-3.5 pt-4 pb-2 shrink-0">
         <div class="md:col-span-7 relative">
-          <Search class="w-4 h-4 text-slate-500 absolute left-3 top-3" />
+          <Search class="w-4 h-4 text-[#8c785b] absolute left-3.5 top-3" />
           <input
             v-model="searchQuery"
             type="text"
             placeholder="Search by name, class, subclass, or tag..."
-            class="w-full pl-9 pr-3 py-2 text-xs rounded-xl bg-slate-950 border border-slate-800 text-slate-100 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/50"
+            class="w-full pl-10 pr-3.5 py-2 text-xs rounded-xl bg-[#120d09] border border-[#3d2c1d] text-[#fcedb6] placeholder-[#7d6850] focus:outline-none focus:border-[#d4af37] font-['EB_Garamond'] text-[14px]"
           />
         </div>
 
         <div class="md:col-span-5 flex items-center gap-2">
-          <SlidersHorizontal class="w-4 h-4 text-slate-500 shrink-0" />
+          <SlidersHorizontal class="w-4 h-4 text-[#8c785b] shrink-0" />
           <select
             v-model="selectedRole"
-            class="w-full px-3 py-2 text-xs rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-amber-400"
+            class="w-full px-3.5 py-2 text-xs rounded-xl bg-[#120d09] border border-[#3d2c1d] text-[#f4ebd9] focus:outline-none focus:border-[#d4af37] font-['Cinzel']"
           >
             <option value="">All Combat Roles</option>
             <option v-for="r in roles" :key="r" :value="r">{{ r }}</option>
@@ -51,16 +55,16 @@
 
       <!-- Scrollable Grid of Companions -->
       <div class="overflow-y-auto flex-1 mt-3 pr-1 space-y-2">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
           <div
             v-for="comp in candidateCompanions"
             :key="comp.id"
             @click="assign(comp.id)"
             :class="[
-              'p-3.5 rounded-xl border transition-all duration-200 cursor-pointer flex flex-col justify-between group',
+              'p-3.5 rounded-xl border transition-all duration-200 cursor-pointer flex flex-col justify-between group shadow-md',
               isCurrentlySelected(comp.id)
-                ? 'bg-amber-950/30 border-amber-500/80 shadow-md ring-1 ring-amber-400/40'
-                : 'bg-slate-950/70 border-slate-800 hover:border-slate-600 hover:bg-slate-950'
+                ? 'bg-gradient-to-b from-[#2a1d13] to-[#1c130c] border-[#d4af37] ring-1 ring-[#d4af37]/40 shadow-lg shadow-black/80'
+                : 'bg-gradient-to-b from-[#18110b] to-[#120d09] border-[#3d2c1d] hover:border-[#8c6d37] hover:bg-[#201710]'
             ]"
           >
             <div class="flex items-start gap-3">
@@ -73,22 +77,22 @@
 
               <div class="flex-1 min-w-0">
                 <div class="flex items-center justify-between gap-1">
-                  <h4 class="text-sm font-bold text-slate-100 truncate group-hover:text-amber-300 transition-colors">
+                  <h4 class="text-sm font-bold text-[#fcedb6] truncate group-hover:text-[#fdedb6] transition-colors font-['Cinzel']">
                     {{ comp.id === 'tav' ? store.customTavConfig.name : comp.name }}
                   </h4>
-                  <Check v-if="isCurrentlySelected(comp.id)" class="w-4 h-4 text-amber-400 shrink-0" />
+                  <Check v-if="isCurrentlySelected(comp.id)" class="w-4 h-4 text-[#d4af37] shrink-0" />
                 </div>
 
-                <p class="text-[11px] text-amber-400 font-medium truncate mt-0.5">
+                <p class="text-[12px] text-[#e6ca65] font-medium truncate mt-0.5 font-['EB_Garamond']">
                   {{ comp.id === 'tav' ? store.customTavConfig.canonicalClass : comp.canonicalClass }}
-                  <span class="text-slate-400">({{ comp.id === 'tav' ? store.customTavConfig.canonicalSubclass : comp.canonicalSubclass }})</span>
+                  <span class="text-[#8c785b]">({{ comp.id === 'tav' ? store.customTavConfig.canonicalSubclass : comp.canonicalSubclass }})</span>
                 </p>
 
                 <div class="flex items-center gap-1.5 mt-2 flex-wrap">
-                  <span class="px-1.5 py-0.5 text-[9px] font-semibold rounded bg-slate-800/80 text-slate-300 border border-slate-700/50">
+                  <span class="px-1.5 py-0.5 text-[9px] font-bold rounded bg-[#261c13] text-[#dfd1ba] border border-[#443221] font-['Cinzel']">
                     {{ comp.id === 'tav' ? store.customTavConfig.primaryRole : comp.primaryRole }}
                   </span>
-                  <span class="px-1.5 py-0.5 text-[9px] rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 truncate max-w-[120px]">
+                  <span class="px-1.5 py-0.5 text-[9px] rounded bg-[#2a1e14] text-[#d4af37] border border-[#5d442e] truncate max-w-[120px] font-['Cinzel']">
                     {{ comp.uniqueFeature.tag }}
                   </span>
                 </div>
@@ -96,23 +100,23 @@
             </div>
 
             <!-- Footer indicator -->
-            <div class="mt-3 pt-2 border-t border-slate-800/60 flex items-center justify-between text-[10px] text-slate-400">
+            <div class="mt-3.5 pt-2 border-t border-[#332417] flex items-center justify-between text-[11px] text-[#8c785b] font-['EB_Garamond']">
               <span class="truncate italic">{{ comp.title }}</span>
-              <span class="font-bold text-amber-400 group-hover:underline">Select</span>
+              <span class="font-bold text-[#d4af37] group-hover:underline font-['Cinzel']">Summon</span>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Action Footer -->
-      <div class="flex items-center justify-between pt-4 mt-3 border-t border-slate-800 shrink-0">
-        <span class="text-xs text-slate-400">
-          Tip: You can customize your camp roster at any time in the camp inventory below.
+      <div class="flex items-center justify-between pt-4 mt-3 border-t border-[#443221] shrink-0">
+        <span class="text-xs text-[#8c785b] font-['EB_Garamond'] italic">
+          Tip: You can modify recruitment status anytime in the camp roster below.
         </span>
 
         <button
           @click="emit('close')"
-          class="px-4 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+          class="px-5 py-2 text-xs font-semibold rounded-xl bg-[#261c14] hover:bg-[#38281a] text-[#b5a07e] border border-[#443221] transition-colors font-['Cinzel']"
         >
           Close
         </button>
