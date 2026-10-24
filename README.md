@@ -30,8 +30,8 @@ Live deployment: [https://bretomart.github.io/bg3-teams/](https://bretomart.gith
    * **Umbral Veil (Darkness Bunker)**: Monitors magical darkness party zoning combined with Devil's Sight and blindness immunity equipment.
 5. **Verified Honor Mode Meta Parties**:
    Curated catalog of tested Honor Mode team templates featuring one-click party loading, full round 1 turn sequencing, and campaign progression milestones.
-6. **Detailed Architecture Decision Records (ADR)**:
-   For comprehensive technical documentation detailing the UI theme overhaul, typography legibility hierarchy, item contention engine, 1d4 initiative calculations, and authentic in-game asset extraction, see [`DECISIONS.md`](./DECISIONS.md).
+6. **Detailed Architecture Decision Records (ADR) & Min-Max Datapoints**:
+   For comprehensive technical documentation detailing the UI theme overhaul, typography legibility hierarchy, item contention engine, and authentic asset pipelines, see [`DECISIONS.md`](./DECISIONS.md). For deep-dive mechanical justifications, damage calculation exploits, and community source references across all builds and meta parties, see [`DATAPOINTS.md`](./DATAPOINTS.md).
 
 ---
 
