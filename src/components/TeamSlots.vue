@@ -90,7 +90,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
             <D20Icon class="w-5 h-5 text-[#d4af37] shrink-0" />
             <span>Active Adventuring Party (4 Slots)</span>
           </h2>
-          <p class="text-xs text-[#b5a07e] font-['EB_Garamond'] text-[14px] mt-1">
+          <p class="text-xs text-[#b5a07e] font-sans mt-1">
             Click any active folio slot to inscribe builds, alter modular weapons, or review tactical synergy.
           </p>
         </div>
@@ -128,10 +128,10 @@ const removeSlot = (index: number, event: MouseEvent) => {
             <div class="w-11 h-11 rounded-full border border-dashed border-[#8c6d37] flex items-center justify-center text-[#8c6d37] group-hover:text-[#d4af37] group-hover:border-[#d4af37] mb-2 font-bold text-sm transition-all shadow-inner">
               <D20Icon class="w-5 h-5" />
             </div>
-            <span class="text-xs font-bold text-[#c5a059] group-hover:text-[#fcedb6] uppercase tracking-wider font-['Cinzel'] transition-colors">
+            <span class="text-xs font-bold text-[#c5a059] group-hover:text-[#fcedb6] uppercase tracking-wider font-sans transition-colors">
               Party Slot {{ index + 1 }}
             </span>
-            <span class="text-[11px] text-[#8c785b] group-hover:text-[#c5a059] mt-0.5 font-['EB_Garamond'] italic">
+            <span class="text-[11px] text-[#8c785b] group-hover:text-[#c5a059] mt-0.5 font-sans italic">
               Click to summon hero
             </span>
           </div>
@@ -149,14 +149,14 @@ const removeSlot = (index: number, event: MouseEvent) => {
                 />
                 <div class="min-w-0 flex-1">
                   <div class="flex items-center gap-1.5">
-                    <span class="text-[10px] font-bold text-[#d4af37] uppercase tracking-wider font-['Cinzel']">
+                    <span class="text-[10px] font-bold text-[#d4af37] uppercase tracking-wider font-sans">
                       Slot {{ index + 1 }}
                     </span>
                   </div>
-                  <h3 class="text-sm font-bold text-[#fcedb6] truncate font-['Cinzel']" :title="member.name">
+                  <h3 class="text-sm font-bold text-[#fcedb6] truncate font-sans" :title="member.name">
                     {{ member.name }}
                   </h3>
-                  <p class="text-[12px] text-[#c5b89a] truncate font-['EB_Garamond']" :title="`${member.canonicalClass} (${member.canonicalSubclass})`">
+                  <p class="text-xs text-[#c5b89a] truncate font-sans" :title="`${member.canonicalClass} (${member.canonicalSubclass})`">
                     {{ member.canonicalClass }} <span class="text-[#8c785b]">({{ member.canonicalSubclass }})</span>
                   </p>
                 </div>
@@ -182,11 +182,11 @@ const removeSlot = (index: number, event: MouseEvent) => {
 
             <!-- Role & Tag Badges -->
             <div class="mt-3 pt-2.5 border-t border-[#38281a] flex items-center justify-between gap-1.5 min-w-0">
-              <span class="px-2 py-0.5 text-[9px] font-bold rounded bg-[#2a1e14] text-[#fcedb6] border border-[#5d442e] shrink-0 font-['Cinzel']">
+              <span class="px-2 py-0.5 text-[9px] font-bold rounded bg-[#2a1e14] text-[#fcedb6] border border-[#5d442e] shrink-0 font-sans">
                 {{ member.primaryRole }}
               </span>
 
-              <span class="text-[11px] text-[#a89476] truncate text-right flex-1 min-w-0 font-['EB_Garamond'] italic" :title="member.uniqueFeature.tag">
+              <span class="text-[11px] text-[#a89476] truncate text-right flex-1 min-w-0 font-sans italic" :title="member.uniqueFeature.tag">
                 {{ member.uniqueFeature.tag }}
               </span>
             </div>
@@ -219,14 +219,14 @@ const removeSlot = (index: number, event: MouseEvent) => {
           />
           <div>
             <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-xs font-bold uppercase tracking-wider text-[#d4af37] font-['Cinzel'] flex items-center gap-1.5">
+              <span class="text-xs font-bold uppercase tracking-wider text-[#d4af37] font-sans flex items-center gap-1.5">
                 <D20Icon class="w-3.5 h-3.5 text-[#d4af37]" />
                 Slot {{ store.inspectingSlotIndex + 1 }} Hero Folio
               </span>
               <span class="text-[#6b5238]">✦</span>
-              <span class="text-xs font-semibold text-[#c5b89a] font-['Cinzel']">{{ activeCompanion.title }}</span>
+              <span class="text-xs font-semibold text-[#c5b89a] font-sans">{{ activeCompanion.title }}</span>
             </div>
-            <h2 class="text-2xl font-bold font-['Cinzel'] text-[#fcedb6] tracking-wide mt-1">
+            <h2 class="text-2xl font-bold font-sans text-[#fcedb6] tracking-tight mt-1">
               {{ activeCompanion.name }}
             </h2>
             <p class="text-xs text-[#c5b89a] font-['IM_Fell_English'] italic text-[15px] mt-0.5">
@@ -238,8 +238,8 @@ const removeSlot = (index: number, event: MouseEvent) => {
         <div class="flex items-center gap-3.5 self-end lg:self-auto">
           <!-- Active Build Badge Indicator -->
           <div class="bg-[#120d09] px-4 py-2 rounded-xl border border-[#443221] text-right shadow-inner">
-            <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-['Cinzel']">Current Inscription</span>
-            <span class="text-xs font-bold text-[#e6ca65] font-['Cinzel']">{{ activeCompanion.recommendedMulticlass }}</span>
+            <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-sans">Current Inscription</span>
+            <span class="text-xs font-bold text-[#e6ca65] font-sans">{{ activeCompanion.recommendedMulticlass }}</span>
           </div>
 
           <button
@@ -264,11 +264,11 @@ const removeSlot = (index: number, event: MouseEvent) => {
           <div class="flex items-center justify-between pb-3 border-b border-[#3d2c1d] mb-4">
             <div class="flex items-center gap-2">
               <Sparkles class="w-4 h-4 text-[#d4af37]" />
-              <h3 class="text-xs font-bold uppercase tracking-wider text-[#fcedb6] font-['Cinzel']">
+              <h3 class="text-xs font-bold uppercase tracking-wider text-[#fcedb6] font-sans">
                 Inscribe {{ activeCompanion.name }}'s Build Archetype
               </h3>
             </div>
-            <span class="text-[11px] text-[#8c785b] font-['EB_Garamond'] italic">
+            <span class="text-[11px] text-[#8c785b] font-sans italic">
               Updates synergies, weapons, and drawbacks immediately
             </span>
           </div>
@@ -287,16 +287,16 @@ const removeSlot = (index: number, event: MouseEvent) => {
             >
               <div>
                 <div class="flex items-center justify-between gap-1">
-                  <h4 class="text-xs font-bold text-[#fcedb6] font-['Cinzel']">{{ b.name }}</h4>
+                  <h4 class="text-xs font-bold text-[#fcedb6] font-sans">{{ b.name }}</h4>
                   <Check v-if="currentSelectedBuildId === b.id" class="w-4 h-4 text-[#d4af37] shrink-0" />
                 </div>
-                <p class="text-[12px] text-[#e6ca65] font-semibold mt-1 font-['Cinzel']">{{ b.classSplit }}</p>
-                <p class="text-[12px] text-[#b5a07e] mt-1.5 line-clamp-2 font-['EB_Garamond'] leading-snug">{{ b.description }}</p>
+                <p class="text-xs text-[#e6ca65] font-semibold mt-1 font-sans">{{ b.classSplit }}</p>
+                <p class="text-xs text-[#b5a07e] mt-1.5 line-clamp-2 font-sans leading-snug">{{ b.description }}</p>
               </div>
 
               <div class="mt-3 pt-2.5 border-t border-[#332417] flex items-center justify-between text-[10px]">
-                <span class="px-2 py-0.5 rounded bg-[#261c13] text-[#dfd1ba] font-bold font-['Cinzel']">{{ b.primaryRole }}</span>
-                <span class="text-[#8c785b] font-['EB_Garamond'] italic">{{ b.shortRestRecharge ? 'Short Rest' : 'Long Rest' }}</span>
+                <span class="px-2 py-0.5 rounded bg-[#261c13] text-[#dfd1ba] font-bold font-sans">{{ b.primaryRole }}</span>
+                <span class="text-[#8c785b] font-sans italic">{{ b.shortRestRecharge ? 'Short Rest' : 'Long Rest' }}</span>
               </div>
             </button>
           </div>
@@ -307,7 +307,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
           <button
             @click="activeTab = 'gear'"
             :class="[
-              'flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all font-[\'Cinzel\'] tracking-wider',
+              'flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all font-sans tracking-wide',
               activeTab === 'gear'
                 ? 'bg-gradient-to-b from-[#d4af37] to-[#aa8524] text-[#140e09] border border-[#f5df86] shadow-md shadow-[#d4af37]/20 font-black'
                 : 'text-[#b5a07e] hover:text-[#fcedb6] hover:bg-[#231911]'
@@ -320,7 +320,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
           <button
             @click="activeTab = 'rationale'"
             :class="[
-              'flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all font-[\'Cinzel\'] tracking-wider',
+              'flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all font-sans tracking-wide',
               activeTab === 'rationale'
                 ? 'bg-gradient-to-b from-[#d4af37] to-[#aa8524] text-[#140e09] border border-[#f5df86] shadow-md shadow-[#d4af37]/20 font-black'
                 : 'text-[#b5a07e] hover:text-[#fcedb6] hover:bg-[#231911]'
@@ -333,7 +333,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
           <button
             @click="activeTab = 'stats'"
             :class="[
-              'flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all font-[\'Cinzel\'] tracking-wider',
+              'flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all font-sans tracking-wide',
               activeTab === 'stats'
                 ? 'bg-gradient-to-b from-[#d4af37] to-[#aa8524] text-[#140e09] border border-[#f5df86] shadow-md shadow-[#d4af37]/20 font-black'
                 : 'text-[#b5a07e] hover:text-[#fcedb6] hover:bg-[#231911]'
@@ -346,7 +346,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
           <button
             @click="activeTab = 'rotation'"
             :class="[
-              'flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all font-[\'Cinzel\'] tracking-wider',
+              'flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all font-sans tracking-wide',
               activeTab === 'rotation'
                 ? 'bg-gradient-to-b from-[#d4af37] to-[#aa8524] text-[#140e09] border border-[#f5df86] shadow-md shadow-[#d4af37]/20 font-black'
                 : 'text-[#b5a07e] hover:text-[#fcedb6] hover:bg-[#231911]'
@@ -364,7 +364,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
             <div class="flex items-center justify-between mb-4">
               <div class="flex items-center gap-2">
                 <Sword class="w-4 h-4 text-[#d4af37]" />
-                <h3 class="text-xs font-bold uppercase tracking-wider text-[#fcedb6] font-['Cinzel']">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-[#fcedb6] font-sans">
                   Weapon Options & Quest Alternatives
                 </h3>
               </div>
@@ -379,8 +379,8 @@ const removeSlot = (index: number, event: MouseEvent) => {
               >
                 <div class="flex items-center justify-between gap-2 flex-wrap">
                   <div class="flex items-center gap-2">
-                    <span class="text-xs font-bold text-[#fcedb6] font-['Cinzel']">{{ wpn.name }}</span>
-                    <span class="px-1.5 py-0.5 text-[9px] font-bold rounded bg-[#2a1e14] text-[#e6ca65] border border-[#5d442e] font-['Cinzel']">
+                    <span class="text-xs font-bold text-[#fcedb6] font-sans">{{ wpn.name }}</span>
+                    <span class="px-1.5 py-0.5 text-[9px] font-bold rounded bg-[#2a1e14] text-[#e6ca65] border border-[#5d442e] font-sans">
                       Act {{ wpn.act }}
                     </span>
                     <span class="text-[11px] text-[#8c785b] font-['EB_Garamond']">{{ wpn.type }}</span>
@@ -418,45 +418,45 @@ const removeSlot = (index: number, event: MouseEvent) => {
           <div class="lg:col-span-6 grimoire-inset p-5 rounded-xl">
             <div class="flex items-center gap-2 mb-4">
               <Shield class="w-4 h-4 text-[#d4af37]" />
-              <h3 class="text-xs font-bold uppercase tracking-wider text-[#fcedb6] font-['Cinzel']">
+              <h3 class="text-xs font-bold uppercase tracking-wider text-[#fcedb6] font-sans">
                 Recommended Armor & Relic Matrix
               </h3>
             </div>
 
             <div class="grid grid-cols-2 gap-2.5 text-xs">
               <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d]">
-                <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-['Cinzel']">Headgear</span>
+                <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Headgear</span>
                 <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.head }}</span>
               </div>
 
               <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d]">
-                <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-['Cinzel']">Chest Armor</span>
+                <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Chest Armor</span>
                 <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.chest }}</span>
               </div>
 
               <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d]">
-                <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-['Cinzel']">Gloves</span>
+                <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Gloves</span>
                 <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.gloves }}</span>
               </div>
 
               <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d]">
-                <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-['Cinzel']">Boots</span>
+                <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Boots</span>
                 <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.boots }}</span>
               </div>
 
               <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d]">
-                <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-['Cinzel']">Amulet</span>
+                <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Amulet</span>
                 <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.amulet }}</span>
               </div>
 
               <div class="p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d]">
-                <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-['Cinzel']">Rings</span>
+                <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Rings</span>
                 <span class="font-semibold text-[#f4ebd9] truncate block font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.rings.join(', ') }}</span>
               </div>
             </div>
 
             <div v-if="activeCompanion.optimalGear.armor.cloak" class="mt-2.5 p-2.5 rounded-lg bg-[#18110b] border border-[#3d2c1d] text-xs">
-              <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-['Cinzel']">Cloak</span>
+              <span class="text-[10px] font-bold text-[#8c785b] uppercase block font-sans">Cloak</span>
               <span class="font-semibold text-[#e6ca65] font-['EB_Garamond'] text-[14px]">{{ activeCompanion.optimalGear.armor.cloak }}</span>
             </div>
           </div>
@@ -465,7 +465,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
         <!-- TAB 2: DETAILED STRATEGY, POSITIVES & DRAWBACKS -->
         <div v-show="activeTab === 'rationale'" class="space-y-4">
           <div class="p-5 rounded-xl grimoire-inset">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-[#d4af37] mb-2 flex items-center gap-2 font-['Cinzel']">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-[#d4af37] mb-2 flex items-center gap-2 font-sans">
               <BookOpen class="w-4 h-4" />
               Build Overview: {{ activeCompanion.recommendedMulticlass }}
             </h3>
@@ -478,7 +478,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <!-- Strengths -->
             <div class="p-5 rounded-xl bg-gradient-to-b from-[#064e3b]/30 to-[#032e23]/40 border border-[#059669]/50 shadow-md">
-              <span class="text-xs font-bold uppercase tracking-wider text-[#6ee7b7] block mb-3 flex items-center gap-2 font-['Cinzel']">
+              <span class="text-xs font-bold uppercase tracking-wider text-[#6ee7b7] block mb-3 flex items-center gap-2 font-sans">
                 <Check class="w-4 h-4 text-[#34d399]" />
                 Tactical Strengths & Upsides
               </span>
@@ -491,7 +491,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
 
             <!-- Drawbacks & Vulnerabilities -->
             <div class="p-5 rounded-xl bg-gradient-to-b from-[#450a0a]/35 to-[#240505]/45 border border-[#dc2626]/50 shadow-md">
-              <span class="text-xs font-bold uppercase tracking-wider text-[#fca5a5] block mb-3 flex items-center gap-2 font-['Cinzel']">
+              <span class="text-xs font-bold uppercase tracking-wider text-[#fca5a5] block mb-3 flex items-center gap-2 font-sans">
                 <AlertTriangle class="w-4 h-4 text-[#f87171]" />
                 Tactical Drawbacks & Vulnerabilities
               </span>
@@ -507,39 +507,39 @@ const removeSlot = (index: number, event: MouseEvent) => {
         <!-- TAB 3: ABILITIES & FEATS -->
         <div v-show="activeTab === 'stats'" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div class="lg:col-span-5 grimoire-inset p-5 rounded-xl">
-            <span class="text-xs font-bold uppercase tracking-wider text-[#fcedb6] block mb-4 font-['Cinzel']">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#fcedb6] block mb-4 font-sans">
               Target Ability Scores (Level 12)
             </span>
             <div class="grid grid-cols-3 gap-2.5 text-center">
               <div class="p-3 rounded-lg bg-[#18110b] border border-[#3d2c1d]">
-                <span class="text-[10px] font-bold text-[#8c785b] block uppercase font-['Cinzel']">STR</span>
-                <span class="text-lg font-bold text-[#fcedb6] font-['Cinzel']">{{ activeCompanion.skillPriority.statGoals.str }}</span>
+                <span class="text-[10px] font-bold text-[#8c785b] block uppercase font-sans">STR</span>
+                <span class="text-lg font-bold text-[#fcedb6] font-sans">{{ activeCompanion.skillPriority.statGoals.str }}</span>
               </div>
               <div class="p-3 rounded-lg bg-[#18110b] border border-[#3d2c1d]">
-                <span class="text-[10px] font-bold text-[#8c785b] block uppercase font-['Cinzel']">DEX</span>
-                <span class="text-lg font-bold text-[#fcedb6] font-['Cinzel']">{{ activeCompanion.skillPriority.statGoals.dex }}</span>
+                <span class="text-[10px] font-bold text-[#8c785b] block uppercase font-sans">DEX</span>
+                <span class="text-lg font-bold text-[#fcedb6] font-sans">{{ activeCompanion.skillPriority.statGoals.dex }}</span>
               </div>
               <div class="p-3 rounded-lg bg-[#18110b] border border-[#3d2c1d]">
-                <span class="text-[10px] font-bold text-[#8c785b] block uppercase font-['Cinzel']">CON</span>
-                <span class="text-lg font-bold text-[#fcedb6] font-['Cinzel']">{{ activeCompanion.skillPriority.statGoals.con }}</span>
+                <span class="text-[10px] font-bold text-[#8c785b] block uppercase font-sans">CON</span>
+                <span class="text-lg font-bold text-[#fcedb6] font-sans">{{ activeCompanion.skillPriority.statGoals.con }}</span>
               </div>
               <div class="p-3 rounded-lg bg-[#18110b] border border-[#3d2c1d]">
-                <span class="text-[10px] font-bold text-[#8c785b] block uppercase font-['Cinzel']">INT</span>
-                <span class="text-lg font-bold text-[#fcedb6] font-['Cinzel']">{{ activeCompanion.skillPriority.statGoals.int }}</span>
+                <span class="text-[10px] font-bold text-[#8c785b] block uppercase font-sans">INT</span>
+                <span class="text-lg font-bold text-[#fcedb6] font-sans">{{ activeCompanion.skillPriority.statGoals.int }}</span>
               </div>
               <div class="p-3 rounded-lg bg-[#18110b] border border-[#3d2c1d]">
-                <span class="text-[10px] font-bold text-[#8c785b] block uppercase font-['Cinzel']">WIS</span>
-                <span class="text-lg font-bold text-[#fcedb6] font-['Cinzel']">{{ activeCompanion.skillPriority.statGoals.wis }}</span>
+                <span class="text-[10px] font-bold text-[#8c785b] block uppercase font-sans">WIS</span>
+                <span class="text-lg font-bold text-[#fcedb6] font-sans">{{ activeCompanion.skillPriority.statGoals.wis }}</span>
               </div>
               <div class="p-3 rounded-lg bg-[#18110b] border border-[#3d2c1d]">
-                <span class="text-[10px] font-bold text-[#8c785b] block uppercase font-['Cinzel']">CHA</span>
-                <span class="text-lg font-bold text-[#fcedb6] font-['Cinzel']">{{ activeCompanion.skillPriority.statGoals.cha }}</span>
+                <span class="text-[10px] font-bold text-[#8c785b] block uppercase font-sans">CHA</span>
+                <span class="text-lg font-bold text-[#fcedb6] font-sans">{{ activeCompanion.skillPriority.statGoals.cha }}</span>
               </div>
             </div>
           </div>
 
           <div class="lg:col-span-7 grimoire-inset p-5 rounded-xl">
-            <span class="text-xs font-bold uppercase tracking-wider text-[#fcedb6] block mb-4 font-['Cinzel']">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#fcedb6] block mb-4 font-sans">
               Mandatory Feats for Honor Mode
             </span>
             <ul class="space-y-2.5 text-xs text-[#f4ebd9]">
@@ -549,7 +549,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
                 class="p-3 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center gap-3"
               >
                 <D20Icon class="w-4 h-4 text-[#d4af37] shrink-0" />
-                <span class="font-semibold text-[#fcedb6] font-['Cinzel'] text-xs">{{ feat }}</span>
+                <span class="font-semibold text-[#fcedb6] font-sans text-xs">{{ feat }}</span>
               </li>
             </ul>
           </div>
@@ -558,7 +558,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
         <!-- TAB 4: ROTATIONS & SPELLS -->
         <div v-show="activeTab === 'rotation'" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div class="lg:col-span-6 grimoire-inset p-5 rounded-xl">
-            <span class="text-xs font-bold uppercase tracking-wider text-[#fcedb6] block mb-4 font-['Cinzel']">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#fcedb6] block mb-4 font-sans">
               Action & Spell Priority Sequence
             </span>
             <ol class="space-y-2.5 text-xs text-[#dfd1ba]">
@@ -567,7 +567,7 @@ const removeSlot = (index: number, event: MouseEvent) => {
                 :key="action"
                 class="p-3 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center gap-3"
               >
-                <span class="text-xs font-bold text-[#140e09] bg-[#d4af37] w-5 h-5 rounded flex items-center justify-center font-['Cinzel'] font-black">
+                <span class="text-xs font-bold text-[#140e09] bg-[#d4af37] w-5 h-5 rounded flex items-center justify-center font-sans font-black">
                   {{ idx + 1 }}
                 </span>
                 <span class="font-medium text-[#f4ebd9] font-['EB_Garamond'] text-[14px]">{{ action }}</span>
@@ -576,14 +576,14 @@ const removeSlot = (index: number, event: MouseEvent) => {
           </div>
 
           <div class="lg:col-span-6 grimoire-inset p-5 rounded-xl">
-            <span class="text-xs font-bold uppercase tracking-wider text-[#fcedb6] block mb-4 font-['Cinzel']">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#fcedb6] block mb-4 font-sans">
               Core Prepared Spells & Invocations
             </span>
             <div class="flex flex-wrap gap-2">
               <span
                 v-for="spell in activeCompanion.skillPriority.spellRecommendations"
                 :key="spell"
-                class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#18110b] border border-[#5d442e] text-[#e6ca65] font-['Cinzel']"
+                class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#18110b] border border-[#5d442e] text-[#e6ca65] font-sans"
               >
                 {{ spell }}
               </span>

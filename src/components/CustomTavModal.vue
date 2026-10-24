@@ -160,7 +160,7 @@ const saveAndApply = () => {
           </div>
           <div>
             <h3 class="text-xl font-bold font-['Cinzel'] text-[#fcedb6] tracking-wide">Custom Character (Tav) Workbench</h3>
-            <p class="text-xs text-[#b5a07e] font-['EB_Garamond'] text-[14px]">Inscribe your protagonist, 27 point-buy ability scores, and tactical role.</p>
+            <p class="text-xs text-[#b5a07e] font-sans">Inscribe your protagonist, 27 point-buy ability scores, and tactical role.</p>
           </div>
         </div>
         <button
@@ -174,22 +174,22 @@ const saveAndApply = () => {
       <!-- Identity & Role Matrix -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
         <div>
-          <label class="block text-xs font-semibold text-[#c5a059] mb-1 font-['Cinzel']">Character Name</label>
+          <label class="block text-xs font-semibold text-[#c5a059] mb-1 font-sans">Character Name</label>
           <input
             v-model="form.name"
             type="text"
-            class="w-full px-3.5 py-2 text-xs rounded-xl bg-[#120d09] border border-[#3d2c1d] text-[#fcedb6] focus:outline-none focus:border-[#d4af37] font-['Cinzel']"
+            class="w-full px-3.5 py-2 text-xs rounded-xl bg-[#120d09] border border-[#3d2c1d] text-[#fcedb6] focus:outline-none focus:border-[#d4af37] font-sans"
           />
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-[#c5a059] mb-1 font-['Cinzel']">Avatar Silhouette</label>
+          <label class="block text-xs font-semibold text-[#c5a059] mb-1 font-sans">Avatar Silhouette</label>
           <div class="grid grid-cols-2 gap-2">
             <button
               type="button"
               @click="form.gender = 'male'"
               :class="[
-                'flex items-center justify-center gap-2 px-3 py-2 text-xs font-bold rounded-xl border transition-all font-[\'Cinzel\']',
+                'flex items-center justify-center gap-2 px-3 py-2 text-xs font-bold rounded-xl border transition-all font-sans',
                 form.gender === 'male'
                   ? 'bg-gradient-to-r from-[#0c4a6e]/70 to-[#082f49]/80 text-[#bae6fd] border-[#38bdf8] ring-1 ring-[#38bdf8]/40'
                   : 'bg-[#120d09] text-[#8c785b] border-[#3d2c1d] hover:border-[#6b5238]'
@@ -201,7 +201,7 @@ const saveAndApply = () => {
               type="button"
               @click="form.gender = 'female'"
               :class="[
-                'flex items-center justify-center gap-2 px-3 py-2 text-xs font-bold rounded-xl border transition-all font-[\'Cinzel\']',
+                'flex items-center justify-center gap-2 px-3 py-2 text-xs font-bold rounded-xl border transition-all font-sans',
                 form.gender === 'female'
                   ? 'bg-gradient-to-r from-[#701a75]/70 to-[#4a044e]/80 text-[#f5d0fe] border-[#c026d3] ring-1 ring-[#c026d3]/40'
                   : 'bg-[#120d09] text-[#8c785b] border-[#3d2c1d] hover:border-[#6b5238]'
@@ -213,50 +213,50 @@ const saveAndApply = () => {
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-[#c5a059] mb-1 font-['Cinzel']">Race</label>
+          <label class="block text-xs font-semibold text-[#c5a059] mb-1 font-sans">Race</label>
           <select
             v-model="form.race"
-            class="w-full px-3.5 py-2 text-xs rounded-xl bg-[#120d09] border border-[#3d2c1d] text-[#f4ebd9] focus:outline-none focus:border-[#d4af37] font-['Cinzel']"
+            class="w-full px-3.5 py-2 text-xs rounded-xl bg-[#120d09] border border-[#3d2c1d] text-[#f4ebd9] focus:outline-none focus:border-[#d4af37] font-sans"
           >
             <option v-for="r in races" :key="r" :value="r">{{ r }}</option>
           </select>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-[#c5a059] mb-1 font-['Cinzel']">Background</label>
+          <label class="block text-xs font-semibold text-[#c5a059] mb-1 font-sans">Background</label>
           <select
             v-model="form.background"
-            class="w-full px-3.5 py-2 text-xs rounded-xl bg-[#120d09] border border-[#3d2c1d] text-[#f4ebd9] focus:outline-none focus:border-[#d4af37] font-['Cinzel']"
+            class="w-full px-3.5 py-2 text-xs rounded-xl bg-[#120d09] border border-[#3d2c1d] text-[#f4ebd9] focus:outline-none focus:border-[#d4af37] font-sans"
           >
             <option v-for="b in backgrounds" :key="b" :value="b">{{ b }}</option>
           </select>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-[#c5a059] mb-1 font-['Cinzel']">Base Class</label>
+          <label class="block text-xs font-semibold text-[#c5a059] mb-1 font-sans">Base Class</label>
           <select
             v-model="form.canonicalClass"
-            class="w-full px-3.5 py-2 text-xs rounded-xl bg-[#120d09] border border-[#3d2c1d] text-[#f4ebd9] focus:outline-none focus:border-[#d4af37] font-['Cinzel']"
+            class="w-full px-3.5 py-2 text-xs rounded-xl bg-[#120d09] border border-[#3d2c1d] text-[#f4ebd9] focus:outline-none focus:border-[#d4af37] font-sans"
           >
             <option v-for="c in classes" :key="c" :value="c">{{ c }}</option>
           </select>
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-[#c5a059] mb-1 font-['Cinzel']">Subclass or Build Title</label>
+          <label class="block text-xs font-semibold text-[#c5a059] mb-1 font-sans">Subclass or Build Title</label>
           <input
             v-model="form.canonicalSubclass"
             type="text"
             placeholder="e.g. College of Swords"
-            class="w-full px-3.5 py-2 text-xs rounded-xl bg-[#120d09] border border-[#3d2c1d] text-[#f4ebd9] focus:outline-none focus:border-[#d4af37] font-['EB_Garamond'] text-[14px]"
+            class="w-full px-3.5 py-2 text-xs rounded-xl bg-[#120d09] border border-[#3d2c1d] text-[#f4ebd9] focus:outline-none focus:border-[#d4af37] font-sans"
           />
         </div>
 
         <div class="md:col-span-2">
-          <label class="block text-xs font-semibold text-[#c5a059] mb-1 font-['Cinzel']">Primary Combat Role</label>
+          <label class="block text-xs font-semibold text-[#c5a059] mb-1 font-sans">Primary Combat Role</label>
           <select
             v-model="form.primaryRole"
-            class="w-full px-3.5 py-2 text-xs rounded-xl bg-[#120d09] border border-[#3d2c1d] text-[#f4ebd9] focus:outline-none focus:border-[#d4af37] font-['Cinzel']"
+            class="w-full px-3.5 py-2 text-xs rounded-xl bg-[#120d09] border border-[#3d2c1d] text-[#f4ebd9] focus:outline-none focus:border-[#d4af37] font-sans"
           >
             <option v-for="role in roles" :key="role" :value="role">{{ role }}</option>
           </select>
@@ -268,11 +268,11 @@ const saveAndApply = () => {
         <div class="flex items-center justify-between pb-3.5 border-b border-[#38281a]">
           <div class="flex items-center gap-2">
             <Sparkles class="w-4 h-4 text-[#d4af37]" />
-            <h4 class="text-sm font-bold text-[#fcedb6] font-['Cinzel']">Point-Buy Ability Scores (27 Points Max)</h4>
+            <h4 class="text-sm font-bold text-[#fcedb6] font-sans">Point-Buy Ability Scores (27 Points Max)</h4>
           </div>
           <span
             :class="[
-              'px-3 py-0.5 text-xs font-bold rounded-full border font-[\'Cinzel\']',
+              'px-3 py-0.5 text-xs font-bold rounded-full border font-sans',
               remainingPoints === 0
                 ? 'bg-[#064e3b]/50 text-[#a7f3d0] border-[#059669]'
                 : remainingPoints > 0
@@ -288,21 +288,21 @@ const saveAndApply = () => {
           <!-- STR -->
           <div class="p-3 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center justify-between">
             <div>
-              <span class="text-xs font-bold text-[#8c785b] block uppercase font-['Cinzel']">STR</span>
-              <span class="text-base font-bold text-[#fcedb6] font-['Cinzel']">{{ form.str }}</span>
+              <span class="text-xs font-bold text-[#8c785b] block uppercase font-sans">STR</span>
+              <span class="text-base font-bold text-[#fcedb6] font-sans">{{ form.str }}</span>
             </div>
             <div class="flex items-center gap-1.5">
               <button
                 @click="adjustAbility('str', -1)"
                 :disabled="form.str <= 8"
-                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-['Cinzel'] text-[#f4ebd9]"
+                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-sans text-[#f4ebd9]"
               >
                 -
               </button>
               <button
                 @click="adjustAbility('str', 1)"
                 :disabled="form.str >= 15 || remainingPoints <= 0"
-                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-['Cinzel'] text-[#d4af37]"
+                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-sans text-[#d4af37]"
               >
                 +
               </button>
@@ -312,21 +312,21 @@ const saveAndApply = () => {
           <!-- DEX -->
           <div class="p-3 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center justify-between">
             <div>
-              <span class="text-xs font-bold text-[#8c785b] block uppercase font-['Cinzel']">DEX</span>
-              <span class="text-base font-bold text-[#fcedb6] font-['Cinzel']">{{ form.dex }}</span>
+              <span class="text-xs font-bold text-[#8c785b] block uppercase font-sans">DEX</span>
+              <span class="text-base font-bold text-[#fcedb6] font-sans">{{ form.dex }}</span>
             </div>
             <div class="flex items-center gap-1.5">
               <button
                 @click="adjustAbility('dex', -1)"
                 :disabled="form.dex <= 8"
-                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-['Cinzel'] text-[#f4ebd9]"
+                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-sans text-[#f4ebd9]"
               >
                 -
               </button>
               <button
                 @click="adjustAbility('dex', 1)"
                 :disabled="form.dex >= 15 || remainingPoints <= 0"
-                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-['Cinzel'] text-[#d4af37]"
+                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-sans text-[#d4af37]"
               >
                 +
               </button>
@@ -336,21 +336,21 @@ const saveAndApply = () => {
           <!-- CON -->
           <div class="p-3 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center justify-between">
             <div>
-              <span class="text-xs font-bold text-[#8c785b] block uppercase font-['Cinzel']">CON</span>
-              <span class="text-base font-bold text-[#fcedb6] font-['Cinzel']">{{ form.con }}</span>
+              <span class="text-xs font-bold text-[#8c785b] block uppercase font-sans">CON</span>
+              <span class="text-base font-bold text-[#fcedb6] font-sans">{{ form.con }}</span>
             </div>
             <div class="flex items-center gap-1.5">
               <button
                 @click="adjustAbility('con', -1)"
                 :disabled="form.con <= 8"
-                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-['Cinzel'] text-[#f4ebd9]"
+                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-sans text-[#f4ebd9]"
               >
                 -
               </button>
               <button
                 @click="adjustAbility('con', 1)"
                 :disabled="form.con >= 15 || remainingPoints <= 0"
-                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-['Cinzel'] text-[#d4af37]"
+                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-sans text-[#d4af37]"
               >
                 +
               </button>
@@ -360,21 +360,21 @@ const saveAndApply = () => {
           <!-- INT -->
           <div class="p-3 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center justify-between">
             <div>
-              <span class="text-xs font-bold text-[#8c785b] block uppercase font-['Cinzel']">INT</span>
-              <span class="text-base font-bold text-[#fcedb6] font-['Cinzel']">{{ form.int }}</span>
+              <span class="text-xs font-bold text-[#8c785b] block uppercase font-sans">INT</span>
+              <span class="text-base font-bold text-[#fcedb6] font-sans">{{ form.int }}</span>
             </div>
             <div class="flex items-center gap-1.5">
               <button
                 @click="adjustAbility('int', -1)"
                 :disabled="form.int <= 8"
-                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-['Cinzel'] text-[#f4ebd9]"
+                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-sans text-[#f4ebd9]"
               >
                 -
               </button>
               <button
                 @click="adjustAbility('int', 1)"
                 :disabled="form.int >= 15 || remainingPoints <= 0"
-                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-['Cinzel'] text-[#d4af37]"
+                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-sans text-[#d4af37]"
               >
                 +
               </button>
@@ -384,21 +384,21 @@ const saveAndApply = () => {
           <!-- WIS -->
           <div class="p-3 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center justify-between">
             <div>
-              <span class="text-xs font-bold text-[#8c785b] block uppercase font-['Cinzel']">WIS</span>
-              <span class="text-base font-bold text-[#fcedb6] font-['Cinzel']">{{ form.wis }}</span>
+              <span class="text-xs font-bold text-[#8c785b] block uppercase font-sans">WIS</span>
+              <span class="text-base font-bold text-[#fcedb6] font-sans">{{ form.wis }}</span>
             </div>
             <div class="flex items-center gap-1.5">
               <button
                 @click="adjustAbility('wis', -1)"
                 :disabled="form.wis <= 8"
-                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-['Cinzel'] text-[#f4ebd9]"
+                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-sans text-[#f4ebd9]"
               >
                 -
               </button>
               <button
                 @click="adjustAbility('wis', 1)"
                 :disabled="form.wis >= 15 || remainingPoints <= 0"
-                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-['Cinzel'] text-[#d4af37]"
+                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-sans text-[#d4af37]"
               >
                 +
               </button>
@@ -408,21 +408,21 @@ const saveAndApply = () => {
           <!-- CHA -->
           <div class="p-3 rounded-lg bg-[#18110b] border border-[#3d2c1d] flex items-center justify-between">
             <div>
-              <span class="text-xs font-bold text-[#8c785b] block uppercase font-['Cinzel']">CHA</span>
-              <span class="text-base font-bold text-[#fcedb6] font-['Cinzel']">{{ form.cha }}</span>
+              <span class="text-xs font-bold text-[#8c785b] block uppercase font-sans">CHA</span>
+              <span class="text-base font-bold text-[#fcedb6] font-sans">{{ form.cha }}</span>
             </div>
             <div class="flex items-center gap-1.5">
               <button
                 @click="adjustAbility('cha', -1)"
                 :disabled="form.cha <= 8"
-                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-['Cinzel'] text-[#f4ebd9]"
+                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-sans text-[#f4ebd9]"
               >
                 -
               </button>
               <button
                 @click="adjustAbility('cha', 1)"
                 :disabled="form.cha >= 15 || remainingPoints <= 0"
-                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-['Cinzel'] text-[#d4af37]"
+                class="w-7 h-7 rounded bg-[#261c14] hover:bg-[#38281a] disabled:opacity-30 text-xs font-bold font-sans text-[#d4af37]"
               >
                 +
               </button>
@@ -435,7 +435,7 @@ const saveAndApply = () => {
       <div class="flex items-center justify-between pt-5 mt-5 border-t border-[#443221]">
         <button
           @click="resetToDefaults"
-          class="flex items-center gap-2 px-3 py-2 text-xs font-semibold text-[#8c785b] hover:text-[#fcedb6] transition-colors font-['Cinzel']"
+          class="flex items-center gap-2 px-3 py-2 text-xs font-semibold text-[#8c785b] hover:text-[#fcedb6] transition-colors font-sans"
         >
           <RotateCcw class="w-3.5 h-3.5" />
           Reset Defaults
@@ -444,13 +444,13 @@ const saveAndApply = () => {
         <div class="flex items-center gap-3">
           <button
             @click="emit('close')"
-            class="px-4 py-2 text-xs font-semibold rounded-xl bg-[#261c14] hover:bg-[#38281a] text-[#b5a07e] border border-[#443221] transition-colors font-['Cinzel']"
+            class="px-4 py-2 text-xs font-semibold rounded-xl bg-[#261c14] hover:bg-[#38281a] text-[#b5a07e] border border-[#443221] transition-colors font-sans"
           >
             Cancel
           </button>
           <button
             @click="saveAndApply"
-            class="flex items-center gap-2 px-6 py-2 text-xs font-bold rounded-xl btn-grimoire-gold shadow-lg shadow-[#d4af37]/20 transition-all font-['Cinzel']"
+            class="flex items-center gap-2 px-6 py-2 text-xs font-bold rounded-xl btn-grimoire-gold shadow-lg shadow-[#d4af37]/20 transition-all font-sans"
           >
             <Save class="w-4 h-4" />
             {{ savedMessage ? 'Inscribed!' : 'Inscribe to Party' }}

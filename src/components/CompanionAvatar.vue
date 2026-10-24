@@ -81,7 +81,7 @@ const sizeClasses = computed(() => {
       <!-- Fallback initials if image cannot load -->
       <span
         v-else
-        class="font-['Cinzel'] font-black text-[#d4af37] text-xs tracking-wider"
+        class="font-sans font-black text-[#d4af37] text-xs tracking-wider"
       >
         {{ initials }}
       </span>
@@ -94,7 +94,7 @@ const sizeClasses = computed(() => {
       v-if="originType"
       :class="[
         badgeColor,
-        'absolute -bottom-1 -right-1 text-[8px] uppercase tracking-wider px-1.5 py-0.2 rounded-md border font-[\'Cinzel\'] pointer-events-none'
+        'absolute -bottom-1 -right-1 text-[8px] uppercase tracking-wider px-1.5 py-0.2 rounded-md border font-sans font-bold pointer-events-none'
       ]"
     >
       {{ originType === 'custom' ? 'Tav' : originType }}

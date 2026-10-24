@@ -50,7 +50,7 @@ const getCompanion = (id: string) => {
             Verified Honor Mode Meta Parties
           </h2>
         </div>
-        <p class="text-xs text-[#b5a07e] font-['EB_Garamond'] text-[14px] mt-1">
+        <p class="text-xs text-[#b5a07e] font-sans mt-1">
           One-click party loading for community battle-tested Honor Mode setups with complete round-by-round turn sequencing and item milestones.
         </p>
       </div>
@@ -85,12 +85,12 @@ const getCompanion = (id: string) => {
 
             <div>
               <div class="flex items-center gap-2">
-                <h3 class="text-base font-bold text-[#fcedb6] font-['Cinzel']">{{ team.name }}</h3>
-                <span class="px-2 py-0.5 text-[9px] font-bold rounded bg-[#2a1e14] text-[#e6ca65] border border-[#5d442e] font-['Cinzel']">
+                <h3 class="text-base font-bold text-[#fcedb6] font-sans">{{ team.name }}</h3>
+                <span class="px-2 py-0.5 text-[10px] font-bold rounded bg-[#2a1e14] text-[#e6ca65] border border-[#5d442e] font-sans">
                   {{ team.difficultyTier }}
                 </span>
               </div>
-              <p class="text-xs text-[#b5a07e] mt-0.5 line-clamp-1 font-['EB_Garamond'] text-[14px]">
+              <p class="text-xs text-[#b5a07e] mt-0.5 line-clamp-1 font-sans">
                 {{ team.coreSynergyConcept }}
               </p>
             </div>
@@ -100,7 +100,7 @@ const getCompanion = (id: string) => {
           <div class="flex items-center gap-3 self-end md:self-auto">
             <span
               v-if="!areAllRecruited(team)"
-              class="text-[11px] text-[#fbbf24] flex items-center gap-1 font-medium font-['EB_Garamond']"
+              class="text-[11px] text-[#fbbf24] flex items-center gap-1 font-medium font-sans"
             >
               <AlertCircle class="w-3.5 h-3.5" />
               Recruitment Needed
@@ -109,7 +109,7 @@ const getCompanion = (id: string) => {
             <button
               @click.stop="store.loadMetaTeam(team.id)"
               :class="[
-                'px-4 py-2 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 font-[\'Cinzel\'] tracking-wider shadow-md',
+                'px-4 py-2 text-xs font-bold rounded-xl transition-all flex items-center gap-1.5 font-sans tracking-wide shadow-md',
                 isPartyLoaded(team)
                   ? 'bg-gradient-to-r from-[#064e3b] to-[#043327] text-[#a7f3d0] border border-[#10b981]'
                   : 'btn-grimoire-gold'
@@ -132,7 +132,7 @@ const getCompanion = (id: string) => {
           class="p-5 border-t border-[#38281a] bg-[#140e0a]/80 space-y-5 animate-in fade-in duration-200"
         >
           <!-- Description Paragraph -->
-          <p class="text-xs text-[#dfd1ba] leading-relaxed font-['EB_Garamond'] text-[15px] grimoire-inset p-4 rounded-xl">
+          <p class="text-xs text-[#dfd1ba] leading-relaxed font-sans grimoire-inset p-4 rounded-xl">
             {{ team.description }}
           </p>
 
@@ -153,17 +153,17 @@ const getCompanion = (id: string) => {
                     size="sm"
                   />
                   <div>
-                    <h4 class="text-xs font-bold text-[#fcedb6] truncate font-['Cinzel']">
+                    <h4 class="text-xs font-bold text-[#fcedb6] truncate font-sans">
                       {{ getCompanion(b.companionId)?.name }}
                     </h4>
-                    <span class="text-[10px] text-[#d4af37] font-semibold font-['Cinzel']">{{ b.assignedRole }}</span>
+                    <span class="text-[10px] text-[#d4af37] font-semibold font-sans">{{ b.assignedRole }}</span>
                   </div>
                 </div>
 
-                <div class="space-y-1 text-[12px] text-[#c5b89a] font-['EB_Garamond']">
-                  <p><span class="text-[#8c785b] font-semibold font-['Cinzel'] text-[10px]">Split:</span> {{ b.classSplit }}</p>
-                  <p><span class="text-[#8c785b] font-semibold font-['Cinzel'] text-[10px]">Feat:</span> {{ b.coreFeat }}</p>
-                  <p><span class="text-[#8c785b] font-semibold font-['Cinzel'] text-[10px]">Key Gear:</span> {{ b.keyGear }}</p>
+                <div class="space-y-1 text-xs text-[#c5b89a] font-sans">
+                  <p><span class="text-[#8c785b] font-semibold font-sans text-[10px]">Split:</span> {{ b.classSplit }}</p>
+                  <p><span class="text-[#8c785b] font-semibold font-sans text-[10px]">Feat:</span> {{ b.coreFeat }}</p>
+                  <p><span class="text-[#8c785b] font-semibold font-sans text-[10px]">Key Gear:</span> {{ b.keyGear }}</p>
                 </div>
               </div>
             </div>
@@ -171,17 +171,17 @@ const getCompanion = (id: string) => {
 
           <!-- Turn-by-Turn Sequencing Guide -->
           <div class="p-5 rounded-xl grimoire-inset">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-[#d4af37] mb-3 flex items-center gap-2 font-['Cinzel']">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-[#d4af37] mb-3 flex items-center gap-2 font-sans">
               <Layers class="w-4 h-4" />
               Round 1 Tactical Turn Sequencing
             </h4>
-            <ol class="space-y-2 text-xs text-[#dfd1ba] font-['EB_Garamond'] text-[14px]">
+            <ol class="space-y-2 text-xs text-[#dfd1ba] font-sans">
               <li
                 v-for="(turn, idx) in team.turnSequencing"
                 :key="idx"
                 class="flex items-start gap-2.5"
               >
-                <span class="text-[#d4af37] font-bold shrink-0 font-['Cinzel']">{{ idx + 1 }}.</span>
+                <span class="text-[#d4af37] font-bold shrink-0 font-sans">{{ idx + 1 }}.</span>
                 <span>{{ turn }}</span>
               </li>
             </ol>
@@ -189,7 +189,7 @@ const getCompanion = (id: string) => {
 
           <!-- Act Milestones & Key Power Spikes -->
           <div class="p-5 rounded-xl grimoire-inset">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-[#d4af37] mb-3 flex items-center gap-2 font-['Cinzel']">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-[#d4af37] mb-3 flex items-center gap-2 font-sans">
               <ShieldCheck class="w-4 h-4" />
               Campaign Progression Milestones
             </h4>
@@ -199,9 +199,9 @@ const getCompanion = (id: string) => {
                 :key="ms.act"
                 class="p-3.5 rounded-lg bg-[#18110b] border border-[#3d2c1d]"
               >
-                <span class="text-[10px] font-bold text-[#e6ca65] uppercase block mb-1 font-['Cinzel']">{{ ms.act }}</span>
-                <p class="font-semibold text-[#fcedb6] font-['Cinzel'] text-xs">{{ ms.objective }}</p>
-                <p class="text-[13px] text-[#c5b89a] mt-1.5 font-['EB_Garamond']">{{ ms.impact }}</p>
+                <span class="text-[10px] font-bold text-[#e6ca65] uppercase block mb-1 font-sans">{{ ms.act }}</span>
+                <p class="font-semibold text-[#fcedb6] font-sans text-xs">{{ ms.objective }}</p>
+                <p class="text-xs text-[#c5b89a] mt-1.5 font-sans">{{ ms.impact }}</p>
               </div>
             </div>
           </div>

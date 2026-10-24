@@ -66,7 +66,7 @@ const getButtonTheme = (diff: GameDifficulty) => {
             Campaign Difficulty & Tactical Risk Calibration
           </h2>
         </div>
-        <p class="text-xs text-[#b5a07e] font-['EB_Garamond'] text-[14px] mt-1">
+        <p class="text-xs text-[#b5a07e] font-sans mt-1">
           Adjust the difficulty seal to dynamically scale combat lethality, camp supply strain, and legendary actions.
         </p>
       </div>
@@ -75,7 +75,7 @@ const getButtonTheme = (diff: GameDifficulty) => {
       <div class="flex flex-col sm:flex-row items-center gap-3">
         <!-- Interactive Range Slider -->
         <div class="flex items-center gap-2.5 bg-[#120d09] px-3.5 py-2 rounded-xl border border-[#3d2c1d] w-full sm:w-auto shadow-inner">
-          <span class="text-[10px] font-bold uppercase tracking-wider text-[#8c785b] font-['Cinzel']">Tier Dial</span>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-[#8c785b] font-sans">Tier Dial</span>
           <input
             v-model.number="sliderValue"
             type="range"
@@ -93,7 +93,7 @@ const getButtonTheme = (diff: GameDifficulty) => {
             :key="diff"
             @click="selectDifficulty(diff)"
             :class="[
-              'px-3.5 py-1.5 text-xs font-bold rounded-lg border transition-all flex items-center gap-1.5 whitespace-nowrap font-[\'Cinzel\'] tracking-wider',
+              'px-3.5 py-1.5 text-xs font-bold rounded-lg border transition-all flex items-center gap-1.5 whitespace-nowrap font-sans tracking-wide',
               getButtonTheme(diff)
             ]"
           >
@@ -112,14 +112,14 @@ const getButtonTheme = (diff: GameDifficulty) => {
       <!-- Camp Supplies Requirement -->
       <div class="p-4 rounded-xl grimoire-inset flex items-center justify-between">
         <div>
-          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-['Cinzel']">Long Rest Food</span>
-          <span class="text-sm font-bold text-[#e6ca65] font-['Cinzel']">
+          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-sans">Long Rest Food</span>
+          <span class="text-sm font-bold text-[#e6ca65] font-sans">
             {{ currentProfile.campSuppliesPerLongRest }} Supplies
           </span>
         </div>
         <span
           :class="[
-            'text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider font-[\'Cinzel\']',
+            'text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider font-sans',
             currentProfile.campSuppliesPerLongRest > 40
               ? 'bg-[#450a0a]/60 text-[#fca5a5] border-[#b91c1c]'
               : 'bg-[#064e3b]/50 text-[#a7f3d0] border-[#059669]'
@@ -132,23 +132,23 @@ const getButtonTheme = (diff: GameDifficulty) => {
       <!-- Enemy Vitality & Scaling -->
       <div class="p-4 rounded-xl grimoire-inset flex items-center justify-between">
         <div>
-          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-['Cinzel']">Foe Vitality Scale</span>
-          <span class="text-sm font-bold text-[#f4ebd9] font-['Cinzel']">
+          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-sans">Foe Vitality Scale</span>
+          <span class="text-sm font-bold text-[#f4ebd9] font-sans">
             {{ currentProfile.enemyHpScaling }}
           </span>
         </div>
-        <span class="text-[10px] font-['Cinzel'] text-[#c5a059]">Modifier</span>
+        <span class="text-[10px] font-sans text-[#c5a059]">Modifier</span>
       </div>
 
       <!-- Multiclassing Rules -->
       <div class="p-4 rounded-xl grimoire-inset flex items-center justify-between">
         <div>
-          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-['Cinzel']">Multiclassing</span>
-          <span :class="['text-sm font-bold font-[\'Cinzel\']', currentProfile.multiclassAllowed ? 'text-[#34d399]' : 'text-[#f87171]']">
+          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-sans">Multiclassing</span>
+          <span :class="['text-sm font-bold font-sans', currentProfile.multiclassAllowed ? 'text-[#34d399]' : 'text-[#f87171]']">
             {{ currentProfile.multiclassAllowed ? 'Unrestricted' : 'Locked in Engine' }}
           </span>
         </div>
-        <span :class="['text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider font-[\'Cinzel\']', currentProfile.multiclassAllowed ? 'bg-[#064e3b]/50 text-[#a7f3d0] border-[#059669]' : 'bg-[#450a0a]/60 text-[#fca5a5] border-[#b91c1c]']">
+        <span :class="['text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider font-sans', currentProfile.multiclassAllowed ? 'bg-[#064e3b]/50 text-[#a7f3d0] border-[#059669]' : 'bg-[#450a0a]/60 text-[#fca5a5] border-[#b91c1c]']">
           {{ currentProfile.multiclassAllowed ? 'Active' : 'Sealed' }}
         </span>
       </div>
@@ -156,12 +156,12 @@ const getButtonTheme = (diff: GameDifficulty) => {
       <!-- Permadeath / Single Save -->
       <div class="p-4 rounded-xl grimoire-inset flex items-center justify-between">
         <div>
-          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-['Cinzel']">Save Scroll Rites</span>
-          <span :class="['text-sm font-bold font-[\'Cinzel\']', currentProfile.permadeathOrSingleSave ? 'text-[#fca5a5]' : 'text-[#34d399]']">
+          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-sans">Save Scroll Rites</span>
+          <span :class="['text-sm font-bold font-sans', currentProfile.permadeathOrSingleSave ? 'text-[#fca5a5]' : 'text-[#34d399]']">
             {{ currentProfile.permadeathOrSingleSave ? 'Single Save File' : 'Unlimited Reloads' }}
           </span>
         </div>
-        <span :class="['text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider font-[\'Cinzel\']', currentProfile.permadeathOrSingleSave ? 'bg-[#450a0a]/60 text-[#fca5a5] border-[#b91c1c]' : 'bg-[#064e3b]/50 text-[#a7f3d0] border-[#059669]']">
+        <span :class="['text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider font-sans', currentProfile.permadeathOrSingleSave ? 'bg-[#450a0a]/60 text-[#fca5a5] border-[#b91c1c]' : 'bg-[#064e3b]/50 text-[#a7f3d0] border-[#059669]']">
           {{ currentProfile.permadeathOrSingleSave ? 'Honor Rule' : 'Standard' }}
         </span>
       </div>
@@ -182,9 +182,9 @@ const getButtonTheme = (diff: GameDifficulty) => {
           currentProfile.legendaryBossActions ? 'text-[#ef4444]' : 'text-[#d4af37]'
         ]"
       />
-      <div class="text-xs leading-relaxed text-[#dfd1ba] font-['EB_Garamond'] text-[14px]">
-        <span class="font-bold font-['Cinzel'] text-[#fcedb6]">{{ currentProfile.name }}:</span> {{ currentProfile.summary }}
-        <span v-if="currentProfile.legendaryBossActions" class="block text-[#fca5a5] font-semibold mt-1 font-['Cinzel'] text-xs">
+      <div class="text-xs leading-relaxed text-[#dfd1ba] font-sans">
+        <span class="font-bold text-[#fcedb6]">{{ currentProfile.name }}:</span> {{ currentProfile.summary }}
+        <span v-if="currentProfile.legendaryBossActions" class="block text-[#fca5a5] font-semibold mt-1 font-sans text-xs">
           ⚠️ Crucial: Bosses gain Legendary Actions triggering reaction attacks outside standard initiative turns.
         </span>
       </div>

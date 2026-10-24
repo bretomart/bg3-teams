@@ -15,7 +15,7 @@ const bg3LogoSrc = computed(() => `${baseUrl}bg3-logo.png`);
 </script>
 
 <template>
-  <div class="min-h-screen text-[#f4ebd9] flex flex-col font-serif selection:bg-[#d4af37]/30 selection:text-[#fcedb6]">
+  <div class="min-h-screen text-[#f4ebd9] flex flex-col font-sans selection:bg-[#d4af37]/30 selection:text-[#fcedb6]">
     <!-- Top Grimoire Navigation & Header -->
     <header class="sticky top-0 z-40 bg-[#120d09]/95 backdrop-blur-md border-b border-[#4d3926] shadow-xl shadow-black/80">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
@@ -38,7 +38,7 @@ const bg3LogoSrc = computed(() => `${baseUrl}bg3-logo.png`);
             <h1 class="text-lg sm:text-xl font-bold font-['Cinzel'] tracking-wide text-[#fcedb6] flex items-center gap-2">
               Baldur's Gate 3 <span class="text-[#d4af37] font-semibold">Party Architect</span>
             </h1>
-            <p class="text-[11px] text-[#b5a07e] font-['EB_Garamond'] italic">Synergy Engine, Build Configurator & Tactical Compendium</p>
+            <p class="text-[11px] text-[#b5a07e] font-sans font-medium">Synergy Engine, Build Configurator & Tactical Compendium</p>
           </div>
         </div>
 
@@ -48,7 +48,7 @@ const bg3LogoSrc = computed(() => `${baseUrl}bg3-logo.png`);
             <button
               @click="activeView = 'builder'"
               :class="[
-                'px-4 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 font-[\'Cinzel\'] tracking-wider',
+                'px-4 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 font-sans tracking-wide',
                 activeView === 'builder'
                   ? 'bg-gradient-to-b from-[#d4af37] to-[#aa8524] text-[#140e09] border border-[#f5df86] shadow-md shadow-[#d4af37]/20 font-black'
                   : 'text-[#c5b89a] hover:text-[#fcedb6] hover:bg-[#251b12]'
@@ -60,7 +60,7 @@ const bg3LogoSrc = computed(() => `${baseUrl}bg3-logo.png`);
             <button
               @click="activeView = 'meta'"
               :class="[
-                'px-4 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 font-[\'Cinzel\'] tracking-wider',
+                'px-4 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 font-sans tracking-wide',
                 activeView === 'meta'
                   ? 'bg-gradient-to-b from-[#d4af37] to-[#aa8524] text-[#140e09] border border-[#f5df86] shadow-md shadow-[#d4af37]/20 font-black'
                   : 'text-[#c5b89a] hover:text-[#fcedb6] hover:bg-[#251b12]'
@@ -112,12 +112,12 @@ const bg3LogoSrc = computed(() => `${baseUrl}bg3-logo.png`);
     <footer class="border-t border-[#3d2c1d] bg-[#0c0805] py-8 text-center text-xs text-[#9d896e]">
       <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
         <div class="flex items-center gap-2">
-          <span class="text-[#d4af37] font-['Cinzel'] text-sm">❖</span>
-          <p class="font-['EB_Garamond'] text-sm text-[#c5b89a]">
+          <span class="text-[#d4af37] text-sm font-sans">❖</span>
+          <p class="font-sans text-xs text-[#c5b89a]">
             Baldur's Gate 3 Party Architect: Immersive tactical optimizer for Honor Mode runs.
           </p>
         </div>
-        <p class="text-[11px] text-[#7d6850]">
+        <p class="text-[11px] text-[#7d6850] font-sans">
           Baldur's Gate 3 is a registered trademark of Larian Studios and Wizards of the Coast.
         </p>
       </div>

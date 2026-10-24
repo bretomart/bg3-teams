@@ -15,7 +15,7 @@
             <h3 class="text-xl font-bold font-['Cinzel'] text-[#fcedb6] tracking-wide flex items-center gap-2">
               Summon Hero for Party Slot {{ slotIndex + 1 }}
             </h3>
-            <p class="text-xs text-[#b5a07e] font-['EB_Garamond'] text-[14px]">
+            <p class="text-xs text-[#b5a07e] font-sans">
               Showing recruited camp inventory. Click any companion to bind them to this slot.
             </p>
           </div>
@@ -37,7 +37,7 @@
             v-model="searchQuery"
             type="text"
             placeholder="Search by name, class, subclass, or tag..."
-            class="w-full pl-10 pr-3.5 py-2 text-xs rounded-xl bg-[#120d09] border border-[#3d2c1d] text-[#fcedb6] placeholder-[#7d6850] focus:outline-none focus:border-[#d4af37] font-['EB_Garamond'] text-[14px]"
+            class="w-full pl-10 pr-3.5 py-2 text-xs rounded-xl bg-[#120d09] border border-[#3d2c1d] text-[#fcedb6] placeholder-[#7d6850] focus:outline-none focus:border-[#d4af37] font-sans"
           />
         </div>
 
@@ -45,7 +45,7 @@
           <SlidersHorizontal class="w-4 h-4 text-[#8c785b] shrink-0" />
           <select
             v-model="selectedRole"
-            class="w-full px-3.5 py-2 text-xs rounded-xl bg-[#120d09] border border-[#3d2c1d] text-[#f4ebd9] focus:outline-none focus:border-[#d4af37] font-['Cinzel']"
+            class="w-full px-3.5 py-2 text-xs rounded-xl bg-[#120d09] border border-[#3d2c1d] text-[#f4ebd9] focus:outline-none focus:border-[#d4af37] font-sans"
           >
             <option value="">All Combat Roles</option>
             <option v-for="r in roles" :key="r" :value="r">{{ r }}</option>
@@ -77,22 +77,22 @@
 
               <div class="flex-1 min-w-0">
                 <div class="flex items-center justify-between gap-1">
-                  <h4 class="text-sm font-bold text-[#fcedb6] truncate group-hover:text-[#fdedb6] transition-colors font-['Cinzel']">
+                  <h4 class="text-sm font-bold text-[#fcedb6] truncate group-hover:text-[#fdedb6] transition-colors font-sans">
                     {{ comp.id === 'tav' ? store.customTavConfig.name : comp.name }}
                   </h4>
                   <Check v-if="isCurrentlySelected(comp.id)" class="w-4 h-4 text-[#d4af37] shrink-0" />
                 </div>
 
-                <p class="text-[12px] text-[#e6ca65] font-medium truncate mt-0.5 font-['EB_Garamond']">
+                <p class="text-xs text-[#e6ca65] font-medium truncate mt-0.5 font-sans">
                   {{ comp.id === 'tav' ? store.customTavConfig.canonicalClass : comp.canonicalClass }}
                   <span class="text-[#8c785b]">({{ comp.id === 'tav' ? store.customTavConfig.canonicalSubclass : comp.canonicalSubclass }})</span>
                 </p>
 
                 <div class="flex items-center gap-1.5 mt-2 flex-wrap">
-                  <span class="px-1.5 py-0.5 text-[9px] font-bold rounded bg-[#261c13] text-[#dfd1ba] border border-[#443221] font-['Cinzel']">
+                  <span class="px-1.5 py-0.5 text-[9px] font-bold rounded bg-[#261c13] text-[#dfd1ba] border border-[#443221] font-sans">
                     {{ comp.id === 'tav' ? store.customTavConfig.primaryRole : comp.primaryRole }}
                   </span>
-                  <span class="px-1.5 py-0.5 text-[9px] rounded bg-[#2a1e14] text-[#d4af37] border border-[#5d442e] truncate max-w-[120px] font-['Cinzel']">
+                  <span class="px-1.5 py-0.5 text-[9px] rounded bg-[#2a1e14] text-[#d4af37] border border-[#5d442e] truncate max-w-[120px] font-sans">
                     {{ comp.uniqueFeature.tag }}
                   </span>
                 </div>
@@ -100,9 +100,9 @@
             </div>
 
             <!-- Footer indicator -->
-            <div class="mt-3.5 pt-2 border-t border-[#332417] flex items-center justify-between text-[11px] text-[#8c785b] font-['EB_Garamond']">
+            <div class="mt-3.5 pt-2 border-t border-[#332417] flex items-center justify-between text-[11px] text-[#8c785b] font-sans">
               <span class="truncate italic">{{ comp.title }}</span>
-              <span class="font-bold text-[#d4af37] group-hover:underline font-['Cinzel']">Summon</span>
+              <span class="font-bold text-[#d4af37] group-hover:underline font-sans">Summon</span>
             </div>
           </div>
         </div>
@@ -110,13 +110,13 @@
 
       <!-- Action Footer -->
       <div class="flex items-center justify-between pt-4 mt-3 border-t border-[#443221] shrink-0">
-        <span class="text-xs text-[#8c785b] font-['EB_Garamond'] italic">
+        <span class="text-xs text-[#8c785b] font-sans italic">
           Tip: You can modify recruitment status anytime in the camp roster below.
         </span>
 
         <button
           @click="emit('close')"
-          class="px-5 py-2 text-xs font-semibold rounded-xl bg-[#261c14] hover:bg-[#38281a] text-[#b5a07e] border border-[#443221] transition-colors font-['Cinzel']"
+          class="px-5 py-2 text-xs font-semibold rounded-xl bg-[#261c14] hover:bg-[#38281a] text-[#b5a07e] border border-[#443221] transition-colors font-sans"
         >
           Close
         </button>
