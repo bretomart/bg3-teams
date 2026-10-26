@@ -16,7 +16,8 @@ const companions = [
   { id: 'minsc', name: 'MINSC', bg1: '#eab308', bg2: '#854d0e', symbol: '🐹' },
 ];
 
-const targetDir = '/home/brandon/projects/bg3-team-builder/public/companions';
+const rootDir = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+const targetDir = path.join(rootDir, 'public/companions');
 
 for (const c of companions) {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">

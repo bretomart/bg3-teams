@@ -16,7 +16,8 @@ const downloads = [
   { file: 'durge.png', url: 'https://bg3.wiki/w/images/8/8c/Portrait_The_Dark_Urge.png' }
 ];
 
-const targetDir = '/home/brandon/projects/bg3-team-builder/public/companions';
+const rootDir = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+const targetDir = path.join(rootDir, 'public/companions');
 
 function downloadFile(url, dest) {
   return new Promise((resolve, reject) => {

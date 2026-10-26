@@ -2,8 +2,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import https from 'node:https';
 
-const companionsPath = '/home/brandon/projects/bg3-team-builder/src/data/companions.json';
-const targetDir = '/home/brandon/projects/bg3-team-builder/public/items';
+const rootDir = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+const companionsPath = path.join(rootDir, 'src/data/companions.json');
+const targetDir = path.join(rootDir, 'public/items');
 
 if (!fs.existsSync(targetDir)) {
   fs.mkdirSync(targetDir, { recursive: true });
@@ -166,7 +167,7 @@ async function main() {
     }
   }
 
-  const manifestPath = '/home/brandon/projects/bg3-team-builder/src/data/itemIcons.json';
+  const manifestPath = path.join(rootDir, 'src/data/itemIcons.json');
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), 'utf8');
   console.log(`\nManifest written to ${manifestPath} (${Object.keys(manifest).length}/${list.length} mapped).`);
 }
