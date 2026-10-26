@@ -56,12 +56,6 @@ export type DamageType =
 
 export type AbilityName = 'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha';
 
-export interface AbilityScoreAllocation {
-  base: Record<AbilityName, number>;
-  bonusPlusTwo: AbilityName;
-  bonusPlusOne: AbilityName;
-}
-
 export interface WeaponOption {
   name: string;
   act: 1 | 2 | 3;

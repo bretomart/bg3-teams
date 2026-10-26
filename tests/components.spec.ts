@@ -3,30 +3,12 @@ import { mount } from '@vue/test-utils';
 import CompanionAvatar from '../src/components/CompanionAvatar.vue';
 
 describe('CompanionAvatar Component', () => {
-  it('renders avatar and origin badge correctly', () => {
-    const wrapper = mount(CompanionAvatar, {
-      props: {
-        avatar: '/companions/astarion.svg',
-        name: 'Astarion',
-        originType: 'origin',
-        size: 'md'
-      }
-    });
-
-    expect(wrapper.find('img').attributes('src')).toBe('/companions/astarion.svg');
-    expect(wrapper.text()).toContain('origin');
-  });
-
-  it('renders Tav label for custom originType', () => {
-    const wrapper = mount(CompanionAvatar, {
-      props: {
-        avatar: '/companions/tav.svg',
-        name: 'Custom Tav',
-        originType: 'custom',
-        size: 'lg'
-      }
-    });
-
-    expect(wrapper.text()).toContain('Tav');
+  it.each([
+    ['origin', '/companions/astarion.svg', 'Astarion', 'md', 'origin'],
+    ['custom', '/companions/tav.svg', 'Custom Tav', 'lg', 'Tav']
+  ])('renders avatar and badge for %s originType', (originType, avatar, name, size, label) => {
+    const wrapper = mount(CompanionAvatar, { props: { avatar, name, originType, size } });
+    expect(wrapper.find('img').attributes('src')).toBe(avatar);
+    expect(wrapper.text()).toContain(label);
   });
 });

@@ -19,6 +19,31 @@ const STORAGE_KEY_CUSTOM_TAV = 'bg3_custom_tav_config';
 const STORAGE_KEY_DIFFICULTY = 'bg3_selected_difficulty';
 const STORAGE_KEY_SELECTED_BUILDS = 'bg3_companion_selected_builds';
 
+function readStorage(key: string): string | null {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function readJSON(key: string): unknown {
+  try {
+    const raw = readStorage(key);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeStorage(key: string, value: string) {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    // Ignore local storage error
+  }
+}
+
 export const DIFFICULTY_PROFILES: Record<GameDifficulty, DifficultyRuleProfile> = {
   Explorer: {
     id: 'Explorer',
@@ -137,20 +162,11 @@ export const useTeamStore = defineStore('team', {
       'minsc'
     ];
 
-    let storedRecruited: CompanionId[] = initialRecruited;
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY_RECRUITED);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          storedRecruited = parsed;
-        }
-      }
-    } catch {
-      // Ignore local storage error
-    }
+    const parsedRecruited = readJSON(STORAGE_KEY_RECRUITED);
+    const storedRecruited: CompanionId[] =
+      Array.isArray(parsedRecruited) && parsedRecruited.length > 0 ? parsedRecruited : initialRecruited;
 
-    let customTav: CustomTavConfig = {
+    const customTav: CustomTavConfig = {
       name: 'Custom Tav',
       gender: 'male',
       race: 'Githyanki',
@@ -165,42 +181,20 @@ export const useTeamStore = defineStore('team', {
       con: 14,
       int: 10,
       wis: 10,
-      cha: 16
+      cha: 16,
+      ...(readJSON(STORAGE_KEY_CUSTOM_TAV) as Partial<CustomTavConfig> | null)
     };
 
-    try {
-      const savedTav = localStorage.getItem(STORAGE_KEY_CUSTOM_TAV);
-      if (savedTav) {
-        customTav = { ...customTav, ...JSON.parse(savedTav) };
-      }
-    } catch {
-      // Ignore
-    }
+    const storedDiff = readStorage(STORAGE_KEY_DIFFICULTY) as GameDifficulty | null;
+    const savedDifficulty: GameDifficulty = storedDiff && DIFFICULTY_PROFILES[storedDiff] ? storedDiff : 'Tactician';
 
-    let savedDifficulty: GameDifficulty = 'Tactician';
-    try {
-      const storedDiff = localStorage.getItem(STORAGE_KEY_DIFFICULTY) as GameDifficulty;
-      if (storedDiff && DIFFICULTY_PROFILES[storedDiff]) {
-        savedDifficulty = storedDiff;
-      }
-    } catch {
-      // Ignore
-    }
-
-    let savedBuilds: Record<string, string> = {
+    const savedBuilds: Record<string, string> = {
       tav: 'swords-bard-controller',
       shadowheart: 'light-cleric-radiant',
       karlach: 'berserker-throwzerker',
-      astarion: 'open-hand-monk-thief'
+      astarion: 'open-hand-monk-thief',
+      ...(readJSON(STORAGE_KEY_SELECTED_BUILDS) as Record<string, string> | null)
     };
-    try {
-      const storedBuilds = localStorage.getItem(STORAGE_KEY_SELECTED_BUILDS);
-      if (storedBuilds) {
-        savedBuilds = { ...savedBuilds, ...JSON.parse(storedBuilds) };
-      }
-    } catch {
-      // Ignore
-    }
 
     return {
       allCompanions: companionsData as Companion[],
@@ -328,26 +322,21 @@ export const useTeamStore = defineStore('team', {
       let shortRestCount = 0;
 
       active.forEach((comp) => {
-        roleCoverage[comp.primaryRole] = (roleCoverage[comp.primaryRole] || 0) + 1;
-        roleCoverage[comp.secondaryRole] = (roleCoverage[comp.secondaryRole] || 0) + 0.5;
+        roleCoverage[comp.primaryRole] = roleCoverage[comp.primaryRole] + 1;
+        roleCoverage[comp.secondaryRole] = roleCoverage[comp.secondaryRole] + 0.5;
         comp.damageTypes.forEach((dt) => damageTypesCovered.add(dt));
         if (comp.shortRestRecharge) {
           shortRestCount++;
         }
       });
 
-      const missingRoles: CombatRole[] = [];
       const criticalRoles: CombatRole[] = ['Striker', 'Support', 'Controller', 'Party Face', 'Skill Monkey'];
-      criticalRoles.forEach((role) => {
-        if ((roleCoverage[role] || 0) < 0.5) {
-          missingRoles.push(role);
-        }
-      });
+      const missingRoles = criticalRoles.filter((role) => roleCoverage[role] < 0.5);
 
-      const hasFace = (roleCoverage['Party Face'] || 0) >= 0.5;
-      const hasLockpicker = (roleCoverage['Skill Monkey'] || 0) >= 0.5;
-      const hasSustain = (roleCoverage['Support'] || 0) >= 0.5;
-      const hasHighControl = (roleCoverage['Controller'] || 0) >= 0.5;
+      const hasFace = roleCoverage['Party Face'] >= 0.5;
+      const hasLockpicker = roleCoverage['Skill Monkey'] >= 0.5;
+      const hasSustain = roleCoverage['Support'] >= 0.5;
+      const hasHighControl = roleCoverage['Controller'] >= 0.5;
 
       const detectedSynergies: TeamSynergyReport['detectedSynergies'] = [];
       const criticalWarnings: string[] = [];
@@ -485,11 +474,8 @@ export const useTeamStore = defineStore('team', {
       }
       score = Math.max(10, Math.min(100, score));
 
-      let partyCompositionHealth: TeamSynergyReport['partyCompositionHealth'] = 'Balanced';
-      if (score >= 90) partyCompositionHealth = 'Transcendent';
-      else if (score >= 75) partyCompositionHealth = 'Balanced';
-      else if (score >= 55) partyCompositionHealth = 'Specialized';
-      else partyCompositionHealth = 'Deficient';
+      const partyCompositionHealth: TeamSynergyReport['partyCompositionHealth'] =
+        score >= 90 ? 'Transcendent' : score >= 75 ? 'Balanced' : score >= 55 ? 'Specialized' : 'Deficient';
 
       let restingViability: TeamSynergyReport['restingViability'] = 'Moderate';
       if (shortRestCount >= 3 || (hasBard && shortRestCount >= 2)) {
@@ -503,65 +489,35 @@ export const useTeamStore = defineStore('team', {
       const itemOccurrences: Record<string, { companionId: CompanionId; companionName: string; slotIndex: number; assignedRole: string }[]> = {};
       const itemSlotMap: Record<string, string> = {};
 
-      for (let i = 0; i < comps.length; i++) {
-        const c = comps[i];
-        if (!c || !c.optimalGear) continue;
-
-        // Collect weapons
-        for (const w of c.optimalGear.weapons || []) {
-          if (!w.name) continue;
-          const wName = w.name.trim();
-          itemSlotMap[wName] = 'Weapon';
-          if (!itemOccurrences[wName]) itemOccurrences[wName] = [];
-          itemOccurrences[wName].push({
+      comps.forEach((c, i) => {
+        if (!c.optimalGear) return;
+        const addItem = (slotName: string, itemName: string | undefined) => {
+          const trimmed = itemName?.trim();
+          if (!trimmed) return;
+          itemSlotMap[trimmed] = slotName;
+          (itemOccurrences[trimmed] ??= []).push({
             companionId: c.id,
             companionName: c.name,
             slotIndex: i,
             assignedRole: c.primaryRole
           });
-        }
+        };
+
+        // Collect weapons
+        for (const w of c.optimalGear.weapons || []) addItem('Weapon', w.name);
 
         // Collect armor and accessories
         const armor = c.optimalGear.armor;
         if (armor) {
-          const slots: [string, string][] = [
-            ['Headwear', armor.head],
-            ['Chest Armor', armor.chest],
-            ['Gloves', armor.gloves],
-            ['Footwear', armor.boots],
-            ['Amulet', armor.amulet],
-            ['Cloak', armor.cloak || '']
-          ];
-
-          for (const [sName, iName] of slots) {
-            if (iName && iName.trim()) {
-              const trimmed = iName.trim();
-              itemSlotMap[trimmed] = sName;
-              if (!itemOccurrences[trimmed]) itemOccurrences[trimmed] = [];
-              itemOccurrences[trimmed].push({
-                companionId: c.id,
-                companionName: c.name,
-                slotIndex: i,
-                assignedRole: c.primaryRole
-              });
-            }
-          }
-
-          for (const ring of armor.rings || []) {
-            if (ring && ring.trim()) {
-              const trimmed = ring.trim();
-              itemSlotMap[trimmed] = 'Ring';
-              if (!itemOccurrences[trimmed]) itemOccurrences[trimmed] = [];
-              itemOccurrences[trimmed].push({
-                companionId: c.id,
-                companionName: c.name,
-                slotIndex: i,
-                assignedRole: c.primaryRole
-              });
-            }
-          }
+          addItem('Headwear', armor.head);
+          addItem('Chest Armor', armor.chest);
+          addItem('Gloves', armor.gloves);
+          addItem('Footwear', armor.boots);
+          addItem('Amulet', armor.amulet);
+          addItem('Cloak', armor.cloak);
+          for (const ring of armor.rings || []) addItem('Ring', ring);
         }
-      }
+      });
 
       const itemContentions: ItemContention[] = [];
       for (const [itemName, users] of Object.entries(itemOccurrences)) {
@@ -703,20 +659,12 @@ export const useTeamStore = defineStore('team', {
     },
 
     persistRecruited() {
-      try {
-        localStorage.setItem(STORAGE_KEY_RECRUITED, JSON.stringify(this.recruitedIds));
-      } catch {
-        // Ignore
-      }
+      writeStorage(STORAGE_KEY_RECRUITED, JSON.stringify(this.recruitedIds));
     },
 
     updateCustomTav(newConfig: Partial<CustomTavConfig>) {
       this.customTavConfig = { ...this.customTavConfig, ...newConfig };
-      try {
-        localStorage.setItem(STORAGE_KEY_CUSTOM_TAV, JSON.stringify(this.customTavConfig));
-      } catch {
-        // Ignore
-      }
+      writeStorage(STORAGE_KEY_CUSTOM_TAV, JSON.stringify(this.customTavConfig));
     },
 
     loadMetaTeam(teamId: string) {
@@ -737,21 +685,13 @@ export const useTeamStore = defineStore('team', {
     setDifficulty(difficulty: GameDifficulty) {
       if (DIFFICULTY_PROFILES[difficulty]) {
         this.currentDifficulty = difficulty;
-        try {
-          localStorage.setItem(STORAGE_KEY_DIFFICULTY, difficulty);
-        } catch {
-          // Ignore
-        }
+        writeStorage(STORAGE_KEY_DIFFICULTY, difficulty);
       }
     },
 
     setCompanionBuild(companionId: string, buildId: string) {
       this.selectedBuildIds[companionId] = buildId;
-      try {
-        localStorage.setItem(STORAGE_KEY_SELECTED_BUILDS, JSON.stringify(this.selectedBuildIds));
-      } catch {
-        // Ignore
-      }
+      writeStorage(STORAGE_KEY_SELECTED_BUILDS, JSON.stringify(this.selectedBuildIds));
       // Refresh inspection if current
       if (this.inspectingSlotIndex >= 0) {
         this.setInspectingSlot(this.inspectingSlotIndex);
@@ -764,8 +704,7 @@ export const useTeamStore = defineStore('team', {
 
     setInspectingSlot(index: number) {
       this.inspectingSlotIndex = index;
-      const comp = this.teamCompanions[index];
-      this.selectedCompanionDetail = comp;
+      this.selectedCompanionDetail = this.teamCompanions[index];
     }
   }
 });
