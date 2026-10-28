@@ -47,6 +47,19 @@ const getButtonTheme = (diff: GameDifficulty) => {
       return 'bg-gradient-to-b from-[#7f1d1d]/85 to-[#450a0a]/95 text-[#fecaca] border-[#ef4444] shadow-lg shadow-[#7f1d1d]/50 ring-1 ring-[#f87171]/50';
   }
 };
+
+const getVitalityBadge = computed(() => {
+  switch (store.currentDifficulty) {
+    case 'Explorer':
+      return { text: 'Reduced', theme: 'bg-[#064e3b]/50 text-[#a7f3d0] border-[#059669]' };
+    case 'Balanced':
+      return { text: 'Standard', theme: 'bg-[#064e3b]/50 text-[#a7f3d0] border-[#059669]' };
+    case 'Tactician':
+      return { text: '+30% Buff', theme: 'bg-[#450a0a]/60 text-[#fca5a5] border-[#b91c1c]' };
+    case 'Honor':
+      return { text: 'Lethal', theme: 'bg-[#450a0a]/60 text-[#fca5a5] border-[#b91c1c]' };
+  }
+});
 </script>
 
 <template>
@@ -108,18 +121,18 @@ const getButtonTheme = (diff: GameDifficulty) => {
     </div>
 
     <!-- Active Difficulty Specification Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-3.5 mt-5">
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3.5 mt-5">
       <!-- Camp Supplies Requirement -->
-      <div class="p-4 rounded-xl grimoire-inset flex items-center justify-between">
-        <div>
-          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-sans">Long Rest Food</span>
-          <span class="text-sm font-bold text-[#e6ca65] font-sans">
+      <div class="p-4 rounded-xl grimoire-inset flex items-center justify-between gap-2.5">
+        <div class="min-w-0">
+          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-sans truncate">Long Rest Food</span>
+          <span class="text-sm font-bold text-[#e6ca65] font-sans block truncate">
             {{ currentProfile.campSuppliesPerLongRest }} Supplies
           </span>
         </div>
         <span
           :class="[
-            'text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider font-sans',
+            'text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider font-sans shrink-0 whitespace-nowrap',
             currentProfile.campSuppliesPerLongRest > 40
               ? 'bg-[#450a0a]/60 text-[#fca5a5] border-[#b91c1c]'
               : 'bg-[#064e3b]/50 text-[#a7f3d0] border-[#059669]'
@@ -130,38 +143,59 @@ const getButtonTheme = (diff: GameDifficulty) => {
       </div>
 
       <!-- Enemy Vitality & Scaling -->
-      <div class="p-4 rounded-xl grimoire-inset flex items-center justify-between">
-        <div>
-          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-sans">Foe Vitality Scale</span>
-          <span class="text-sm font-bold text-[#f4ebd9] font-sans">
+      <div class="p-4 rounded-xl grimoire-inset flex items-center justify-between gap-2.5">
+        <div class="min-w-0">
+          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-sans truncate">Foe Vitality Scale</span>
+          <span class="text-sm font-bold text-[#f4ebd9] font-sans block truncate">
             {{ currentProfile.enemyHpScaling }}
           </span>
         </div>
-        <span class="text-[10px] font-sans text-[#c5a059]">Modifier</span>
+        <span
+          :class="[
+            'text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider font-sans shrink-0 whitespace-nowrap',
+            getVitalityBadge.theme
+          ]"
+        >
+          {{ getVitalityBadge.text }}
+        </span>
       </div>
 
       <!-- Multiclassing Rules -->
-      <div class="p-4 rounded-xl grimoire-inset flex items-center justify-between">
-        <div>
-          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-sans">Multiclassing</span>
-          <span :class="['text-sm font-bold font-sans', currentProfile.multiclassAllowed ? 'text-[#34d399]' : 'text-[#f87171]']">
+      <div class="p-4 rounded-xl grimoire-inset flex items-center justify-between gap-2.5">
+        <div class="min-w-0">
+          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-sans truncate">Multiclassing</span>
+          <span :class="['text-sm font-bold font-sans block truncate', currentProfile.multiclassAllowed ? 'text-[#34d399]' : 'text-[#f87171]']">
             {{ currentProfile.multiclassAllowed ? 'Unrestricted' : 'Locked in Engine' }}
           </span>
         </div>
-        <span :class="['text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider font-sans', currentProfile.multiclassAllowed ? 'bg-[#064e3b]/50 text-[#a7f3d0] border-[#059669]' : 'bg-[#450a0a]/60 text-[#fca5a5] border-[#b91c1c]']">
+        <span
+          :class="[
+            'text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider font-sans shrink-0 whitespace-nowrap',
+            currentProfile.multiclassAllowed
+              ? 'bg-[#064e3b]/50 text-[#a7f3d0] border-[#059669]'
+              : 'bg-[#450a0a]/60 text-[#fca5a5] border-[#b91c1c]'
+          ]"
+        >
           {{ currentProfile.multiclassAllowed ? 'Active' : 'Sealed' }}
         </span>
       </div>
 
       <!-- Permadeath / Single Save -->
-      <div class="p-4 rounded-xl grimoire-inset flex items-center justify-between">
-        <div>
-          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-sans">Save Scroll Rites</span>
-          <span :class="['text-sm font-bold font-sans', currentProfile.permadeathOrSingleSave ? 'text-[#fca5a5]' : 'text-[#34d399]']">
+      <div class="p-4 rounded-xl grimoire-inset flex items-center justify-between gap-2.5">
+        <div class="min-w-0">
+          <span class="text-[10px] font-bold text-[#8c785b] uppercase tracking-wider block font-sans truncate">Save Scroll Rites</span>
+          <span :class="['text-sm font-bold font-sans block truncate', currentProfile.permadeathOrSingleSave ? 'text-[#fca5a5]' : 'text-[#34d399]']">
             {{ currentProfile.permadeathOrSingleSave ? 'Single Save File' : 'Unlimited Reloads' }}
           </span>
         </div>
-        <span :class="['text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider font-sans', currentProfile.permadeathOrSingleSave ? 'bg-[#450a0a]/60 text-[#fca5a5] border-[#b91c1c]' : 'bg-[#064e3b]/50 text-[#a7f3d0] border-[#059669]']">
+        <span
+          :class="[
+            'text-[10px] font-bold px-2 py-0.5 rounded border uppercase tracking-wider font-sans shrink-0 whitespace-nowrap',
+            currentProfile.permadeathOrSingleSave
+              ? 'bg-[#450a0a]/60 text-[#fca5a5] border-[#b91c1c]'
+              : 'bg-[#064e3b]/50 text-[#a7f3d0] border-[#059669]'
+          ]"
+        >
           {{ currentProfile.permadeathOrSingleSave ? 'Honor Rule' : 'Standard' }}
         </span>
       </div>
