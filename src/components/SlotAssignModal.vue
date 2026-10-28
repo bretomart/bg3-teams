@@ -53,6 +53,34 @@
         </div>
       </div>
 
+      <!-- Recruited vs All Toggle Buttons -->
+      <div class="flex items-center gap-2 pt-1 pb-1 shrink-0">
+        <button
+          type="button"
+          @click="showAllRoster = false"
+          :class="[
+            'px-3 py-1.5 text-xs rounded-lg border font-sans font-semibold transition-all',
+            !showAllRoster
+              ? 'bg-[#2a1d13] border-[#d4af37] text-[#fcedb6] shadow-sm'
+              : 'border-[#3d2c1d] text-[#8c785b] hover:text-[#f4ebd9] hover:bg-[#1a120c]'
+          ]"
+        >
+          Camp Recruits ({{ store.recruitedIds.length }})
+        </button>
+        <button
+          type="button"
+          @click="showAllRoster = true"
+          :class="[
+            'px-3 py-1.5 text-xs rounded-lg border font-sans font-semibold transition-all',
+            showAllRoster
+              ? 'bg-[#2a1d13] border-[#d4af37] text-[#fcedb6] shadow-sm'
+              : 'border-[#3d2c1d] text-[#8c785b] hover:text-[#f4ebd9] hover:bg-[#1a120c]'
+          ]"
+        >
+          All Roster ({{ store.allCompanions.length }})
+        </button>
+      </div>
+
       <!-- Scrollable Grid of Companions -->
       <div class="overflow-y-auto flex-1 mt-3 pr-1 space-y-2">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
@@ -155,9 +183,13 @@ const roles: CombatRole[] = [
   'Party Face'
 ];
 
+const showAllRoster = ref(store.recruitedIds.length === 0);
+
 const candidateCompanions = computed(() => {
-  return store.allCompanions
-    .filter((c) => store.recruitedIds.includes(c.id))
+  const base = (!showAllRoster.value && store.recruitedIds.length > 0)
+    ? store.allCompanions.filter((c) => store.recruitedIds.includes(c.id))
+    : store.allCompanions;
+  return base
     .filter((comp) => {
       const name = comp.id === 'tav' ? store.customTavConfig.name : comp.name;
       const cls = comp.id === 'tav' ? store.customTavConfig.canonicalClass : comp.canonicalClass;

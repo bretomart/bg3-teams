@@ -15,6 +15,7 @@ import type {
 } from '../types/companion';
 
 const STORAGE_KEY_RECRUITED = 'bg3_recruited_companions';
+const STORAGE_KEY_CURRENT_TEAM = 'bg3_current_party_slots';
 const STORAGE_KEY_CUSTOM_TAV = 'bg3_custom_tav_config';
 const STORAGE_KEY_DIFFICULTY = 'bg3_selected_difficulty';
 const STORAGE_KEY_SELECTED_BUILDS = 'bg3_companion_selected_builds';
@@ -146,26 +147,15 @@ export interface TeamSynergyReport {
 
 export const useTeamStore = defineStore('team', {
   state: () => {
-    // Default: Tav, Shadowheart, Astarion, Karlach
-    const initialRecruited: CompanionId[] = [
-      'tav',
-      'durge',
-      'astarion',
-      'gale',
-      'karlach',
-      'laezel',
-      'shadowheart',
-      'wyll',
-      'minthara',
-      'halsin',
-      'jaheira',
-      'minsc'
-    ];
-
     const parsedRecruited = readJSON(STORAGE_KEY_RECRUITED);
     const storedRecruited: CompanionId[] =
-      Array.isArray(parsedRecruited) && parsedRecruited.length > 0 ? parsedRecruited : initialRecruited;
+      Array.isArray(parsedRecruited) ? parsedRecruited : [];
 
+    const parsedTeam = readJSON(STORAGE_KEY_CURRENT_TEAM);
+    const storedTeam: (CompanionId | null)[] =
+      Array.isArray(parsedTeam) && parsedTeam.length === 4
+        ? parsedTeam
+        : [null, null, null, null];
     const customTav: CustomTavConfig = {
       name: 'Custom Tav',
       gender: 'male',
@@ -200,12 +190,7 @@ export const useTeamStore = defineStore('team', {
       allCompanions: companionsData as Companion[],
       metaTeams: metaTeamsData as MetaTeam[],
       recruitedIds: storedRecruited,
-      currentTeam: [
-        'tav',
-        'shadowheart',
-        'astarion',
-        'karlach'
-      ] as (CompanionId | null)[],
+      currentTeam: storedTeam as (CompanionId | null)[],
       customTavConfig: customTav,
       currentDifficulty: savedDifficulty,
       selectedBuildIds: savedBuilds,
@@ -623,6 +608,10 @@ export const useTeamStore = defineStore('team', {
   },
 
   actions: {
+    persistTeam() {
+      writeStorage(STORAGE_KEY_CURRENT_TEAM, JSON.stringify(this.currentTeam));
+    },
+
     assignCompanion(slotIndex: number, companionId: CompanionId | null) {
       if (slotIndex < 0 || slotIndex > 3) return;
 
@@ -633,13 +622,19 @@ export const useTeamStore = defineStore('team', {
           // Swap positions
           this.currentTeam[existingIndex] = this.currentTeam[slotIndex];
         }
+        if (!this.recruitedIds.includes(companionId)) {
+          this.recruitedIds.push(companionId);
+          this.persistRecruited();
+        }
       }
       this.currentTeam[slotIndex] = companionId;
+      this.persistTeam();
     },
 
     removeCompanion(slotIndex: number) {
       if (slotIndex >= 0 && slotIndex <= 3) {
         this.currentTeam[slotIndex] = null;
+        this.persistTeam();
       }
     },
 
@@ -651,6 +646,7 @@ export const useTeamStore = defineStore('team', {
         const teamIdx = this.currentTeam.indexOf(companionId);
         if (teamIdx !== -1) {
           this.currentTeam[teamIdx] = null;
+          this.persistTeam();
         }
       } else {
         this.recruitedIds.push(companionId);
@@ -661,7 +657,6 @@ export const useTeamStore = defineStore('team', {
     persistRecruited() {
       writeStorage(STORAGE_KEY_RECRUITED, JSON.stringify(this.recruitedIds));
     },
-
     updateCustomTav(newConfig: Partial<CustomTavConfig>) {
       this.customTavConfig = { ...this.customTavConfig, ...newConfig };
       writeStorage(STORAGE_KEY_CUSTOM_TAV, JSON.stringify(this.customTavConfig));
@@ -672,6 +667,7 @@ export const useTeamStore = defineStore('team', {
       if (!meta) return;
 
       this.currentTeam = [...meta.slots];
+      this.persistTeam();
 
       // Auto recruit team members if not already
       meta.slots.forEach((id) => {
@@ -700,6 +696,7 @@ export const useTeamStore = defineStore('team', {
 
     clearTeam() {
       this.currentTeam = [null, null, null, null];
+      this.persistTeam();
     },
 
     setInspectingSlot(index: number) {

@@ -13,11 +13,12 @@ describe('BG3 Team Store & Synergy Engine', () => {
   });
 
   describe('data invariants', () => {
-    it('initializes with 12 unique companions and the default 4-member party', () => {
+    it('initializes with 12 unique companions and empty default party and camp roster', () => {
       const store = useTeamStore();
       expect(store.allCompanions.length).toBe(12);
       expect(new Set(store.allCompanions.map((c) => c.id)).size).toBe(12);
-      expect(store.currentTeam).toEqual(['tav', 'shadowheart', 'astarion', 'karlach']);
+      expect(store.currentTeam).toEqual([null, null, null, null]);
+      expect(store.recruitedIds).toEqual([]);
       expect(store.currentDifficulty).toBe('Tactician');
     });
 
@@ -140,6 +141,7 @@ describe('BG3 Team Store & Synergy Engine', () => {
       'switches %s to build %s',
       (id, buildId, multiclass, tag) => {
         const store = useTeamStore();
+        store.assignCompanion(0, id);
         store.setCompanionBuild(id, buildId);
         const comp = store.teamCompanions.find((c) => c?.id === id);
         expect(comp?.recommendedMulticlass).toContain(multiclass);
@@ -150,6 +152,7 @@ describe('BG3 Team Store & Synergy Engine', () => {
 
     it('customizes Tav identity while keeping custom roles over build roles', () => {
       const store = useTeamStore();
+      store.assignCompanion(0, 'tav');
       store.updateCustomTav({ name: 'Gorion Ward', canonicalClass: 'Paladin', primaryRole: 'Tank', cha: 18, gender: 'female' });
       const tav = store.teamCompanions[0];
       expect(tav?.name).toBe('Gorion Ward');
@@ -171,12 +174,14 @@ describe('BG3 Team Store & Synergy Engine', () => {
 
     it('swaps positions when assigning a companion already in the party', () => {
       const store = useTeamStore();
+      store.currentTeam = ['tav', 'shadowheart', 'astarion', 'karlach'];
       store.assignCompanion(0, 'karlach');
       expect(store.currentTeam).toEqual(['karlach', 'shadowheart', 'astarion', 'tav']);
     });
 
     it.each([-1, 4])('ignores out-of-range slot %i', (slot) => {
       const store = useTeamStore();
+      store.currentTeam = ['tav', 'shadowheart', 'astarion', 'karlach'];
       store.assignCompanion(slot, 'gale');
       store.removeCompanion(slot);
       expect(store.currentTeam).toEqual(['tav', 'shadowheart', 'astarion', 'karlach']);
@@ -184,6 +189,8 @@ describe('BG3 Team Store & Synergy Engine', () => {
 
     it('un-recruiting a companion removes them from the party and persists', () => {
       const store = useTeamStore();
+      store.recruitedIds = ['astarion'];
+      store.currentTeam = [null, null, 'astarion', null];
       store.toggleRecruited('astarion');
       expect(store.recruitedIds).not.toContain('astarion');
       expect(store.currentTeam[2]).toBeNull();
